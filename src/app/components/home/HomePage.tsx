@@ -70,7 +70,12 @@ const HomeScreen: React.FC = () => {
           <Home size={28} color='#d31875' />
         </HomeIndicator>
         <Fan size={24} opacity={0.4} />
-        <Book size={24} opacity={0.4} />
+        <Book
+          size={24}
+          opacity={0.4}
+          style={{ cursor: 'pointer' }}
+          onClick={() => handleNavigate('/stories')}
+        />
       </BottomNav>
     </ScreenContainer>
   );
