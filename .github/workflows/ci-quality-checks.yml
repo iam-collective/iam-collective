@@ -10,7 +10,7 @@ jobs:
       pull-requests: write
       contents: write
     timeout-minutes: 5
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]'
     steps:
       - uses: actions/checkout@v5
@@ -26,7 +26,7 @@ jobs:
   code-formatting:
     name: 'Code - Formatting'
     needs: commit-check
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: [self-hosted, linux, x64, mtn-one]
     permissions:
       contents: read
       actions: read
@@ -59,7 +59,7 @@ jobs:
   code-linting:
     name: 'Code - Linting'
     needs: commit-check
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       actions: read
@@ -94,7 +94,7 @@ jobs:
     permissions:
       contents: read
       actions: read
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: [self-hosted, linux, x64, mtn-one]
     if: github.actor != 'dependabot[bot]'
     steps:
       - name: Checkout code
@@ -115,7 +115,7 @@ jobs:
     permissions:
       contents: read
       actions: read
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: [self-hosted, linux, x64, mtn-one]
     if: github.actor != 'dependabot[bot]'
     steps:
       - name: Checkout code
@@ -141,7 +141,7 @@ jobs:
     permissions:
       contents: read
       actions: read
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: [self-hosted, linux, x64, mtn-one]
     if: github.actor != 'dependabot[bot]'
     steps:
       - name: Checkout code
@@ -161,7 +161,7 @@ jobs:
     permissions:
       contents: read
       actions: read
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: [self-hosted, linux, x64, mtn-one]
     if: github.actor != 'dependabot[bot]'
     steps:
       - name: Checkout code
@@ -193,7 +193,7 @@ jobs:
     permissions:
       contents: read
       actions: read
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: [self-hosted, linux, x64, mtn-one]
     if: github.actor != 'dependabot[bot]'
     steps:
       - name: Checkout code
@@ -231,7 +231,7 @@ jobs:
     permissions:
       contents: read
       actions: read
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: [self-hosted, linux, x64, mtn-one]
     if: github.actor != 'dependabot[bot]'
     steps:
       - name: Checkout code
@@ -255,7 +255,7 @@ jobs:
   test:
     name: 'Tests - Integration'
     needs: naming-conventions
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: [self-hosted, linux, x64, mtn-one]
     permissions:
       contents: read
       actions: read
@@ -287,7 +287,7 @@ jobs:
       checks: write
       pull-requests: write
       contents: write
-    runs-on: [self-hosted, linux, x64, core]
+    runs-on: [self-hosted, linux, x64, mtn-one]
     timeout-minutes: 10
     if: github.actor != 'dependabot[bot]'
     steps:
