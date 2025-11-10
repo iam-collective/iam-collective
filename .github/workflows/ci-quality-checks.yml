@@ -186,7 +186,7 @@ jobs:
           fi
 
           npx lockfile-lint --path package-lock.json --type npm --validate-https \
-            --allowed-hosts npm.pkg.github.com,registry.npmjs.org
+            --allowed-hosts npm.pkg.github.com registry.npmjs.org
   package-sbom:
     name: 'Code - SBOM Generation'
     needs: secrets-leaks
