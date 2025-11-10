@@ -218,7 +218,9 @@ jobs:
 
           npx @cyclonedx/cyclonedx-npm@latest \
             --output-file sbom.cdx.json \
-            --spec-version 1.5
+            --spec-version 1.5 \
+            --omit dev \
+            -ignore-npm-erros
       - name: Upload SBOM artifact
         uses: actions/upload-artifact@v4
         with:
