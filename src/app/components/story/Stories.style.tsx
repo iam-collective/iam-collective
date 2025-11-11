@@ -63,8 +63,8 @@ export const CardWrapper = styled.div`
 export const PinkButton = styled.button`
   background-color: #ffd7e8;
   color: #1a1a1a;
-  padding: 20px 56px;
-  font-size: 2rem;
+  padding: 20px 33px;
+  font-size: 1.5rem;
   font-weight: 500;
   border: none;
   border-radius: 60px;
@@ -91,4 +91,10 @@ export const StyledScroller = styled.div`
   overflow: auto;
   scrollbar-width: none;
   flex: 1;
+`;
+
+export const SuggestedTitle = styled.p`
+  font-size: 1.2rem;
+  color: #6b7280;
+  font-weight: 750;
 `;

@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
-import { PinkButton, ScreenContainer, StyledPopUpCard, StyledScroller } from './Stories.style';
+import React, { useEffect, useState } from 'react';
+import {
+  PinkButton,
+  ScreenContainer,
+  StyledContainer,
+  StyledPopUpCard,
+  StyledScroller,
+  SuggestedTitle,
+} from './Stories.style';
 import Header from '../header/Header';
-import { BottomNav, HomeIndicator } from '../home/HomePage.styled';
+// import { BottomNav, HomeIndicator, SuggestedTitle } from '../home/HomePage.styled';
 import { GraduationCap, Heart, Home, Fan, Book } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useScrollHandler } from '../../hooks/use-scroll-handler';
+import BottomNavigation from '../bottom-nav/BottomNav';
 
 interface StoryProps {
   title: string;
   description: string;
   image?: string;
+  date: string;
 }
 
 const Stories: React.FC = () => {
@@ -20,6 +29,22 @@ const Stories: React.FC = () => {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState<string | undefined>();
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
+
+  useEffect(() => {
+    const savedPosts = localStorage.getItem('stories');
+    if (savedPosts) {
+      setPosts(JSON.parse(savedPosts));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('stories', JSON.stringify(posts));
+  }, [posts]);
+
+  const handleDelete = (index: number) => {
+    const updated = posts.filter((_, i) => i !== index);
+    setPosts(updated);
+  };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -33,7 +58,13 @@ const Stories: React.FC = () => {
   const handlePost = () => {
     if (!title || !description) return alert('Please fill everything!');
 
-    setPosts([...posts, { title, description, image }]);
+    const newPost = {
+      title,
+      description,
+      image,
+      date: new Date().toISOString(),
+    };
+    setPosts([...posts, newPost]);
 
     setTitle('');
     setDescription('');
@@ -65,36 +96,75 @@ const Stories: React.FC = () => {
                 marginTop: '24px',
               }}
             >
-              <PinkButton onClick={() => setShowModal(true)}>Add a Story</PinkButton>
-            </div>
-          ) : (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-              }}
-            >
-              <button
-                onClick={() => setShowModal(true)}
+              <StyledContainer
                 style={{
-                  width: 50,
-                  height: 50,
-                  borderRadius: '50%',
-                  fontSize: 28,
-                  border: 'none',
-                  cursor: 'pointer',
+                  background: 'linear-gradient(180deg, #FAF0E6 0%, #FDEDF4 100%)',
+                  minHeight: '70vh',
                   display: 'flex',
+                  flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background: '#ffbfdc',
-                  color: 'white',
+                  textAlign: 'center',
+                  padding: '2rem',
                 }}
               >
-                +
-              </button>
+                <h1
+                  style={{
+                    fontSize: '2.5rem',
+                    fontWeight: '600',
+                    color: 'purple',
+                    marginBottom: '0.5rem',
+                  }}
+                >
+                  Share your story
+                </h1>
+
+                <p
+                  style={{
+                    fontSize: '1.5rem',
+                    maxWidth: '320px',
+                    color: '#6b6b6b',
+                    marginBottom: '2rem',
+                  }}
+                >
+                  Your words can inspire someone. Tell us about a moment, a feeling, or something
+                  you learned.
+                </p>
+                <PinkButton onClick={() => setShowModal(true)}>Add a Story</PinkButton>
+              </StyledContainer>
             </div>
+          ) : (
+            <>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
+                  marginTop: '16px',
+                }}
+              >
+                <button
+                  onClick={() => setShowModal(true)}
+                  style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: '50%',
+                    fontSize: 28,
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: '#ffbfdc',
+                    color: 'white',
+                  }}
+                >
+                  +
+                </button>
+              </div>
+              <SuggestedTitle>Recent Stories</SuggestedTitle>
+            </>
           )}
 
           <div
@@ -176,29 +246,46 @@ const Stories: React.FC = () => {
               </>
             )}
 
-            {posts.map((post, i) => (
+            {[...posts].reverse().map((post, i) => (
               <div
                 key={i}
                 style={{
                   border: '1px solid #ccc',
-                  borderRadius: 10,
+                  borderRadius: 16,
                   padding: 12,
                   marginBottom: 16,
                   textAlign: 'left',
                   borderColor: '#ff69b4',
                   backgroundColor: 'white',
+                  boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
                 }}
               >
+                <p style={{ fontSize: 12, color: '#888' }}>
+                  {new Date(post.date).toLocaleString()}
+                </p>
                 <h3>{post.title}</h3>
                 {post.image && (
                   <img src={post.image} alt='' style={{ width: '100%', borderRadius: 10 }} />
                 )}
                 <p>{post.description}</p>
+                <button
+                  onClick={() => handleDelete(posts.length - 1 - i)}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    fontSize: 18,
+                    cursor: 'pointer',
+                    color: '#ff4d6d',
+                  }}
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </div>
         </StyledScroller>
-        <BottomNav>
+        <BottomNavigation></BottomNavigation>
+        {/* <BottomNav>
           <GraduationCap size={24} opacity={0.4} />
           <Heart size={24} opacity={0.4} />
           <HomeIndicator>
@@ -211,7 +298,7 @@ const Stories: React.FC = () => {
           </HomeIndicator>
           <Fan size={24} opacity={0.4} />
           <Book size={24} opacity={0.4} />
-        </BottomNav>
+        </BottomNav> */}
       </ScreenContainer>
     </>
   );

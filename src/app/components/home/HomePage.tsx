@@ -22,6 +22,9 @@ import {
   HomeIndicator,
   Quote,
 } from './HomePage.styled';
+import AffirmationCards from '../cards/Cards';
+import { defaultAffirmations } from '../../../services/affirmations';
+import BottomNavigation from '../bottom-nav/BottomNav';
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -40,25 +43,37 @@ const HomeScreen: React.FC = () => {
         <OverlayText>
           <Quote>This is a daily affirmation of support and positivity.</Quote>
           <Author>– The author</Author>
-          <ProfileImage src='https://randomuser.me/api/portraits/women/44.jpg' alt='Profile' />
+          <ProfileImage
+            as='svg'
+            width='40'
+            height='40'
+            viewBox='0 0 24 24'
+            className='rounded-full bg-gray-200 text-gray-400'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <circle cx='12' cy='8' r='4' fill='currentColor' />
+            <path d='M4 20c0-4 4-6 8-6s8 2 8 6' fill='currentColor' />
+          </ProfileImage>
         </OverlayText>
       </ImageCard>
 
-      <SuggestedWrapper>
-        <SuggestedTitle>Suggested for you</SuggestedTitle>
+      {/* <SuggestedWrapper>
+        <SuggestedTitle>Affirmations for you</SuggestedTitle>
         <Card>
           <CardText>
-            <CardHeading>Hello, I’m a card</CardHeading>
+            <CardHeading>Daily Affirmation</CardHeading>
             <CardDescription>
               I am a card descriptor piece of text that gives context.
             </CardDescription>
-            <CardLink>Call to action</CardLink>
+            <CardLink>Explore more </CardLink>
           </CardText>
           <LotusEmoji>🌸</LotusEmoji>
         </Card>
-      </SuggestedWrapper>
+      </SuggestedWrapper> */}
+      <AffirmationCards items={defaultAffirmations} />
+      <BottomNavigation></BottomNavigation>
 
-      <BottomNav>
+      {/* <BottomNav>
         <GraduationCap
           size={24}
           opacity={0.4}
@@ -76,7 +91,7 @@ const HomeScreen: React.FC = () => {
           style={{ cursor: 'pointer' }}
           onClick={() => handleNavigate('/stories')}
         />
-      </BottomNav>
+      </BottomNav> */}
     </ScreenContainer>
   );
 };

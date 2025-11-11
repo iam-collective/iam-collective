@@ -6,6 +6,7 @@ import { CoreFonts } from '@mtnkente/paragon-core-fonts';
 import HomeScreen from './components/home/HomePage';
 import LearnScreen from './components/learn/Learn';
 import Stories from './components/story/Stories';
+import LandingScreen from './components/landing-screen/LandingScreen';
 
 type AppProps = {
   data?: unknown;

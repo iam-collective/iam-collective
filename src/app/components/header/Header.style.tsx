@@ -56,12 +56,13 @@ export const Headline = styled.div`
 
 export const ProfileImage = styled.img`
   position: absolute;
+  padding: 0.5rem;
   right: 1rem;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
-  height: 42px;
-  width: 42px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid white;
+  border: 2px solid purple;
 `;
