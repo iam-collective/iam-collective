@@ -18,6 +18,9 @@ import {
   SuggestedTitle,
   SuggestedWrapper,
 } from './HomePage.styled';
+import AffirmationCards from '../cards/Cards';
+import { defaultAffirmations } from '../../../services/affirmations';
+import BottomNavigation from '../bottom-nav/BottomNav';
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -32,21 +35,23 @@ const HomeScreen: React.FC = () => {
         <ProfileImage src='https://randomuser.me/api/portraits/women/44.jpg' alt='Profile' />
       </Banner>
 
-      <SuggestedWrapper>
-        <SuggestedTitle>Suggested for you</SuggestedTitle>
+      {/* <SuggestedWrapper>
+        <SuggestedTitle>Affirmations for you</SuggestedTitle>
         <Card>
           <CardText>
-            <CardHeading>Hello, I’m a card</CardHeading>
+            <CardHeading>Daily Affirmation</CardHeading>
             <CardDescription>
               I am a card descriptor piece of text that gives context.
             </CardDescription>
-            <CardLink>Call to action</CardLink>
+            <CardLink>Explore more </CardLink>
           </CardText>
           <LotusEmoji>🌸</LotusEmoji>
         </Card>
-      </SuggestedWrapper>
+      </SuggestedWrapper> */}
+      <AffirmationCards items={defaultAffirmations} />
+      <BottomNavigation></BottomNavigation>
 
-      <BottomNav>
+      {/* <BottomNav>
         <GraduationCap
           size={24}
           opacity={0.4}
@@ -58,8 +63,13 @@ const HomeScreen: React.FC = () => {
           <Home size={28} color='#d31875' />
         </HomeIndicator>
         <Fan size={24} opacity={0.4} />
-        <Book size={24} opacity={0.4} />
-      </BottomNav>
+        <Book
+          size={24}
+          opacity={0.4}
+          style={{ cursor: 'pointer' }}
+          onClick={() => handleNavigate('/stories')}
+        />
+      </BottomNav> */}
     </ScreenContainer>
   );
 };

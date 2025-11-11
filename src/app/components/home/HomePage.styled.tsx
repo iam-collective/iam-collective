@@ -98,6 +98,7 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.5rem;
 `;
 
 export const CardText = styled.div`
@@ -111,7 +112,7 @@ export const CardHeading = styled.h3`
 `;
 
 export const CardDescription = styled.p`
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: #6b6b6b;
 `;
 
@@ -140,6 +141,11 @@ export const BottomNav = styled.nav`
   justify-content: space-between;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   margin-top: 1.2rem;
+
+  div:hover > .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
 `;
 
 export const HomeIndicator = styled.div`
