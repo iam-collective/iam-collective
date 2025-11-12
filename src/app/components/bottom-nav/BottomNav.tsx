@@ -1,20 +1,55 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable react/jsx-no-bind */
+import React, { useState } from 'react';
 import { GraduationCap, Heart, Home, Fan, Book } from 'lucide-react';
-import { BottomNav, HomeIndicator } from '../home/HomePage.styled';
+import { BottomNav } from '../home/HomePage.styled';
 import { useNavigate } from 'react-router-dom';
-
-// import { BottomNavContainer, NavItem, NavIcon, NavLabel } from "./BottomNav.styled";
 
 interface BottomNavProps {
   activeItem?: string;
 }
 
-const BottomNavigation: React.FC<BottomNavProps> = ({ activeItem }) => {
+const BottomNavigation: React.FC<BottomNavProps> = () => {
   const navigate = useNavigate();
+  const [activeItem, setActiveItem] = useState<string>('');
 
   const handleNavigate = (navigateTo: string): void => {
     navigate(navigateTo);
   };
+  const handleClick = (label: string, path?: string) => {
+    setActiveItem(label);
+    if (path) handleNavigate(path);
+  };
+
+  const navItems = [
+    {
+      label: 'Learn',
+      icon: GraduationCap,
+      path: '/learn',
+    },
+    {
+      label: 'Heal',
+      icon: Heart,
+      path: '/heal',
+    },
+    {
+      label: 'Home',
+      icon: Home,
+      path: '/',
+      isHome: true,
+    },
+    {
+      label: 'About',
+      icon: Fan,
+    },
+    {
+      label: 'Share',
+      icon: Book,
+      path: '/stories',
+    },
+  ];
 
   const TooltipItem = ({ label, children }: { label: string; children: React.ReactNode }) => (
     <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
@@ -44,44 +79,22 @@ const BottomNavigation: React.FC<BottomNavProps> = ({ activeItem }) => {
   return (
     <>
       <BottomNav>
-        <TooltipItem label='Learn'>
-          <GraduationCap
-            size={24}
-            opacity={0.4}
-            style={{ cursor: 'pointer' }}
-            onClick={() => handleNavigate('/quotes')}
-          />
-        </TooltipItem>
+        {navItems.map(({ label, icon: Icon, path }) => {
+          const isActive = activeItem === label;
 
-        <TooltipItem label='Heal'>
-          <Heart size={24} opacity={0.4} />
-        </TooltipItem>
-
-        <TooltipItem label='Home'>
-          <HomeIndicator>
-            <Home
-              size={28}
-              color='#d31875'
-              style={{ cursor: 'pointer' }}
-              onClick={() => handleNavigate('/')}
-            />
-          </HomeIndicator>
-        </TooltipItem>
-
-        <TooltipItem label='About'>
-          <Fan size={24} opacity={0.4} />
-        </TooltipItem>
-
-        <TooltipItem label='Share'>
-          <Book
-            size={24}
-            opacity={0.4}
-            style={{ cursor: 'pointer' }}
-            onClick={() => handleNavigate('/stories')}
-          />
-        </TooltipItem>
+          return (
+            <TooltipItem key={label} label={label}>
+              <Icon
+                size={24}
+                opacity={isActive ? 1 : 0.4}
+                color={isActive ? '#d31875' : undefined}
+                style={{ cursor: path ? 'pointer' : 'default' }}
+                onClick={() => handleClick(label, path)}
+              />
+            </TooltipItem>
+          );
+        })}
       </BottomNav>
-      <div></div>
     </>
   );
 };

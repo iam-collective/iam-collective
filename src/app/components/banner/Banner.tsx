@@ -1,4 +1,5 @@
-/* eslint-disable  */
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable no-undef */
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import * as backgrounds from '../../assets/background/';
 import {
@@ -15,11 +16,11 @@ interface Image {
 }
 const Banner: React.FC<{ children: ReactElement }> = ({ children }) => {
   const titles = [
-    'You are worthy of love and respect.',
-    'You are not alone in your healing.',
-    'You deserve peace and safety every day.',
-    'Your strength is greater than any challenge.',
-    'You deserve peace and safety every day.',
+    'First learn how to stand up for yourself, then learn how to stand up for someone else.',
+    'Silence protects the problem. Speaking up protects the people.',
+    'Technology should never be a weapon — it should be a shield.',
+    'Your story might be the key that unlocks someone else’s freedom.',
+    'When we learn better, we do better — and we hurt each other less.',
   ];
   const sources = Object.values(backgrounds) as string[];
 

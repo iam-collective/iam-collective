@@ -1,3 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable react/jsx-no-bind */
 import React, { useEffect, useState } from 'react';
 import {
   PinkButton,
@@ -8,9 +12,6 @@ import {
   SuggestedTitle,
 } from './Stories.style';
 import Header from '../header/Header';
-// import { BottomNav, HomeIndicator, SuggestedTitle } from '../home/HomePage.styled';
-import { GraduationCap, Heart, Home, Fan, Book } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import { useScrollHandler } from '../../hooks/use-scroll-handler';
 import BottomNavigation from '../bottom-nav/BottomNav';
 
@@ -70,12 +71,6 @@ const Stories: React.FC = () => {
     setDescription('');
     setImage(undefined);
     setShowModal(false);
-  };
-
-  const navigate = useNavigate();
-
-  const handleNavigate = (navigateTo: string): void => {
-    navigate(navigateTo);
   };
 
   const { handleScroll } = useScrollHandler(setIsScrolling);
@@ -285,20 +280,6 @@ const Stories: React.FC = () => {
           </div>
         </StyledScroller>
         <BottomNavigation></BottomNavigation>
-        {/* <BottomNav>
-          <GraduationCap size={24} opacity={0.4} />
-          <Heart size={24} opacity={0.4} />
-          <HomeIndicator>
-            <Home
-              size={28}
-              color='#d31875'
-              style={{ cursor: 'pointer' }}
-              onClick={() => handleNavigate('/')}
-            />
-          </HomeIndicator>
-          <Fan size={24} opacity={0.4} />
-          <Book size={24} opacity={0.4} />
-        </BottomNav> */}
       </ScreenContainer>
     </>
   );

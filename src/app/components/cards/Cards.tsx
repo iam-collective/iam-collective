@@ -1,3 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable react/prop-types */
+
 import React from 'react';
 import {
   SuggestedWrapper,
@@ -5,7 +11,6 @@ import {
   CardText,
   CardHeading,
   CardDescription,
-  CardLink,
   LotusEmoji,
   Card,
 } from '../home/HomePage.styled';
