@@ -1,8 +1,11 @@
+
 // import React from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import { motion } from 'framer-motion';
 // import { ScreenContainer, StyledContainer, PinkButton } from '../landing-page/LandingPage.styles';
 // import styled from 'styled-components';
+
+
 
 // const Circle = styled(motion.div)<{
 //   size: number;

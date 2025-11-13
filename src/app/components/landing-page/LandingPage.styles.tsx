@@ -9,11 +9,11 @@ export const ScreenContainer = styled.div`
 `;
 
 export const MainContent = styled.div`
-  flex: 1;
+  flex: 1; 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; 
   gap: 2rem;
   padding: 2rem 0;
 `;
@@ -30,13 +30,13 @@ export const Logo = styled.img`
 
 export const DividerWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
   width: 100%;
   max-width: 400px;
-  gap: 2rem;
+  gap: 2rem; 
 `;
 
 export const Line = styled.div`
@@ -86,20 +86,20 @@ export const FooterText = styled.span`
 `;
 
 export const FooterLogos = styled.div`
-  display: flex;
+  display: flex; 
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1rem; 
 `;
 
 export const FooterLogo = styled.img`
-  width: 80px;
+  width: 80px; 
   height: auto;
 `;
 
 export const LogoDivider = styled.div`
-  width: 1px;
-  height: 40px;
-  background-color: rgb(200, 200, 200);
+  width: 1px;               
+  height: 40px;           
+  background-color: rgb(200, 200, 200); 
 `;

@@ -11,6 +11,7 @@ import SignUpPage from './components/sign-up/SignUpPage';
 import LoginPage from './components/log-in/LogIn';
 import GuestPage from './components/guest-page/GuestPage';
 // import ContinuePage from './components/continue/ContinuePage';
+// import ContinuePage from './components/continue/ContinuePage';
 import GuestHomePage from './components/guest-page/GuestHomePage';
 // import HomeScreen from './components/home/Home';
 import AboutPage from './components/about-page/AboutPage';
@@ -36,6 +37,7 @@ const App: React.FC<AppProps> = (config) => {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/about' element={<AboutPage />} />
+          {/* <Route path='/continue' element={<ContinuePage />} /> */}
           {/* <Route path='/continue' element={<ContinuePage />} /> */}
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/login' element={<LoginPage />} />
