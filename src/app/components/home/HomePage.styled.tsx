@@ -55,6 +55,11 @@ export const ImageCard = styled.div`
 //   height: 100%;
 //   object-fit: cover;
 // `;
+// export const BackgroundImage = styled.img`
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+// `;
 export const BackgroundImage = styled.img`
   width: 100%;
   height: 100%;
