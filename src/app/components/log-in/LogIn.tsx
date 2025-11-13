@@ -173,8 +173,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ScreenContainer, StyledContainer, PinkButton } from '../landing-page/LandingPage.styles';
+import { ScreenContainer } from '../landing-page/LandingPage.styles';
 import styled from 'styled-components';
+import { PinkButton } from '../sign-up/SignUp.styles';
 
 // export default function LoginPage() {
 //   const navigate = useNavigate();
@@ -338,94 +339,79 @@ export default function LoginPage() {
 
   return (
     <ScreenContainer>
-      <StyledContainer
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          background: 'linear-gradient(180deg, #FAF0E6 0%, #FDEDF4 100%)',
-          padding: '2rem',
-          gap: '1.5rem',
-          maxWidth: '400px',
-          margin: '2rem auto',
-        }}
+      {/* Decorative left panel */}
+      <LeftDecor>
+        <motion.div
+          className='circle1'
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1 }}
+        />
+        <motion.div
+          className='circle2'
+          initial={{ scale: 0 }}
+          animate={{ scale: 1.2 }}
+          transition={{ duration: 1.2 }}
+        />
+      </LeftDecor>
+
+      <h1 style={{ fontSize: '2rem', fontWeight: 700, color: '#1a1a1a' }}>Login</h1>
+
+      <form
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}
+        onSubmit={handleLogin}
       >
-        {/* Decorative left panel */}
-        <LeftDecor>
-          <motion.div
-            className='circle1'
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1 }}
+        <motion.div custom={0} initial='hidden' animate='visible' variants={inputVariants}>
+          <input
+            type='email'
+            placeholder='Enter your email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem 1rem',
+              borderRadius: '0.75rem',
+              border: '1px solid #ffbfdc',
+              outline: 'none',
+              fontSize: '1rem',
+            }}
+            required
           />
-          <motion.div
-            className='circle2'
-            initial={{ scale: 0 }}
-            animate={{ scale: 1.2 }}
-            transition={{ duration: 1.2 }}
+        </motion.div>
+
+        <motion.div custom={1} initial='hidden' animate='visible' variants={inputVariants}>
+          <input
+            type='password'
+            placeholder='Enter your password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem 1rem',
+              borderRadius: '0.75rem',
+              border: '1px solid #ffbfdc',
+              outline: 'none',
+              fontSize: '1rem',
+            }}
+            required
           />
-        </LeftDecor>
+        </motion.div>
 
-        <h1 style={{ fontSize: '2rem', fontWeight: 700, color: '#1a1a1a' }}>Login</h1>
+        <motion.div initial='hidden' animate='visible' variants={buttonVariants}>
+          <PinkButton type='submit' style={{ width: '100%' }}>
+            Login
+          </PinkButton>
+        </motion.div>
 
-        <form
-          style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}
-          onSubmit={handleLogin}
-        >
-          <motion.div custom={0} initial='hidden' animate='visible' variants={inputVariants}>
-            <input
-              type='email'
-              placeholder='Enter your email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '0.75rem 1rem',
-                borderRadius: '0.75rem',
-                border: '1px solid #ffbfdc',
-                outline: 'none',
-                fontSize: '1rem',
-              }}
-              required
-            />
-          </motion.div>
-
-          <motion.div custom={1} initial='hidden' animate='visible' variants={inputVariants}>
-            <input
-              type='password'
-              placeholder='Enter your password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '0.75rem 1rem',
-                borderRadius: '0.75rem',
-                border: '1px solid #ffbfdc',
-                outline: 'none',
-                fontSize: '1rem',
-              }}
-              required
-            />
-          </motion.div>
-
-          <motion.div initial='hidden' animate='visible' variants={buttonVariants}>
-            <PinkButton type='submit' style={{ width: '100%' }}>
-              Login
-            </PinkButton>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
-            <a
-              href='#'
-              style={{ fontSize: '0.85rem', color: '#6b7280', textDecoration: 'underline' }}
-            >
-              Forgot Password?
-            </a>
-          </motion.div>
-        </form>
-      </StyledContainer>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+          <a
+            href='#'
+            style={{ fontSize: '0.85rem', color: '#6b7280', textDecoration: 'underline' }}
+          >
+            Forgot Password?
+          </a>
+        </motion.div>
+      </form>
     </ScreenContainer>
   );
 }

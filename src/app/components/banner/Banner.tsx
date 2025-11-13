@@ -73,7 +73,7 @@ const Banner: React.FC<{ children: ReactElement }> = ({ children }) => {
       onTouchEnd={handleTouchEnd}
       key={images[0].src}
     >
-      <SlideWrapper $activeIndex={activeIndex}>
+      <SlideWrapper $activeIndex={activeIndex} $count={images.length}>
         {images.map((img) => (
           <BackgroundImage key={img.src} src={img.src} alt='Background' />
         ))}
