@@ -1,190 +1,105 @@
-/* eslint-disable */
-// LandingPage.styles.ts
 import styled from 'styled-components';
 import { Button } from '../buttons';
-// import { motion } from 'framer-motion';
 
 export const ScreenContainer = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   min-height: 100vh;
-  padding: 1rem;
-  margin: 0 auto;
-  overflow: visible;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  width: 100%;
 `;
 
-export const StyledContainer = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 100%;
+export const MainContent = styled.div`
   flex: 1;
-  border-radius: 2rem;
-  overflow: hidden;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  gap: 1.5rem;
-  background: linear-gradient(180deg, #faf0e6 0%, #fdedf4 100%);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  gap: 2rem;
+  padding: 2rem 0;
+`;
+
+export const Logo = styled.img`
+  width: 150px;
+  height: auto;
+  margin-bottom: 2rem;
 
   @media (max-width: 768px) {
-    padding: 1rem;
-    gap: 1rem;
-    border-radius: 1rem;
+    width: 120px;
   }
 `;
 
-export const PinkButton = styled(Button)`
-  background-color: #ffd7e8;
-  color: #1a1a1a;
-  padding: 1rem 2rem;
-  font-size: 1.25rem;
+export const DividerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 400px;
+  gap: 2rem;
+`;
+
+export const Line = styled.div`
+  width: 50%;
+  height: 2px;
+  background-color: rgb(255, 105, 180);
+`;
+
+export const DividerText = styled.span`
+  margin: 0 1rem;
+  font-size: 1rem;
   font-weight: 500;
+  color: black;
+  text-align: center;
+`;
+
+export const NextButton = styled(Button)`
+  background-color: rgb(255, 105, 180);
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
   border: none;
-  border-radius: 60px;
   cursor: pointer;
-  transition: all 0.25s ease;
-  font-family: 'Work Sans', sans-serif;
+  transition: all 0.2s ease;
 
   &:hover {
-    background-color: #ffbfdc;
+    background-color: #ff85c0;
     transform: translateY(-2px);
   }
 
   &:active {
     transform: translateY(0);
   }
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    padding: 0.75rem 1.5rem;
-  }
 `;
-
-export const CardWrapper = styled.div`
-  width: 100%;
-  max-width: 600px;
-  background: white;
-  border-radius: 2rem;
-  padding: 1.5rem;
-  margin-top: 3rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-
-  h2 {
-    margin-bottom: 0.5rem;
-  }
-
-  p {
-    color: #6b7280;
-  }
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-    margin-top: 2rem;
-  }
-`;
-export const Logo = styled.img`
-  height: 40px;
-  cursor: pointer;
-`;
-
-export const Header = styled.header`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+export const Footer = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  z-index: 2;
-
-  @media (max-width: 768px) {
-    padding: 0.75rem 1rem;
-  }
-`;
-
-export const NavLinks = styled.nav<{ isOpen?: boolean }>`
-  display: flex;
-  gap: 2rem;
-
-  a {
-    color: #7b1fa2;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.3s;
-
-    &:hover {
-      color: #9b30ff;
-    }
-  }
-
-  @media (max-width: 768px) {
-    position: absolute;
-    top: 60px;
-    right: 1rem;
-    background: white;
-    flex-direction: column;
-    padding: 1rem 1.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
-    gap: 1rem;
-
-    a {
-      font-size: 1rem;
-    }
-  }
-`;
-
-export const Hamburger = styled.div`
-  display: none;
-  cursor: pointer;
-  width: 30px;
-  height: 25px;
   flex-direction: column;
-  justify-content: space-between;
-
-  span {
-    height: 3px;
-    width: 100%;
-    background: #7b1fa2;
-    border-radius: 2px;
-    transition: all 0.3s;
-  }
-
-  @media (max-width: 768px) {
-    display: flex;
-  }
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 2rem;
 `;
 
-export const HeroTitle = styled.h1`
-  font-size: 2rem;
-  font-weight: 700;
-  color: #20a4cc;
-  margin-bottom: 1rem;
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
+export const FooterText = styled.span`
+  font-size: 0.9rem;
+  color: rgb(150, 150, 150);
 `;
-export const BottomLeftImage = styled.img`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 250px;
+
+export const FooterLogos = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+`;
+
+export const FooterLogo = styled.img`
+  width: 80px;
   height: auto;
-  z-index: 20;
-  pointer-events: auto;
+`;
 
-  @media (max-width: 768px) {
-    width: 150px;
-  }
+export const LogoDivider = styled.div`
+  width: 1px;
+  height: 40px;
+  background-color: rgb(200, 200, 200);
 `;

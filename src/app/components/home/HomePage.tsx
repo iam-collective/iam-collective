@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Home, GraduationCap, Heart, Fan, Book } from 'lucide-react';
@@ -24,6 +22,7 @@ import {
   SuggestedCardsContainer,
 } from './HomePage.styled';
 import BottomNavigation from '../bottom-nav/BottomNav';
+import Banner from '../banner/Banner';
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -44,6 +43,7 @@ const HomeScreen: React.FC = () => {
       subline:
         'The I AM Collective is a healing movement and digital community for anyone impacted by gender-based violence — directly or indirectly. We turn real stories into learning journeys and community insights that help people recognise abuse, heal, and take action.',
       cta: "Share your story & unlock healing & someone else's",
+      link: '/stories',
     },
     {
       headline: 'Join the Movement Teaser',
@@ -69,22 +69,28 @@ const HomeScreen: React.FC = () => {
       subline:
         'When we heal the individual, we heal the collective. When we awaken the collective, we ignite change.',
       cta: 'Share your story',
+      link: '/stories',
     },
   ];
 
   return (
     <ScreenContainer>
-      <ImageCard>
-        <BackgroundImage
-          src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80'
-          alt='Nature background'
-        />
-        <OverlayText>
-          <Quote>This is a daily affirmation of support and positivity.</Quote>
-          <Author>– The author</Author>
-          <ProfileImage src='https://randomuser.me/api/portraits/women/44.jpg' alt='Profile' />
-        </OverlayText>
-      </ImageCard>
+      <Banner>
+        <ProfileImage
+          as='svg'
+          width='40'
+          height='40'
+          viewBox='0 0 24 24'
+          className='rounded-full bg-gray-200 text-gray-400'
+          xmlns='http://www.w3.org/2000/svg'
+          onClick={() => navigate('/profile')}
+          style={{ cursor: 'pointer' }}
+        >
+          <circle cx='12' cy='8' r='4' fill='currentColor' />
+          <path d='M4 20c0-4 4-6 8-6s8 2 8 6' fill='currentColor' />
+        </ProfileImage>
+      </Banner>
+
       <SuggestedWrapper>
         <SuggestedTitle>Suggested for you</SuggestedTitle>
         <SuggestedCardsContainer>
@@ -110,22 +116,7 @@ const HomeScreen: React.FC = () => {
           ))}
         </SuggestedCardsContainer>
       </SuggestedWrapper>
-      <BottomNavigation/>
-
-      {/* <BottomNav>
-        <GraduationCap
-          size={24}
-          opacity={0.4}
-          style={{ cursor: 'pointer' }}
-          onClick={() => handleNavigate('/quotes')}
-        />
-        <Heart size={24} opacity={0.4} />
-        <HomeIndicator>
-          <Home size={28} color='#d31875' />
-        </HomeIndicator>
-        <Fan size={24} opacity={0.4} />
-        <Book size={24} opacity={0.4} />
-      </BottomNav> */}
+      <BottomNavigation />
     </ScreenContainer>
   );
 };

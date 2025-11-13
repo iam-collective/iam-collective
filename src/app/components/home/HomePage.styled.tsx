@@ -1,5 +1,3 @@
-
-
 import styled from 'styled-components';
 
 export const ScreenContainer = styled.div`
@@ -20,8 +18,8 @@ export const SuggestedCardsContainer = styled.div`
   display: flex;
   gap: 1rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory; 
-  -webkit-overflow-scrolling: touch; 
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
   padding-bottom: 0.5rem;
 
   /* hide scrollbar */
@@ -34,7 +32,7 @@ export const SuggestedCardsContainer = styled.div`
 
 export const Card = styled.div`
   flex: 0 0 80%;
-  scroll-snap-align: start; 
+  scroll-snap-align: start;
   background: #fbd8e7;
   padding: 1rem;
   border-radius: 1.5rem;
@@ -42,7 +40,6 @@ export const Card = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
 
 export const ImageCard = styled.div`
   position: relative;
@@ -53,9 +50,15 @@ export const ImageCard = styled.div`
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 `;
 
+// export const BackgroundImage = styled.img`
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+// `;
 export const BackgroundImage = styled.img`
   width: 100%;
   height: 100%;
+  flex-shrink: 0;
   object-fit: cover;
 `;
 
@@ -178,6 +181,20 @@ export const HomeIndicator = styled.div`
     background: #d31875;
     border-radius: 999px;
   }
+`;
+// export const SlideWrapper = styled.div<{ $activeIndex: number }>`
+//   display: flex;
+//   width: 100%;
+//   height: 100%;
+//   transition: transform 1s ease-in-out;
+//   transform: ${({ $activeIndex }) => `translateX(-${$activeIndex * 100}%)`};
+// `;
+export const SlideWrapper = styled.div<{ $activeIndex: number; $count: number }>`
+  display: flex;
+  width: ${({ $count }) => `${$count * 100}%`};
+  height: 100%;
+  transition: transform 1s ease-in-out;
+  transform: ${({ $activeIndex, $count }) => `translateX(-${($activeIndex * 100) / $count}%)`};
 `;
 
 export const TooltipWrapper = styled.div`

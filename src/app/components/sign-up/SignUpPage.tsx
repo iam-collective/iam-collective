@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import {
   Container,
@@ -14,11 +12,11 @@ import {
   CountryDropdown,
   CountrySelectWrapper,
   CountryOption,
+  PinkButton,
 } from './SignUp.styles';
 import { useNavigate } from 'react-router-dom';
-import { PinkButton } from '../landing-page/LandingPage.styles';
 
-type Country = { name: string; flag: string; };
+type Country = { name: string; flag: string };
 type StepData = {
   fullName?: string;
   email?: string;
@@ -41,16 +39,16 @@ export default function SignUpPage() {
     setFormData({ ...formData, [field]: value });
   };
 
-  const nextStep = () => setStep(prev => Math.min(prev + 1, 2));
-  const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
+  const nextStep = () => setStep((prev) => Math.min(prev + 1, 2));
+  const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
   useEffect(() => {
     fetch('https://restcountries.com/v3.1/all?fields=name,flags')
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         const countryList: Country[] = data.map((c: any) => ({
           name: c.name.common,
-          flag: c.flags?.png || ''
+          flag: c.flags?.png || '',
         }));
         countryList.sort((a, b) => a.name.localeCompare(b.name));
         setCountries(countryList);
@@ -59,10 +57,6 @@ export default function SignUpPage() {
 
   return (
     <Container>
-      {/* <LeftPanel>
-        <img src='/girl.jpg' alt='Welcome to IAM Collective' />
-      </LeftPanel> */}
-
       <RightPanel>
         <FormTitle>Create Your Account</FormTitle>
         <Form>
@@ -115,24 +109,30 @@ export default function SignUpPage() {
               <CountrySelectWrapper>
                 <CountrySelectorButton type='button' onClick={() => setShowDropdown(!showDropdown)}>
                   <span>
-                    {formData.country
-                      ? <>
-                          <img
-                            src={countries.find(c => c.name === formData.country)?.flag || ''}
-                            alt={formData.country}
-                          /> {formData.country}
-                        </>
-                      : 'Select Country'}
+                    {formData.country ? (
+                      <>
+                        <img
+                          src={countries.find((c) => c.name === formData.country)?.flag || ''}
+                          alt={formData.country}
+                        />{' '}
+                        {formData.country}
+                      </>
+                    ) : (
+                      'Select Country'
+                    )}
                   </span>
                   <span>▾</span>
                 </CountrySelectorButton>
                 {showDropdown && (
                   <CountryDropdown>
-                    {countries.map(c => (
-                      <CountryOption key={c.name} onClick={() => {
-                        handleChange('country', c.name);
-                        setShowDropdown(false);
-                      }}>
+                    {countries.map((c) => (
+                      <CountryOption
+                        key={c.name}
+                        onClick={() => {
+                          handleChange('country', c.name);
+                          setShowDropdown(false);
+                        }}
+                      >
                         <img src={c.flag} alt={c.name} />
                         {c.name}
                       </CountryOption>
@@ -166,9 +166,15 @@ export default function SignUpPage() {
           )}
 
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem' }}>
-            {step > 1 && <PinkButton type='button' onClick={prevStep}>Back</PinkButton>}
+            {step > 1 && (
+              <PinkButton type='button' onClick={prevStep}>
+                Back
+              </PinkButton>
+            )}
             {step < 2 ? (
-              <PinkButton type='button' onClick={nextStep}>Next</PinkButton>
+              <PinkButton type='button' onClick={nextStep}>
+                Next
+              </PinkButton>
             ) : (
               <PinkButton
                 type='button'
