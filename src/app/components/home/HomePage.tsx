@@ -1,13 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home, GraduationCap, Heart, Fan, Book } from 'lucide-react';
 import {
   ScreenContainer,
-  ImageCard,
-  BackgroundImage,
   Card,
-  OverlayText,
-  Author,
   ProfileImage,
   SuggestedWrapper,
   SuggestedTitle,
@@ -16,9 +11,6 @@ import {
   CardDescription,
   CardLink,
   LotusEmoji,
-  BottomNav,
-  HomeIndicator,
-  Quote,
   SuggestedCardsContainer,
 } from './HomePage.styled';
 import BottomNavigation from '../bottom-nav/BottomNav';
@@ -27,9 +19,9 @@ import Banner from '../banner/Banner';
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleNavigate = (navigateTo: string): void => {
-    navigate(navigateTo);
-  };
+  // const handleNavigate = (navigateTo: string): void => {
+  //   navigate(navigateTo);
+  // };
   const cardsData = [
     {
       headline: 'I AM Taking Action Against Gender-Based Violence',

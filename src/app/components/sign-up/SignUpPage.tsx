@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   Container,
-  LeftPanel,
   RightPanel,
   FormTitle,
   Form,
@@ -35,7 +34,7 @@ export default function SignUpPage() {
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (field: keyof StepData, value: string) => {
+  const handleChange = (field: keyof StepData, value: string) : void => {
     setFormData({ ...formData, [field]: value });
   };
 
@@ -48,7 +47,7 @@ export default function SignUpPage() {
       .then((data) => {
         const countryList: Country[] = data.map((c: any) => ({
           name: c.name.common,
-          flag: c.flags?.png || '',
+          flag: c.flags?.png ?? '',
         }));
         countryList.sort((a, b) => a.name.localeCompare(b.name));
         setCountries(countryList);
