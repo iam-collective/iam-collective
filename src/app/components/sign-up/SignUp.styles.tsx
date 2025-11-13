@@ -1,83 +1,58 @@
+
+
 import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(to right, #fff0f6, #fdf0f5);
+  background: linear-gradient(180deg, #fbd2e1, #d8f3d1);
+  padding: 1rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
+    padding: 1rem;
   }
 `;
 
 export const LeftPanel = styled.div`
   flex: 1;
-  background: #20a4cc;
+  background: #d31875;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  border-radius: 2rem;
   overflow: hidden;
-
-  /* subtle background blobs for extra visual interest */
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
-    opacity: 0.4;
-    z-index: 0;
-  }
-
-  &::before {
-    width: 300px;
-    height: 300px;
-    top: 10%;
-    left: -50px;
-    background: radial-gradient(circle, #e27171 0%, transparent 70%);
-  }
-
-  &::after {
-    width: 250px;
-    height: 250px;
-    bottom: 0;
-    right: -60px;
-    background: radial-gradient(circle, #20a4cc 0%, transparent 70%);
-  }
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  margin-right: 2rem;
 
   img {
-    position: relative;
-    width: 70%;
-    max-width: 320px;
+    width: 80%;
+    max-width: 350px;
+    border-radius: 1.5rem;
     z-index: 1;
-    border-radius: 1rem;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   }
 
   @media (max-width: 768px) {
-    height: 200px;
-
-    &::before,
-    &::after {
-      display: none;
-    }
+    margin-right: 0;
+    margin-bottom: 2rem;
+    height: 220px;
 
     img {
-      width: 50%;
-      max-width: 160px;
+      width: 60%;
+      max-width: 180px;
     }
   }
 `;
 
 export const RightPanel = styled.div`
   flex: 1;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background: white;
+  border-radius: 2rem;
   padding: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
     padding: 2rem;
@@ -87,8 +62,8 @@ export const RightPanel = styled.div`
 export const FormTitle = styled.h1`
   font-size: 2rem;
   font-weight: 700;
-  color: #20a4cc;
-  margin-bottom: 1rem;
+  color: #d31875;
+  margin-bottom: 1.5rem;
 `;
 
 export const Form = styled.form`
@@ -100,54 +75,51 @@ export const Form = styled.form`
 export const Label = styled.label`
   font-size: 0.95rem;
   font-weight: 500;
-  color: #20a4cc;
+  color: #333;
   margin-bottom: 0.25rem;
 `;
 
 export const TextInput = styled.input`
   padding: 0.75rem 1rem;
-  border: 1px solid #e27171;
-  border-radius: 0.75rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 1rem;
   font-size: 1rem;
-  color: #111827;
   outline: none;
-  background-color: #fff;
+  background: #fafafa;
 
   &:focus {
-    border-color: #20a4cc;
-    box-shadow: 0 3px 10px rgba(32, 164, 204, 0.15);
+    border-color: #d31875;
+    box-shadow: 0 3px 10px rgba(211, 24, 117, 0.2);
   }
 `;
 
 export const SelectInput = styled.select`
   padding: 0.75rem 1rem;
-  border: 1px solid #e27171;
-  border-radius: 0.75rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 1rem;
   font-size: 1rem;
-  color: #111827;
   outline: none;
-  background-color: #fff;
+  background: #fafafa;
 
   &:focus {
-    border-color: #20a4cc;
-    box-shadow: 0 3px 10px rgba(32, 164, 204, 0.15);
+    border-color: #d31875;
+    box-shadow: 0 3px 10px rgba(211, 24, 117, 0.2);
   }
 `;
 
 export const SubmitButton = styled.button`
-  background-color: #e27171;
+  background: #d31875;
   color: white;
-  padding: 0.9rem;
+  padding: 1rem;
   font-size: 1rem;
   font-weight: 600;
   border: none;
-  border-radius: 9999px;
+  border-radius: 2rem;
   cursor: pointer;
-  margin-top: 1rem;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #20a4cc;
+    background: #e27171;
     transform: translateY(-2px);
   }
 
@@ -156,9 +128,34 @@ export const SubmitButton = styled.button`
   }
 `;
 
+export const StepNavigation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+`;
+
+export const PinkButton = styled.button`
+  background: #d31875;
+  color: white;
+  padding: 0.9rem 2rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #e27171;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
 export const CountrySelectWrapper = styled.div`
   position: relative;
-  width: 100%;
 `;
 
 export const CountryDropdown = styled.div`
@@ -169,8 +166,8 @@ export const CountryDropdown = styled.div`
   max-height: 200px;
   overflow-y: auto;
   background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   z-index: 10;
 `;
 
@@ -182,14 +179,14 @@ export const CountryOption = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: #f3f3f3;
+    background-color: #f7f7f7;
   }
 
   img {
     width: 24px;
     height: 16px;
-    border-radius: 2px;
     object-fit: cover;
+    border-radius: 2px;
   }
 `;
 
@@ -198,15 +195,15 @@ export const CountrySelectorButton = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 1rem;
   padding: 0.75rem 1rem;
   cursor: pointer;
   font-size: 1rem;
 
   &:hover {
-    border-color: #888;
+    border-color: #d31875;
   }
 
   span {
@@ -218,7 +215,7 @@ export const CountrySelectorButton = styled.button`
   img {
     width: 24px;
     height: 16px;
-    border-radius: 2px;
     object-fit: cover;
+    border-radius: 2px;
   }
 `;
