@@ -173,8 +173,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ScreenContainer, StyledContainer, PinkButton } from '../landing-page/LandingPage.styles';
+import { ScreenContainer  } from '../landing-page/LandingPage.styles';
 import styled from 'styled-components';
+import { PinkButton } from '../sign-up/SignUp.styles';
 
 // export default function LoginPage() {
 //   const navigate = useNavigate();
@@ -338,20 +339,7 @@ export default function LoginPage() {
 
   return (
     <ScreenContainer>
-      <StyledContainer
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          background: 'linear-gradient(180deg, #FAF0E6 0%, #FDEDF4 100%)',
-          padding: '2rem',
-          gap: '1.5rem',
-          maxWidth: '400px',
-          margin: '2rem auto',
-        }}
-      >
+
         {/* Decorative left panel */}
         <LeftDecor>
           <motion.div
@@ -425,7 +413,7 @@ export default function LoginPage() {
             </a>
           </motion.div>
         </form>
-      </StyledContainer>
+     
     </ScreenContainer>
   );
 }
