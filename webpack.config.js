@@ -5,6 +5,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const deps = require('./package.json').dependencies;
 
@@ -104,9 +105,7 @@ const common = {
       threshold: 10240,
       minRatio: 0.8,
     }),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/index.html'),
-    }),
+    
     new webpack.ProvidePlugin({
       React: 'react',
       process: 'process/browser',
