@@ -1,7 +1,4 @@
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable react/jsx-no-bind */
 import React, { useEffect, useState } from 'react';
 import {
   Container,
@@ -18,6 +15,7 @@ import {
   PinkButton,
 } from './SignUp.styles';
 import { useNavigate } from 'react-router-dom';
+import { setUser } from '../../utils/storage';
 
 type Country = { name: string; flag: string };
 type StepData = {
@@ -183,6 +181,16 @@ export default function SignUpPage() {
                 type='button'
                 onClick={() => {
                   console.log('Collected Sign Up Data:', formData);
+
+                  setUser({
+                    name: formData.fullName || '',
+                    email: formData.email || '',
+                    ageRange: formData.ageRange || '',
+                    country: formData.country || '',
+                    deviceUsed: formData.deviceUsed || '',
+                    survivorStage: formData.survivorStage || '',
+                  });
+
                   navigate('/home');
                 }}
               >
