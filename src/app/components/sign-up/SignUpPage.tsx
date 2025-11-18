@@ -177,22 +177,11 @@ export default function SignUpPage() {
                 Next
               </PinkButton>
             ) : (
-              // <PinkButton
-              //   type='button'
-              //   onClick={() => {
-              //     console.log('Collected Sign Up Data:', formData);
-              //     navigate('/home');
-              //   }}
-              // >
-              //   Complete Sign Up
-              // </PinkButton>
-
               <PinkButton
                 type='button'
                 onClick={() => {
                   console.log('Collected Sign Up Data:', formData);
 
-                  // Save user data in localStorage
                   setUser({
                     name: formData.fullName || '',
                     email: formData.email || '',
@@ -202,7 +191,6 @@ export default function SignUpPage() {
                     survivorStage: formData.survivorStage || '',
                   });
 
-                  // Redirect to the next page
                   navigate('/home');
                 }}
               >
