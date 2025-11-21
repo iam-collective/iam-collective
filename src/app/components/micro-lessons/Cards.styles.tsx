@@ -18,6 +18,7 @@ export const Card = styled.button<{ $completed: boolean }>`
   padding: 1.5rem;
   background-color: ${({ $completed }): DefaultTheme => ($completed ? '#ff69b4' : '#fbd8e7')};
   border-radius: 1.5rem;
+  cursor: pointer;
   h4,
   p {
     margin: 0;
