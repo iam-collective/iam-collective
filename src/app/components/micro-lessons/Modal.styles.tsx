@@ -128,7 +128,8 @@ export const SectionContent = styled.p`
 
 // Reflection Input
 export const ReflectionInput = styled.textarea`
-  max-width: 90%;
+  max-width: 85%;
+  width: 100%;
   padding: 16px;
   border: 2px solid #e2e8f0;
   border-radius: 12px;
