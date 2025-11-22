@@ -146,11 +146,11 @@ export const ReflectionInput = styled.textarea`
 `;
 
 // Complete Button
-export const CompleteButton = styled.button`
+export const CompleteButton = styled.button<{$variant: boolean}>`
   width: 100%;
   padding: 16px 32px;
-  background: linear-gradient(135deg, #fbd8e7, 0%, #ff69b4 100%);
-  color: white;
+  background: ${({$variant}) :DefaultTheme=> $variant ?'': 'linear-gradient(135deg, #fbd8e7, 0%, #ff69b4 100%)' } ;
+  color: ${({$variant}) :DefaultTheme=> $variant ? 'black': 'white' } ;
   border: none;
   border-radius: 12px;
   font-size: 18px;
@@ -171,22 +171,6 @@ export const CompleteButton = styled.button`
   }
 `;
 
-// Social Hook
-export const SocialHook = styled.button`
-all: unset;
-padding: 16px 32px;
-cursor: pointer;
-  text-align: center;
-  padding: 20px;
-  border: 1px solid black;
-  color: black;
-  width: 80%;
-  /* background-color: #ff4f9a; */
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  margin-top: 24px;
-`;
 
 // Footer
 export const Footer = styled.div`
