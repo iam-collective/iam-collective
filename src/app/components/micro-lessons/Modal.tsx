@@ -77,7 +77,7 @@ const Modal: React.FC = () => {
             <S.SectionContent>{reflectionPrompt}</S.SectionContent>
             <S.ReflectionInput placeholder='Take your time... your thoughts are safe here' id='reflection' />
           </S.Section>
-          <S.SocialHook>{socialHook}</S.SocialHook>
+          <S.CompleteButton $variant='seconndary'>{socialHook}</S.CompleteButton>
           <S.CompleteButton onClick={closeButton}>
             {loading ? 'Saving' : 'Complete Day'}
           </S.CompleteButton>
