@@ -4,7 +4,7 @@ import { AuthProvider } from './context/AuthContext'; // ✅ ADD THIS
 
 import HomeScreen from './components/home/HomePage';
 import LearnScreen from './components/learn/Learn';
-import Stories from './components/story/Stories';
+import StoriesCard from './components/story/StoriesCard';
 import LandingPage from './components/landing-page/LandingPage';
 import SignUpPage from './components/sign-up/SignUpPage';
 import LoginPage from './components/log-in/LogIn';
@@ -15,28 +15,33 @@ import ContinuePage from './components/continue/ContinuePage';
 import MicroLessons from './components/micro-lessons/MicroLessons';
 import { Toaster } from 'sonner'
 import { GlobalStyles } from './Global.styles';
+import Stories from './components/story/Stories';
+import StoriesLayout from './components/story/StoriesLayout';
 const App: React.FC = () => (
-    <AuthProvider>
+  <AuthProvider>
     <Toaster />
     <GlobalStyles />
-      <Router>
-        <Routes>
-          <Route path='/' element={<LandingPage />} />
-          <Route path='/about' element={<AboutPage />} />
-          <Route path='/continue' element={<ContinuePage />} />
-          <Route path='/signup' element={<SignUpPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          {/* <Route path='/guest-home' element={<GuestHomeScreen />} /> */}
-          <Route path='/guest-home' element={<GuestHomePage />} />
-          <Route path='/home' element={<HomeScreen />} />
-          <Route path='/profile' element={<ProfilePage />} />
-          <Route path='learn' element={<LearnScreen />} />
-          <Route path='micro-lessons' element={<MicroLessons />} />
-          <Route path='/heal' element={<Stories />} />
-          <Route path='/stories' element={<Stories />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <Router>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/about' element={<AboutPage />} />
+        <Route path='/continue' element={<ContinuePage />} />
+        <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        {/* <Route path='/guest-home' element={<GuestHomeScreen />} /> */}
+        <Route path='/guest-home' element={<GuestHomePage />} />
+        <Route path='/home' element={<HomeScreen />} />
+        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='learn' element={<LearnScreen />} />
+        <Route path='micro-lessons' element={<MicroLessons />} />
+        <Route path='/heal' element={<StoriesCard />} />
+        <Route path='/stories' element={<StoriesLayout />} >
+          <Route index element={<StoriesCard />} />
+          <Route path=':storyId' element={<Stories />} />
+        </Route>
+      </Routes>
+    </Router>
+  </AuthProvider>
 );
 
 export default App;

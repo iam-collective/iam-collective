@@ -2,11 +2,13 @@ import styled, { DefaultTheme } from 'styled-components';
 
 export const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1.5rem;
   width: 100%;
   overflow-y: scroll;
+  @media (min-width: 480px) {
   padding: 1rem 2rem;
+  }
 `;
 
 export const Card = styled.button<{ $completed: boolean }>`

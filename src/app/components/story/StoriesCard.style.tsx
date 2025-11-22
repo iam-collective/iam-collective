@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ScreenContainer = styled.div`
@@ -97,4 +98,68 @@ export const SuggestedTitle = styled.p`
   font-size: 1.2rem;
   color: #6b7280;
   font-weight: 750;
+`;
+
+
+export const StyledCard = styled.article`
+    border: 1px solid #ff69b4;
+    border-radius: 1rem ;
+    max-width: 100%;
+    /* overflow: hidden; */
+    padding: 1.25rem;
+    text-align: left ;
+    max-height: 20rem;
+    background-color: white ;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) ;
+`;
+
+export const StyledCardImage = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin-bottom: 8px;
+  object-fit: cover;
+  max-height: 10rem;
+`;
+
+
+export const Date = styled.p`
+  font-size: 12px;
+  color: #888;  
+`
+
+export const Content = styled.p``;
+
+
+export const DeleteButton = styled.button`
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: #ff7875;
+  }
+`
+
+export const Title = styled(Link)`
+display: block;
+  font-size: 1.25rem;
+  margin: 0;
+  padding: 0;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+export const ReadMore = styled(Link)`
+  text-decoration: none;
+  color: #ff69b4;
+  font-weight: bold;
+
 `;
