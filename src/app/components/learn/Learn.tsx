@@ -26,7 +26,7 @@ import {
   NextButton,
   ScrollableContent,
 } from './Learn.styled';
-
+// import HeaderComponent from '../micro-lessons/Header';
 const LearnScreen: React.FC = () => {
   const navigate = useNavigate();
   const handleNavigate = (navigateTo: string): void => {
@@ -35,13 +35,14 @@ const LearnScreen: React.FC = () => {
   
   return (
     <ScreenContainer>
+      {/* <HeaderComponent title='' /> */}
       <ScrollableContent>
         <Header>
           Knowledge is strength. Your journey to empowerment through upskilling starts here.
         </Header>
-        <ProfileImage src='https://randomuser.me/api/portraits/women/44.jpg' alt='Profile' />
+        <ProfileImage/>
         <SubTitle>We curate content according to three categories:</SubTitle>
-        
+
         <CarouselWrapper>
           <CarouselContainer>
             <CarouselCard>
