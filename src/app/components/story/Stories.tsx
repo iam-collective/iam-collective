@@ -8,11 +8,11 @@ import {
   StyledScroller,
   SuggestedTitle,
 } from './Stories.style';
-import Header from '../header/Header';
 import { useScrollHandler } from '../../hooks/use-scroll-handler';
 import BottomNavigation from '../bottom-nav/BottomNav';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router';
+import Header from '../micro-lessons/Header';
 
 interface StoryProps {
   title: string;
@@ -80,7 +80,8 @@ const Stories: React.FC = () => {
   return (
     <>
       <ScreenContainer>
-        <Header title='Stories' />
+      <Header title='Stories'/>        
+
         <StyledScroller onScroll={handleScroll}>
           {posts.length === 0 ? (
             <div
