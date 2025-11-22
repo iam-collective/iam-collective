@@ -14,9 +14,11 @@ import ProfilePage from './components/profile-page/ProfilePage';
 import ContinuePage from './components/continue/ContinuePage';
 import MicroLessons from './components/micro-lessons/MicroLessons';
 import { Toaster } from 'sonner'
+import { GlobalStyles } from './Global.styles';
 const App: React.FC = () => (
     <AuthProvider>
     <Toaster />
+    <GlobalStyles />
       <Router>
         <Routes>
           <Route path='/' element={<LandingPage />} />
