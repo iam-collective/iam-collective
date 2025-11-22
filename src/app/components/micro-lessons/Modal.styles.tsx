@@ -24,7 +24,7 @@ export const CustomToastWrapper = styled.div<{ $bgColor?: string; $textColor?: s
 export const ModalContainer = styled.div`
   background: white;
   border-radius: 24px;
-  max-width: 75%;
+  max-width: 90%;
   overflow: hidden;
   max-height: 90vh;
   display: flex;
@@ -146,11 +146,11 @@ export const ReflectionInput = styled.textarea`
 `;
 
 // Complete Button
-export const CompleteButton = styled.button<{$variant: boolean}>`
+export const CompleteButton = styled.button<{ $variant: boolean }>`
   width: 100%;
   padding: 16px 32px;
-  background: ${({$variant}) :DefaultTheme=> $variant ?'': 'linear-gradient(135deg, #fbd8e7, 0%, #ff69b4 100%)' } ;
-  color: ${({$variant}) :DefaultTheme=> $variant ? 'black': 'white' } ;
+  background: ${({ $variant }): DefaultTheme => $variant ? '' : 'linear-gradient(135deg, #fbd8e7, 0%, #ff69b4 100%)'} ;
+  color: ${({ $variant }): DefaultTheme => $variant ? 'black' : 'white'} ;
   border: none;
   border-radius: 12px;
   font-size: 18px;
