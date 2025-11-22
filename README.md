@@ -1,7 +1,6 @@
-# Getting started with fa-kente-iam-collective
+# Getting started with iam-collective
 
-i am collective pwa. This project
-was bootstrapped with [Create Micro App](https://github.com/mtnkente/create-micro-app).
+i am collective pwa. 
 
 # MicroFrontends
 
