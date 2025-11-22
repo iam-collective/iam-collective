@@ -1,16 +1,15 @@
 import styled, { DefaultTheme } from 'styled-components';
 
 export const Header = styled.header`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 60px;
   align-items: center;
-  /* background-color: #f5f5f5; */
   display: flex;
   justify-content: space-between;
-  padding: 0 1.25rem;
+  padding: 0 .5rem;
 `;
 
 export const ProfileImage = styled.img<{ $invert?: boolean }>`

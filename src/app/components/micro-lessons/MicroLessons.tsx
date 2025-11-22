@@ -11,7 +11,7 @@ const MicroLessons: React.FC = () => {
   const complatedDay = useModalCompletedDay();
   if (!hasHydrated) return;
   return (
-    <ScreenContainer>
+    <S.ScreenContainer>
       <Header title='Micro Lessons' />
       <S.Container>
         <S.Title>
@@ -22,7 +22,7 @@ const MicroLessons: React.FC = () => {
         <Cards />
       </S.Container>
       <BottomNavigation />
-    </ScreenContainer>
+    </S.ScreenContainer>
   );
 };
 
