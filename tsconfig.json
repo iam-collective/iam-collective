@@ -26,6 +26,6 @@
     ".github/scripts/universal-check.js",
     "test",
     "capacitor.config.ts"
-  ],
+, "convex/stories.ts"  ],
   "exclude": []
 }
