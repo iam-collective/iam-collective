@@ -18,8 +18,10 @@ export const uploadStory = mutation({
     title: v.string(),
     content: v.string(),
     imageId: v.optional(v.id("_storage")),
+    isPublic: v.optional(v.boolean()),
+    username: v.optional(v.string()),
   },
-  handler: async (ctx, { title, content, imageId }) => {
+  handler: async (ctx, { title, content, imageId, isPublic, username }) => {
     // const identity = await ctx.auth.getUserIdentity();
     // if (!identity) throw new Error("Not authenticated");
 
@@ -29,11 +31,13 @@ export const uploadStory = mutation({
       content,
       imageId,
       createdAt: Date.now(),
+      isPublic,
+      username,
     });
   },
 });
 
-// List all stories
+// List all stories (hides username if isPublic is false)
 export const listStories = query({
   args: {},
   handler: async (ctx) => {
@@ -41,6 +45,25 @@ export const listStories = query({
 
     return await Promise.all(
       stories.map(async (story) => ({
+        ...story,
+        // Hide username if user chose to be anonymous
+        username: story.isPublic ? story.username : "Anonymous",
+        imageUrl: story.imageId ? await ctx.storage.getUrl(story.imageId) : null,
+      }))
+    );
+  },
+});
+
+// List stories by username (only their own stories show real username)
+export const listStoriesByUsername = query({
+  args: { username: v.string() },
+  handler: async (ctx, { username }) => {
+    const stories = await ctx.db.query("stories").order("desc").collect();
+
+    const userStories = stories.filter((story) => story.username === username);
+
+    return await Promise.all(
+      userStories.map(async (story) => ({
         ...story,
         imageUrl: story.imageId ? await ctx.storage.getUrl(story.imageId) : null,
       }))
@@ -57,6 +80,8 @@ export const getStory = query({
 
     return {
       ...story,
+      // Hide username if user chose to be anonymous
+      username: story.isPublic ? story.username : "Anonymous",
       imageUrl: story.imageId ? await ctx.storage.getUrl(story.imageId) : null,
     };
   },
@@ -90,8 +115,9 @@ export const updateStory = mutation({
     title: v.optional(v.string()),
     content: v.optional(v.string()),
     imageId: v.optional(v.id("_storage")),
+    isPublic: v.optional(v.boolean()),
   },
-  handler: async (ctx, { storyId, title, content, imageId }) => {
+  handler: async (ctx, { storyId, title, content, imageId, isPublic }) => {
     // const identity = await ctx.auth.getUserIdentity();
     // if (!identity) throw new Error("Not authenticated");
 
@@ -104,6 +130,7 @@ export const updateStory = mutation({
     const updates: Record<string, unknown> = {};
     if (title !== undefined) updates.title = title;
     if (content !== undefined) updates.content = content;
+    if (isPublic !== undefined) updates.isPublic = isPublic;
     if (imageId !== undefined) {
       if (story.imageId && story.imageId !== imageId) {
         await ctx.storage.delete(story.imageId);

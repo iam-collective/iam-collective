@@ -9,5 +9,7 @@ export default defineSchema({
     content: v.string(),
     imageId: v.optional(v.id("_storage")),
     createdAt: v.number(),
+    isPublic: v.optional(v.boolean()),
+    username: v.optional(v.string()),
   }).index("by_userId", ["userId"]),
 });

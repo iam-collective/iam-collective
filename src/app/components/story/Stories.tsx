@@ -44,6 +44,20 @@ const Stories: React.FC = () => {
   const uploadStory = useMutation(api.stories.uploadStory);
   const generateUploadUrl = useMutation(api.stories.generateUploadUrl);
   const deleteStory = useMutation(api.stories.deleteStory);
+  console.log(stories)
+
+  //this is the payload example
+  // {
+  //   "_id": "k97abc123def456",
+  //   "_creationTime": 1732456789123,
+  //   "userId": "this is going to come from auth",
+  //   "title": "My First Story",
+  //   "content": "This is my story about...",
+  //   "createdAt": 1732456789000,
+  //   "isPublic": true,
+  //   "username": "JohnDoe",
+  //   "imageUrl": "https://your-project.convex.cloud/api/storage/kg789xyz456abc"
+  // }
 
   const handleDelete = async (storyId: Id<"stories">) => {
     try {
