@@ -6,7 +6,7 @@ export const ScreenContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  max-height: 100vh;
   padding: 1rem;
   // background: linear-gradient(180deg, #fbd2e1, #d8f3d1);
   // border-radius: 2rem;
@@ -82,6 +82,10 @@ export const DividerText = styled.span`
   color: black;
   text-align: center;
   font-family: 'Lora';
+  h3, p{
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 export const NextButton = styled(Button)`

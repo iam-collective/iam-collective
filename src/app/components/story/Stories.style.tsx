@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const ScreenContainer = styled.div`
+export const ScreenContainer = styled.main`
+display: flex;
+flex-direction: column;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   height: 100vh;
-  padding: 1rem;
-  margin: 0 auto;
-  overflow: hidden;
+  gap: 1rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 `;
-
-export const StyledContainer = styled.div`
+export const StoryWrapper = styled.div`
+  padding: 1rem;
+`;
+export const StyledContainer = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
@@ -83,15 +83,24 @@ export const PinkButton = styled.button`
   }
 `;
 
-export const StyledScroller = styled.div`
+export const StyledScroller = styled.section`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--app-container-vertical-margin-small, 8px);
   align-self: stretch;
+  overflow: scroll;
   overflow: auto;
+  padding: 0 1rem;
   scrollbar-width: none;
   flex: 1;
+/* hide scrollbar */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-bottom: 3rem;
 `;
 
 export const SuggestedTitle = styled.p`

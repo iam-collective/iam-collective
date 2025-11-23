@@ -9,8 +9,8 @@ export const StoryScreen = styled.div`
   border-radius: 2rem;
   overflow: auto;
   width: 100%;
-  max-width: 760px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  /* max-width: 760px; */
+  /* box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12); */
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -61,10 +61,14 @@ export const HeroImageWrapper = styled.div`
 `;
 
 export const HeroImage = styled.img`
-  width: 100%;
+  width: 90%;
+  height: 10rem;
   height: auto;
   object-fit: cover;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
 `;
 
 export const HeroCaption = styled.p`

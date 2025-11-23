@@ -14,6 +14,7 @@ import {
   ProfileImage,
   ScreenContainer
 } from '../home/HomePage.styled';
+import HeaderComponent from '../micro-lessons/Header';
 import {
   ButtonWrapper,
   CarouselCard,
@@ -32,15 +33,15 @@ const LearnScreen: React.FC = () => {
   const handleNavigate = (navigateTo: string): void => {
     navigate(navigateTo);
   };
-  
+
   return (
     <ScreenContainer>
       {/* <HeaderComponent title='' /> */}
+      <HeaderComponent title='Learn' />
       <ScrollableContent>
         <Header>
           Knowledge is strength. Your journey to empowerment through upskilling starts here.
         </Header>
-        <ProfileImage/>
         <SubTitle>We curate content according to three categories:</SubTitle>
 
         <CarouselWrapper>
@@ -59,7 +60,7 @@ const LearnScreen: React.FC = () => {
                 </CentredCard>
               </PinkCard>
             </CarouselCard>
-            
+
             <CarouselCard>
               <OrangeCard>
                 <CentredCard>
@@ -74,7 +75,7 @@ const LearnScreen: React.FC = () => {
                 </CentredCard>
               </OrangeCard>
             </CarouselCard>
-            
+
             <CarouselCard>
               <BlueCard>
                 <CentredCard>
@@ -90,12 +91,12 @@ const LearnScreen: React.FC = () => {
             </CarouselCard>
           </CarouselContainer>
         </CarouselWrapper>
-        
+
         <ButtonWrapper>
           <NextButton to={'/micro-lessons'}>Next</NextButton>
         </ButtonWrapper>
       </ScrollableContent>
-      
+
       <BottomNavigation></BottomNavigation>
     </ScreenContainer>
   );
