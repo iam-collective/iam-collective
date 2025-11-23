@@ -17,10 +17,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { setUser } from '../../utils/storage';
-import { useMutation } from 'convex/react';
+import { useAction } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import bcrypt from 'bcryptjs';
-
+import { setAuthToken } from '../../utils/auth';
 
 type Country = { name: string };
 type StepData = {
@@ -45,8 +45,8 @@ export default function SignUpPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
   
-  // Convex mutation
-  const createUser = useMutation(api.usersInfo.createUser);
+  // Use Convex action for signup with token generation
+  const signupWithToken = useAction(api.usersInfo.signupWithToken);
 
   const handleChange = (field: keyof StepData, value: string): void => {
     setFormData({ ...formData, [field]: value });
@@ -119,37 +119,42 @@ export default function SignUpPage() {
       // Hash password before sending to Convex
       const hashedPassword = await bcrypt.hash(formData.password, 10);
 
-      // Create user in Convex (returns the generated userId)
-      const result = await createUser({
+      // Create user and get JWT token (stored in database)
+      const result = await signupWithToken({
         full_name: formData.fullName,
         email: formData.email,
-        password: hashedPassword, // ✅ Now hashed!
+        password: hashedPassword,
         age: ageNumber,
         country: formData.country,
         device_type: formData.deviceUsed,
         healing_Journey: formData.survivorStage,
+        deviceInfo: navigator.userAgent, // Track device/browser
       });
+
+      // Store JWT token in localStorage
+      setAuthToken(result.token);
 
       // Store current logged-in user locally (optional, for offline access)
       localStorage.setItem(
         'currentUser',
         JSON.stringify({ 
           userId: result.userId,
-          email: formData.email, 
-          fullName: formData.fullName 
+          email: result.user.email, 
+          fullName: result.user.full_name 
         })
       );
 
-      // Log user in via AuthContext
+      // Log user in via AuthContext with token
       login({ 
-        email: formData.email, 
-        fullName: formData.fullName 
+        email: result.user.email, 
+        fullName: result.user.full_name,
+        token: result.token,
       });
 
-      // Store additional user info (if needed by your app)
+      // Store additional user info 
       setUser({
-        name: formData.fullName,
-        email: formData.email,
+        name: result.user.full_name,
+        email: result.user.email,
         ageRange: formData.ageRange,
         country: formData.country,
         deviceUsed: formData.deviceUsed,
