@@ -3,80 +3,86 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  min-height: 100vh;
-  width: 100%;
-  background: linear-gradient(180deg, #fbd2e1, #d8f3d1);
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
   padding: 1rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    padding: 1rem;
-  }
-`;
-
-export const LeftPanel = styled.div`
-  flex: 1;
-  background: #d31875;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border-radius: 2rem;
+  margin: 0 auto;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  margin-right: 2rem;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+`;
 
-  img {
-    width: 80%;
-    max-width: 350px;
-    border-radius: 1.5rem;
-    z-index: 1;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  }
+export const FormWrapper = styled.div`
+  width: 100%;
+  width: 100%;        
+  height: 90vh;               
+  background: white;
+  border-color: red;
+  border-radius: 2rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto;            
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
-    margin-right: 0;
-    margin-bottom: 2rem;
-    height: 220px;
-
-    img {
-      width: 60%;
-      max-width: 180px;
-    }
+    width: 90%;
+    height: 95vh;
+    padding: 1.5rem;
   }
 `;
 
-export const RightPanel = styled.div`
-  flex: 1;
-  background: white;
-  border-radius: 2rem;
-  padding: 3rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
-  @media (max-width: 768px) {
-    padding: 2rem;
-  }
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 1rem; 
+`;
+
+
+export const TitleUnderline = styled.div`
+  height: 2px;
+  width: 100%;
+  background-color: rgb(255, 105, 180);
+  margin: 4px 0 0 0;
 `;
 
 export const FormTitle = styled.h1`
-  font-size: 2rem;
-  font-weight: 700;
-  color: #d31875;
-  margin-bottom: 1.5rem;
+  font-family: 'Lora', serif; 
+  font-size: 1.6rem;          
+  font-weight: 600;          
+  color: #fffff;           
+  margin: 0;                  
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
+  flex: 1;
+  overflow-y: auto;
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<{ isRequired?: boolean }>`
   font-size: 0.95rem;
   font-weight: 500;
   color: #333;
   margin-bottom: 0.25rem;
+  position: relative;
+
+  /* Add red star for required fields */
+  &::after {
+    content: '${({ isRequired }) => (isRequired ? '*' : '')}';
+    color: red;
+    margin-left: 0.25rem;
+  }
 `;
+
 
 export const TextInput = styled.input`
   padding: 0.75rem 1rem;
@@ -106,27 +112,6 @@ export const SelectInput = styled.select`
   }
 `;
 
-export const SubmitButton = styled.button`
-  background: #d31875;
-  color: white;
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: #e27171;
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`;
-
 export const StepNavigation = styled.div`
   display: flex;
   justify-content: space-between;
@@ -134,25 +119,26 @@ export const StepNavigation = styled.div`
 `;
 
 export const PinkButton = styled.button`
-  background: #d31875;
-  color: white;
-  padding: 0.9rem 2rem;
-  border-radius: 2rem;
-  font-weight: 600;
-  cursor: pointer;
+  background-color: #ffd7e8;
+  color: #1a1a1a;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 500;
   border: none;
-  transition: all 0.3s ease;
+  border-radius: 60px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: 'Lora', serif;
 
   &:hover {
-    background: #e27171;
+    background-color: #ffbfdc;
+    transform: translateY(-2px);
   }
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  &:active {
+    transform: translateY(0);
   }
 `;
-
 export const CountrySelectWrapper = styled.div`
   position: relative;
 `;
@@ -218,3 +204,4 @@ export const CountrySelectorButton = styled.button`
     border-radius: 2px;
   }
 `;
+

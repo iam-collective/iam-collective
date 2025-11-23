@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext'; // ✅ ADD THIS
+import { AuthProvider } from './context/AuthContext'; 
 
 import HomeScreen from './components/home/HomePage';
 import LearnScreen from './components/learn/Learn';
@@ -24,7 +24,6 @@ const App: React.FC = () => (
           <Route path='/continue' element={<ContinuePage />} />
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/login' element={<LoginPage />} />
-          {/* <Route path='/guest-home' element={<GuestHomeScreen />} /> */}
           <Route path='/guest-home' element={<GuestHomePage />} />
           <Route path='/home' element={<HomeScreen />} />
           <Route path='/profile' element={<ProfilePage />} />

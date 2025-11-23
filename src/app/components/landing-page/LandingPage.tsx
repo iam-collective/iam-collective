@@ -28,7 +28,7 @@ export default function LandingPage() {
         <DividerWrapper>
           <Line />
           <DividerText>
-            Welcome to IAM Collective,, something goes in here maybe a brief of what to expect
+          Welcome to IAM Collective, a safe and supportive self-healing circle for people impacted by GBV, whether directly or indirectly.
           </DividerText>
           <Line />
         </DividerWrapper>

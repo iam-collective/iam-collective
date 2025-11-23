@@ -5,18 +5,21 @@
 import styled from 'styled-components';
 
 export const ScreenContainer = styled.div`
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
   padding: 1rem;
-  // background: linear-gradient(180deg, #fbd2e1, #d8f3d1);
-  // border-radius: 2rem;
-  margin: 0 auto;
+  margin: 0;
+  width: 100%;
   overflow: hidden;
   position: relative;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 `;
+
+
 
 export const SuggestedCardsContainer = styled.div`
   display: flex;
@@ -26,16 +29,18 @@ export const SuggestedCardsContainer = styled.div`
   -webkit-overflow-scrolling: touch;
   padding-bottom: 0.5rem;
 
-  /* hide scrollbar */
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  &::-webkit-scrollbar { display: none; }
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  /* prevent child cards from exceeding container */
+  max-width: 100%;
 `;
 
+
 export const Card = styled.div`
-  flex: 0 0 80%;
+  flex: 0 0 80%; /* width relative to container */
+  max-width: 80%;
   scroll-snap-align: start;
   background: #fbd8e7;
   padding: 1rem;
@@ -43,27 +48,22 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 768px) {
+    flex: 0 0 70%;
+    max-width: 70%;
+  }
 `;
 
 export const ImageCard = styled.div`
   position: relative;
   width: 100%;
+  max-width: 100%; /* prevent overflow */
   height: 60vh;
   border-radius: 2rem;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 `;
-
-// export const BackgroundImage = styled.img`
-//   width: 100%;
-//   height: 100%;
-//   object-fit: cover;
-// `;
-// export const BackgroundImage = styled.img`
-//   width: 100%;
-//   height: 100%;
-//   object-fit: cover;
-// `;
 export const BackgroundImage = styled.img`
   width: 100%;
   height: 100%;
@@ -113,7 +113,7 @@ export const SuggestedWrapper = styled.div`
   background: white;
   border-radius: 2rem;
   margin-top: -6rem;
-  padding: 1rem;
+  padding: 0.5rem;
   z-index: 0;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 `;
@@ -124,15 +124,6 @@ export const SuggestedTitle = styled.p`
   font-weight: 500;
   margin-bottom: 0.75rem;
 `;
-
-// export const Card = styled.div`
-//   background: #fbd8e7;
-//   padding: 1rem;
-//   border-radius: 1.5rem;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-// `;
 
 export const CardText = styled.div`
   max-width: 70%;
@@ -166,16 +157,15 @@ export const LotusEmoji = styled.div`
 `;
 
 export const BottomNav = styled.nav`
-  width: 100%;
+  max-width: 100%; /* prevent nav from stretching off-screen */
   background: white;
   border-radius: 2rem;
   padding: 0.75rem 2rem;
   display: flex;
   justify-content: space-between;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 1.2rem;
+  margin-top: 1rem;
 `;
-
 export const HomeIndicator = styled.div`
   position: relative;
   display: flex;
@@ -191,13 +181,7 @@ export const HomeIndicator = styled.div`
     border-radius: 999px;
   }
 `;
-// export const SlideWrapper = styled.div<{ $activeIndex: number }>`
-//   display: flex;
-//   width: 100%;
-//   height: 100%;
-//   transition: transform 1s ease-in-out;
-//   transform: ${({ $activeIndex }) => `translateX(-${$activeIndex * 100}%)`};
-// `;
+
 export const SlideWrapper = styled.div<{ $activeIndex: number; $count: number }>`
   display: flex;
   width: ${({ $count }) => `${$count * 100}%`};
