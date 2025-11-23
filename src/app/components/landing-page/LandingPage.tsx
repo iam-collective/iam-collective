@@ -7,7 +7,6 @@ import {
   DividerWrapper,
   Line,
   DividerText,
-  NextButton,
   Footer,
   FooterText,
   FooterLogos,
@@ -28,7 +27,10 @@ export default function LandingPage() {
         <DividerWrapper>
           <Line />
           <DividerText>
-            Welcome to IAM Collective,, something goes in here maybe a brief of what to expect
+            <h3>
+            Welcome to IAM Collective
+            </h3> 
+            The I AM Collective is a healing movement and digital community for anyone impacted by gender-based violence 
           </DividerText>
           <Line />
         </DividerWrapper>
@@ -42,8 +44,6 @@ export default function LandingPage() {
           <FooterLogo src='/MTN-Logo.png' alt='MTN-Logo' />
           <LogoDivider />
           <FooterLogo src='/chenosis.png' alt='chenosis' />
-          {/* <LogoDivider />
-          <FooterLogo src='/unite.png' alt='unite' /> */}
         </FooterLogos>
       </Footer>
     </ScreenContainer>

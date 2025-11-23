@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Container,
-  RightPanel,
+  FormWrapper,
   FormTitle,
   Form,
   Label,
@@ -12,17 +12,15 @@ import {
   CountryDropdown,
   CountrySelectWrapper,
   CountryOption,
+  TitleUnderline,
+  TitleWrapper,
   PinkButton,
 } from './SignUp.styles';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { setUser } from '../../utils/storage';
-import { useAction } from 'convex/react';
-import { api } from '../../../../convex/_generated/api';
-import bcrypt from 'bcryptjs';
-import { setAuthToken } from '../../utils/auth';
 
-type Country = { name: string };
+type Country = { name: string; flag: string };
 type StepData = {
   fullName?: string;
   email?: string;
@@ -39,110 +37,84 @@ export default function SignUpPage() {
   const [formData, setFormData] = useState<StepData>({});
   const [countries, setCountries] = useState<Country[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const navigate = useNavigate();
   const { login } = useAuth();
-  
-  // Use Convex action for signup with token generation
-  const signupWithToken = useAction(api.usersInfo.signupWithToken);
 
-  const handleChange = (field: keyof StepData, value: string): void => {
+  const handleChange = (field: keyof StepData, value: string) => {
     setFormData({ ...formData, [field]: value });
-    if (error) setError(''); 
+    setErrors((prev) => ({ ...prev, [field]: '' }));
   };
 
   const nextStep = () => {
-    // Validate step 1 fields
-    if (step === 1) {
-      if (!formData.fullName?.trim()) {
-        setError('Full name is required');
-        return;
-      }
-      if (!formData.email?.trim()) {
-        setError('Email is required');
-        return;
-      }
-      if (!formData.password) {
-        setError('Password is required');
-        return;
-      }
-      if (formData.password !== formData.confirmPassword) {
-        setError('Passwords do not match');
-        return;
-      }
-      if (formData.password.length < 6) {
-        setError('Password must be at least 6 characters');
-        return;
-      }
-    }
-    setError('');
-    setStep((prev) => Math.min(prev + 1, 2));
+    if (step === 1 && !validateStep1()) return;
+    setStep((prev) => prev + 1);
   };
 
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
+  const validateStep1 = (): boolean => {
+    const newErrors: { [key: string]: string } = {};
+    if (!formData.fullName) newErrors.fullName = 'Full Name is required';
+    if (!formData.email) newErrors.email = 'Email is required';
+    if (!formData.password) newErrors.password = 'Password is required';
+    if (!formData.confirmPassword) newErrors.confirmPassword = 'Confirm your password';
+    if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword)
+      newErrors.confirmPassword = 'Passwords do not match';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const validateStep2 = (): boolean => {
+    const newErrors: { [key: string]: string } = {};
+    if (!formData.ageRange) newErrors.ageRange = 'Age Range is required';
+    if (!formData.country) newErrors.country = 'Country is required';
+    if (!formData.deviceUsed) newErrors.deviceUsed = 'Device Used is required';
+    if (!formData.survivorStage) newErrors.survivorStage = 'Healing Journey Stage is required';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   useEffect(() => {
-    fetch('https://restcountries.com/v3.1/all?fields=name')
+    fetch('https://restcountries.com/v3.1/all?fields=name,flags')
       .then((res) => res.json())
       .then((data) => {
         const countryList: Country[] = data.map((c: any) => ({
           name: c.name.common,
+          flag: c.flags?.png ?? '',
         }));
         countryList.sort((a, b) => a.name.localeCompare(b.name));
         setCountries(countryList);
       });
   }, []);
 
-  const handleSignUp = async () => {
-    try {
-      setIsLoading(true);
-      setError('');
+  const handleSubmit = () => {
+    if (!validateStep2()) return;
 
-      // Validate required fields
-      if (!formData.email || !formData.password || !formData.fullName) {
-        setError('Please fill in all required fields');
-        setIsLoading(false);
-        return;
-      }
+    console.log('Collected Sign Up Data:', formData);
 
-      if (!formData.ageRange || !formData.country || !formData.deviceUsed || !formData.survivorStage) {
-        setError('Please complete all fields in step 2');
-        setIsLoading(false);
-        return;
-      }
+    if (!formData.email || !formData.password) {
+      alert('Email and password are required');
+      return;
+    }
 
-      // Extract age number from range (e.g., "25-34" -> 25)
-      const ageNumber = formData.ageRange ? parseInt(formData.ageRange.split('-')[0]) : 0;
-
-      // Hash password before sending to Convex
-      const hashedPassword = await bcrypt.hash(formData.password, 10);
-
-      // Create user and get JWT token (stored in database)
-      const result = await signupWithToken({
-        full_name: formData.fullName,
+    const savedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const existingUser = savedUsers.find((u: any) => u.email === formData.email);
+    if (!existingUser) {
+      savedUsers.push({
         email: formData.email,
-        password: hashedPassword,
-        age: ageNumber,
-        country: formData.country,
-        device_type: formData.deviceUsed,
-        healing_Journey: formData.survivorStage,
-        deviceInfo: navigator.userAgent, // Track device/browser
+        password: formData.password,
+        fullName: formData.fullName,
       });
+      localStorage.setItem('users', JSON.stringify(savedUsers));
+    }
 
-      // Store JWT token in localStorage
-      setAuthToken(result.token);
-
-      // Store current logged-in user locally (optional, for offline access)
-      localStorage.setItem(
-        'currentUser',
-        JSON.stringify({ 
-          userId: result.userId,
-          email: result.user.email, 
-          fullName: result.user.full_name 
-        })
-      );
+    localStorage.setItem(
+      'currentUser',
+      JSON.stringify({ email: formData.email, fullName: formData.fullName })
+    );
 
       // Log user in via AuthContext with token
       login({ 
@@ -150,76 +122,60 @@ export default function SignUpPage() {
         fullName: result.user.full_name,
         token: result.token,
       });
+    login({ email: formData.email, fullName: formData.fullName });
 
-      // Store additional user info 
-      setUser({
-        name: result.user.full_name,
-        email: result.user.email,
-        ageRange: formData.ageRange,
-        country: formData.country,
-        deviceUsed: formData.deviceUsed,
-        survivorStage: formData.survivorStage,
-      });
+    setUser({
+      name: formData.fullName || '',
+      email: formData.email || '',
+      ageRange: formData.ageRange || '',
+      country: formData.country || '',
+      deviceUsed: formData.deviceUsed || '',
+      survivorStage: formData.survivorStage || '',
+    });
 
-      // Navigate to home
-      navigate('/home');
-    } catch (err: any) {
-      console.error('Sign up error:', err);
-      setError(err.message || 'Failed to create account. Please try again.');
-      setIsLoading(false);
-    }
+    navigate('/home');
   };
 
   return (
     <Container>
-      <RightPanel>
-        <FormTitle>Create Your Account</FormTitle>
+      <FormWrapper>
+        <TitleWrapper>
+          <FormTitle>Create Your Account</FormTitle>
+          <TitleUnderline />
+        </TitleWrapper>
         <Form>
-          {error && (
-            <div style={{ 
-              color: '#d32f2f', 
-              backgroundColor: '#ffebee', 
-              padding: '0.75rem', 
-              borderRadius: '4px', 
-              marginBottom: '1rem',
-              fontSize: '0.875rem'
-            }}>
-              {error}
-            </div>
-          )}
-
           {step === 1 && (
             <>
               <Label>Full Name *</Label>
               <TextInput
                 value={formData.fullName || ''}
                 onChange={(e) => handleChange('fullName', e.target.value)}
-                disabled={isLoading}
               />
+              {errors.fullName && <p style={{ color: 'red' }}>{errors.fullName}</p>}
 
               <Label>Email *</Label>
               <TextInput
-                type='email'
+                type="email"
                 value={formData.email || ''}
                 onChange={(e) => handleChange('email', e.target.value)}
-                disabled={isLoading}
               />
+              {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
 
               <Label>Password *</Label>
               <TextInput
-                type='password'
+                type="password"
                 value={formData.password || ''}
                 onChange={(e) => handleChange('password', e.target.value)}
-                disabled={isLoading}
               />
+              {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
 
               <Label>Confirm Password *</Label>
               <TextInput
-                type='password'
+                type="password"
                 value={formData.confirmPassword || ''}
                 onChange={(e) => handleChange('confirmPassword', e.target.value)}
-                disabled={isLoading}
               />
+              {errors.confirmPassword && <p style={{ color: 'red' }}>{errors.confirmPassword}</p>}
             </>
           )}
 
@@ -229,24 +185,30 @@ export default function SignUpPage() {
               <SelectInput
                 value={formData.ageRange || ''}
                 onChange={(e) => handleChange('ageRange', e.target.value)}
-                disabled={isLoading}
               >
-                <option value=''>Select</option>
-                <option value='18-24'>18-24</option>
-                <option value='25-34'>25-34</option>
-                <option value='35-44'>35-44</option>
-                <option value='45+'>45+</option>
+                <option value="">Select</option>
+                <option value="18-24">18-24</option>
+                <option value="25-34">25-34</option>
+                <option value="35-44">35-44</option>
+                <option value="45+">45+</option>
               </SelectInput>
+              {errors.ageRange && <p style={{ color: 'red' }}>{errors.ageRange}</p>}
 
               <Label>Country *</Label>
               <CountrySelectWrapper>
-                <CountrySelectorButton 
-                  type='button' 
-                  onClick={() => !isLoading && setShowDropdown(!showDropdown)}
-                  disabled={isLoading}
-                >
+                <CountrySelectorButton type="button" onClick={() => setShowDropdown(!showDropdown)}>
                   <span>
-                    {formData.country || 'Select Country'}
+                    {formData.country ? (
+                      <>
+                        <img
+                          src={countries.find((c) => c.name === formData.country)?.flag || ''}
+                          alt={formData.country}
+                        />{' '}
+                        {formData.country}
+                      </>
+                    ) : (
+                      'Select Country'
+                    )}
                   </span>
                   <span>▾</span>
                 </CountrySelectorButton>
@@ -260,61 +222,59 @@ export default function SignUpPage() {
                           setShowDropdown(false);
                         }}
                       >
+                        <img src={c.flag} alt={c.name} />
                         {c.name}
                       </CountryOption>
                     ))}
                   </CountryDropdown>
                 )}
               </CountrySelectWrapper>
+              {errors.country && <p style={{ color: 'red' }}>{errors.country}</p>}
 
               <Label>Device Used *</Label>
               <SelectInput
                 value={formData.deviceUsed || ''}
                 onChange={(e) => handleChange('deviceUsed', e.target.value)}
-                disabled={isLoading}
               >
-                <option value=''>Select</option>
-                <option value='Mobile'>Mobile</option>
-                <option value='Laptop'>Laptop</option>
+                <option value="">Select</option>
+                <option value="Mobile">Mobile</option>
+                <option value="Laptop">Laptop</option>
               </SelectInput>
+              {errors.deviceUsed && <p style={{ color: 'red' }}>{errors.deviceUsed}</p>}
 
               <Label>Healing Journey Stage *</Label>
               <SelectInput
                 value={formData.survivorStage || ''}
                 onChange={(e) => handleChange('survivorStage', e.target.value)}
-                disabled={isLoading}
               >
-                <option value=''>Select</option>
-                <option value='I am here to learn'>I am here to learn</option>
-                <option value='Healing'>Healing</option>
-                <option value='Support someone'>Support someone</option>
-                <option value='Prefer not to say'>Prefer not to say</option>
+                <option value="">Select</option>
+                <option value="I am here to learn">I am here to learn</option>
+                <option value="Healing">Healing</option>
+                <option value="Support someone">Support someone</option>
+                <option value="Prefer not to say">Prefer not to say</option>
               </SelectInput>
+              {errors.survivorStage && <p style={{ color: 'red' }}>{errors.survivorStage}</p>}
             </>
           )}
 
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem' }}>
             {step > 1 && (
-              <PinkButton type='button' onClick={prevStep} disabled={isLoading}>
+              <PinkButton type="button" onClick={prevStep}>
                 Back
               </PinkButton>
             )}
             {step < 2 ? (
-              <PinkButton type='button' onClick={nextStep} disabled={isLoading}>
+              <PinkButton type="button" onClick={nextStep}>
                 Next
               </PinkButton>
             ) : (
-              <PinkButton
-                type='button'
-                onClick={handleSignUp}
-                disabled={isLoading}
-              >
-                {isLoading ? 'Creating Account...' : 'Complete Sign Up'}
+              <PinkButton type="button" onClick={handleSubmit}>
+                Complete Sign Up
               </PinkButton>
             )}
           </div>
         </Form>
-      </RightPanel>
+      </FormWrapper>
     </Container>
   );
 }

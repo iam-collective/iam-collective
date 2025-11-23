@@ -1,0 +1,74 @@
+import React from "react"
+import { CardGrid } from "../micro-lessons/Cards.styles";
+import * as S from "./Stories.style";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
+import { Id } from "../../../../convex/_generated/dataModel";
+import { truncateText } from "../../utils/stories-util";
+import { getUserFromStorage } from "../../utils/storage";
+import { useNavigate } from "react-router-dom";
+import { BackButton } from "./StorieSection.styles";
+
+const MyStories: React.FC = () => {
+    const navigate = useNavigate();
+    const deleteStory = useMutation(api.stories.deleteStory);
+    const userLocal = getUserFromStorage()
+    const stories = useQuery(api.stories.listStoriesByUsername, { username: userLocal.fullName });
+    const handleDelete = async (storyId: Id<"stories">) => {
+        try {
+            await deleteStory({ storyId });
+        } catch (error) {
+            console.error("Failed to delete story:", error);
+            alert("Failed to delete story. You may not have permission.");
+        }
+    };
+    if (!stories) return null;
+    return (
+        <>
+            <S.InlineBackButton>
+                <BackButton onClick={() => navigate(-1)}>
+                    ← Back
+                </BackButton>
+                <S.SuggestedTitle>My Stories</S.SuggestedTitle>
+            </S.InlineBackButton>
+
+
+
+            <CardGrid>
+                {stories.map((story) => (
+                    <S.StyledCard
+                        key={story._id}
+                    >
+                        <S.Username>{story.username}</S.Username>
+                        <S.Date>
+                            {new Date(story.createdAt).toLocaleString()}
+                        </S.Date>
+                        <S.Title to={`${story._id}`}>{story.title}</S.Title>
+                        <S.Content>{truncateText(story.content, 20)}
+
+                        </S.Content>
+
+                        {story.imageUrl && (
+                            <S.StyledCardImage
+                                src={story.imageUrl}
+                                alt={story.title}
+                            />
+                        )}
+                        <S.Wrapper>
+                            {story.username === userLocal.fullName && < S.DeleteButton
+                                onClick={() => handleDelete(story._id)}
+                            >
+                                Delete
+                            </S.DeleteButton>
+                            }
+                            <S.ReadMore to={`${story._id}`}>Read More</S.ReadMore>
+                        </S.Wrapper>
+                    </S.StyledCard>
+                ))
+                }
+            </CardGrid >
+        </>
+    )
+};
+
+export default MyStories;
