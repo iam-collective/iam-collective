@@ -7,7 +7,6 @@ import LearnScreen from './components/learn/Learn';
 import Stories from './components/story/Stories';
 import LandingPage from './components/landing-page/LandingPage';
 import SignUpPage from './components/sign-up/SignUpPage';
-import LoginPage from './components/log-in/LogIn';
 import GuestHomePage from './components/guest-page/GuestHomePage';
 import AboutPage from './components/about-page/AboutPage';
 import ProfilePage from './components/profile-page/ProfilePage';

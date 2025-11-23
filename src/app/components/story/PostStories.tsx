@@ -125,7 +125,7 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
             {/* Success Popup */}
             {showSuccess && (
                 <S.SuccessPopup>
-                    🎉 Your story has been posted!
+                    Your story has been posted!
                 </S.SuccessPopup>
             )}
         </>

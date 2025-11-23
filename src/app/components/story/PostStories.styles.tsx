@@ -14,7 +14,7 @@ export const SuccessPopup = styled.div`
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  background: #4caf50;
+  background: pink;
   color: white;
   padding: 14px 24px;
   border-radius: 12px;
@@ -79,9 +79,7 @@ export const TextArea = styled.textarea`
 `;
 
 export const PreviewImage = styled.img`
-  width: 90%;
-  object-fit: cover;
-  height: 10rem;
+  width: 100%;
   margin-top: 10px;
   border-radius: 8px;
 `;
