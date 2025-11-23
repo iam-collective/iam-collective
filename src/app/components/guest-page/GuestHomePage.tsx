@@ -27,12 +27,12 @@ const GuestHomeScreen: React.FC = () => {
 
   const cardsData = [
     {
-      headline: 'I AM Taking Action Against Gender-Based Violence',
+      headline: 'Together, Our Stories Break the Silence ',
       subline:
-        'A healing movement for anyone impacted by gender-based violence (GBV) — turning real stories into real change.',
-      cta: 'Join the Collective (Sign Up)',
+        'Collective storytelling turns pain into learning, learning into courage, and courage into safer futures for us all.',
+      cta: '[Become a Member]',
       link: '/signup',
-      restricted: true, // mark this card as restricted for guests
+      restricted: true,
     },
     {
       headline: 'What is The I AM Collective?',

@@ -27,28 +27,34 @@ const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth(); // get signed-up user data
 
-  // Only include relevant cards for signed-up users
   const cardsData = [
     {
-      headline: 'I AM Taking Action Against Gender-Based Violence',
+      headline: 'Together, Our Stories Break the Silence ',
       subline:
-        'A healing movement for anyone impacted by gender-based violence (GBV) — turning real stories into real change.',
-      cta: 'Continue your journey',
-      link: '/learn',
+        'Collective storytelling turns pain into learning, learning into courage, and courage into safer futures for us all.',
+      cta: '[Become a Member]',
+      link: '/signup',
     },
     {
-      headline: 'What is The I AM Collective?',
+      headline: 'Your Story Is Strength — Speak to Heal',
       subline:
-        'The I AM Collective is a healing movement and digital community for anyone impacted by gender-based violence — directly or indirectly. We turn real stories into learning journeys and community insights that help people recognise abuse, heal, and take action.',
-      cta: 'Share your story & unlock healing',
+        'By sharing what you’ve endured, you give voice to your journey — and help build a safer path for others still finding theirs.',
+      cta: 'Click here to share your story & help build a community creating safe spaces ',
       link: '/stories',
     },
     {
-      headline: 'Join the Movement Teaser',
+      headline: 'Share to Shape Healing ',
       subline:
-        'Your contribution is not money — it is your commitment to learn, heal, and refuse to normalise abuse. When you join The I AM Collective, you become part of a community that is learning how to be a safe space, one person at a time.',
-      cta: 'Explore collective resources',
-      link: '/learn',
+        'When you tell your lived experience, you help us learn — and together we create the tools for understanding, boundaries, and bravery.',
+      cta: 'Click here to share your story & help build a community creating safe spaces ',
+      link: '/stories',
+    },
+    {
+      headline: 'Speak Up. This Is Action. ',
+      subline:
+        'Your voice matters: sharing your story becomes our collective education, building power and protection in community.',
+      cta: 'Click here to share your story & help build a community creating safe spaces ',
+      link: '/stories',
     },
     {
       headline: 'Who We Are',
@@ -63,13 +69,6 @@ const HomeScreen: React.FC = () => {
         'When we change the conversation, we change behaviour. When we speak up, connect and heal, we create safer communities.',
       cta: 'Be the change. Continue your journey',
       link: '/learn',
-    },
-    {
-      headline: 'It’s about collective action',
-      subline:
-        'When we heal the individual, we heal the collective. When we awaken the collective, we ignite change.',
-      cta: 'Share your story',
-      link: '/stories',
     },
   ];
   console.log('rendering home page.............')
