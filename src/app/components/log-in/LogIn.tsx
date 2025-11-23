@@ -23,6 +23,7 @@ import { TitleUnderline } from '../sign-up/SignUp.styles';
 export default function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,11 +33,16 @@ export default function LoginPage() {
   const loginUser = useMutation(api.usersInfo.loginUser);
 
   const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError('');
     setIsLoading(true);
     setError('');
 
     if (!email.trim() || !password.trim()) {
+      setError('Please enter valid email and password.');
+      setIsLoading(false);
       setError('Please enter valid email and password.');
       setIsLoading(false);
       return;

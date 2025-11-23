@@ -127,7 +127,7 @@ export const deleteUser = mutation({
 });
 
 // Query for login - returns user if email/password match
-export const loginUser = query({
+export const loginUser = mutation({
   args: {
     email: v.string(),
     password: v.string(),
@@ -139,16 +139,14 @@ export const loginUser = query({
       .unique();
     
     if (!user) {
-      return null;
+      throw new Error("Invalid email or password");
     }
     
-    // Check password (in production, use bcrypt.compare())
-    if (user.password !== args.password) {
-      return null;
-    }
-    
-    // Return user without password
+    // Return user data and hashed password for frontend verification
     const { password, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    return {
+      user: userWithoutPassword,
+      hashedPassword: user.password,
+    };
   },
 });

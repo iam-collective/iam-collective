@@ -1,7 +1,7 @@
 import styled, { DefaultTheme } from 'styled-components';
 
-export const Header = styled.header`
-  position: absolute;
+export const Header = styled.header<{$absolute?: boolean}>`
+  position: ${({$absolute}):DefaultTheme => ($absolute ? 'absolute' : 'relative')}; ;
   top: 0;
   left: 0;
   right: 0;

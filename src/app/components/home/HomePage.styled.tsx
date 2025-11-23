@@ -157,7 +157,11 @@ export const LotusEmoji = styled.div`
 `;
 
 export const BottomNav = styled.nav`
-  max-width: 100%; /* prevent nav from stretching off-screen */
+  max-width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: white;
   border-radius: 2rem;
   padding: 0.75rem 2rem;
