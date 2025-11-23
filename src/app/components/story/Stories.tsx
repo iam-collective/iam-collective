@@ -7,25 +7,18 @@ import NoStoriesPage from "./NoStoriesPage";
 import PostStories from "./PostStories";
 import * as S from './Stories.style';
 import StoriesList from "./StoriesList";
-import MyStories from "./MyStories";
+import { useNavigate } from "react-router-dom";
+import SignUpGuestModal from "./SignUpGuestModal";
 
-interface StoryProps {
-  _id: Id<"stories">;
-  title: string;
-  content: string;
-  imageId?: Id<"_storage">;
-  imageUrl: string | null;
-  createdAt: number;
-  userId: string;
-}
+
 
 const Stories: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const { isGuest, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [showGuestModal, setShowGuestModal] = useState(false);
 
 
-  // Convex hooks - use api object for proper typing
   const stories = useQuery(api.stories.listStories);
 
 
@@ -39,11 +32,17 @@ const Stories: React.FC = () => {
   const closeModal = () => {
     setShowModal(false);
   }
-const openModal = () => {
+  const openModal = () => {
     setShowModal(true);
-}
+  }
+  const closeGuestModal = () => {
+    setShowGuestModal(false);
+  }
   const showGuest = () => {
     setShowGuestModal(true);
+  }
+  function navigateToSignUp() {
+    navigate('/signup');
   }
   // Loading state
   if (stories === undefined) {
@@ -57,20 +56,22 @@ const openModal = () => {
   return (
     <S.StyledScroller>
       {stories.length === 0 ? (
-        <NoStoriesPage showGuest={showGuest} showModal={openModal} closeModal={closeModal} />
+        <NoStoriesPage showGuest={showGuest} showModal={openModal} closeModal={closeModal} isGuest={showGuestModal} />
       ) : (
         <>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", marginTop: "16px" }}>
-            <button onClick={handleAddStoryClick} style={{ width: 50, height: 50, borderRadius: "50%", fontSize: 28, border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", background: "#ffbfdc", color: "white" }}>+</button>
-          </div>
-          {/* <S.SuggestedTitle>Recent Stories</S.SuggestedTitle> */}
+          <S.AddStoryWrapper>
+            <S.AddStoryButton onClick={handleAddStoryClick}>+</S.AddStoryButton>
+          </S.AddStoryWrapper>
+
         </>
+      )}
+      {showGuestModal && (
+        <SignUpGuestModal closeModal={closeGuestModal} />
       )}
       {showModal && (
         <PostStories closeModal={closeModal} />
       )}
-      {/* <MyStories /> */}
-      <StoriesList />
+      <StoriesList stories={stories} />
     </S.StyledScroller>
   );
 };

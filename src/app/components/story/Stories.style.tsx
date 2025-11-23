@@ -104,6 +104,30 @@ export const StyledScroller = styled.section`
   padding-bottom: 3rem;
 `;
 
+export const AddStoryWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
+`;
+
+export const AddStoryButton = styled.button`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 28px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff69b4;
+  color: white;
+`;
+
+
+
 export const SuggestedTitle = styled.p`
   font-size: 1.2rem;
   color: #6b7280;

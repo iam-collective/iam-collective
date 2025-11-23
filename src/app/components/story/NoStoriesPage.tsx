@@ -5,16 +5,13 @@ import { useAuth } from "../../context/AuthContext";
 type NoStoriesPageProps = {
     showModal: () => void;
     closeModal: () => void;
-    showGuest: () => void; 
+    showGuest: () => void;
+    isGuest: boolean;
 };
 const NoStoriesPage: React.FC<NoStoriesPageProps> = ({ showModal, showGuest, closeModal }) => {
-    const showGuestModal = false;
     const { isAuthenticated, isGuest } = useAuth()
-    const navigate = useNavigate();
-    function navigateToSignUp() {
-        navigate('/signup');
-    }
     
+
     const handleAddStoryClick = () => {
         if (isGuest && !isAuthenticated) {
             // setShowGuestModal(true);
@@ -23,6 +20,7 @@ const NoStoriesPage: React.FC<NoStoriesPageProps> = ({ showModal, showGuest, clo
             showModal()
         }
     };
+    console.log('isGuest in NoStoriesPage:', isGuest);
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", marginTop: "24px" }}>
             <S.StyledContainer style={{ background: "linear-gradient(180deg, #FAF0E6 0%, #FDEDF4 100%)", minHeight: "70vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "2rem" }}>
@@ -34,17 +32,7 @@ const NoStoriesPage: React.FC<NoStoriesPageProps> = ({ showModal, showGuest, clo
                     Add a Story
                 </S.PinkButton>
 
-                {showGuestModal && (
-                    <>
-                        <div style={{ position: "fixed", inset: 0, backdropFilter: "blur(6px)", backgroundColor: "rgba(0,0,0,0.35)", zIndex: 10 }} onClick={() => setShowGuestModal(false)} />
-                        <S.StyledPopUpCard>
-                            <h3 style={{ fontFamily: "Work Sans" }}>Sign Up to Share Stories</h3>
-                            <p>Your words can inspire others. Create an account to unlock full access.</p>
-                            <S.PinkButton onClick={navigateToSignUp}>Sign Up</S.PinkButton>
-                            <S.PinkButton onClick={closeModal} style={{ backgroundColor: "#ffd7e8", marginLeft: "1rem" }}>Cancel</S.PinkButton>
-                        </S.StyledPopUpCard>
-                    </>
-                )}
+                
             </S.StyledContainer>
         </div>
     )
