@@ -76,26 +76,21 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isGuest, setIsGuest] = useState(false);
+  const isAuthenticated = localStorage.getItem('currentUser') !== null;
+  const isGuest = localStorage.getItem('currentUser') === null;
   const [user, setUser] = useState<User | undefined>(undefined);
 
   const login = (user: User) => {
     setUser(user);
-    setIsAuthenticated(true);
-    setIsGuest(false);
   };
 
   const logout = () => {
     setUser(undefined);
-    setIsAuthenticated(false);
-    setIsGuest(false);
+    localStorage.clear();
   };
 
   const continueAsGuest = () => {
     setUser(undefined);
-    setIsGuest(true);
-    setIsAuthenticated(false);
   };
 
   return (
