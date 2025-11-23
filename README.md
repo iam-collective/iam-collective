@@ -1,6 +1,6 @@
 # Getting started with iam-collective
 
-i am collective pwa. 
+i am collective pwa.
 
 # MicroFrontends
 

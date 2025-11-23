@@ -20,6 +20,8 @@ import {
 import BottomNavigation from '../bottom-nav/BottomNav';
 import Banner from '../banner/Banner';
 import { useAuth } from '../../context/AuthContext';
+import SideNavigation from '../bottom-nav/SideNav';
+import FloatingStoryButton from '../about-page/floating-button/FloatingStoryButton';
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -52,7 +54,8 @@ const HomeScreen: React.FC = () => {
       headline: 'Who We Are',
       subline:
         'We’re a healing movement and digital community created to support anyone affected by gender-based violence (GBV). Our collective stories and learning is how we help each other recognise abuse, heal from it, and change how we show up in our homes, workplaces and online spaces.',
-      cta: null, // no CTA needed
+      cta: 'Who we are',
+      link: '/about',
     },
     {
       headline: 'When one person heals, we all move.',
@@ -73,7 +76,8 @@ const HomeScreen: React.FC = () => {
   return (
     <ScreenContainer>
       <Banner>
-        <ProfileImage
+        <SideNavigation variant='home' />
+        {/* <ProfileImage
           as='svg'
           width='40'
           height='40'
@@ -85,7 +89,7 @@ const HomeScreen: React.FC = () => {
         >
           <circle cx='12' cy='8' r='4' fill='currentColor' />
           <path d='M4 20c0-4 4-6 8-6s8 2 8 6' fill='currentColor' />
-        </ProfileImage>
+        </ProfileImage> */}
       </Banner>
 
       <SuggestedWrapper>
@@ -106,7 +110,8 @@ const HomeScreen: React.FC = () => {
         </SuggestedCardsContainer>
       </SuggestedWrapper>
 
-      <BottomNavigation />
+      <FloatingStoryButton />
+      {/* <BottomNavigation /> */}
     </ScreenContainer>
   );
 };

@@ -84,8 +84,6 @@ export const IconContainer = styled.div`
   }}
 `;
 
-
-
 export const TextTab = styled.div`
   ${({ theme: { floats } }): DefaultTheme => {
     return css`

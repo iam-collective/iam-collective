@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ScreenContainer = styled.main`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
   position: relative;
   height: 100vh;
   gap: 1rem;
@@ -95,7 +95,7 @@ export const StyledScroller = styled.section`
   padding: 0 1rem;
   scrollbar-width: none;
   flex: 1;
-/* hide scrollbar */
+  /* hide scrollbar */
   &::-webkit-scrollbar {
     display: none;
   }
@@ -135,18 +135,17 @@ export const SuggestedTitle = styled.p`
   margin: 0;
 `;
 
-
 export const StyledCard = styled.article`
-    border: 1px solid #ff69b4;
-    border-radius: 1rem ;
-    max-width: 100%;
-    position: relative;
-    /* overflow: hidden; */
-    padding: 1.25rem;
-    text-align: left ;
-    max-height: 20rem;
-    background-color: white ;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) ;
+  border: 1px solid #ff69b4;
+  border-radius: 1rem;
+  max-width: 100%;
+  position: relative;
+  /* overflow: hidden; */
+  padding: 1.25rem;
+  text-align: left;
+  max-height: 20rem;
+  background-color: white;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 `;
 export const Username = styled.span`
   position: absolute;
@@ -168,11 +167,10 @@ export const StyledCardImage = styled.img`
   max-height: 10rem;
 `;
 
-
 export const Date = styled.p`
   font-size: 12px;
-  color: #888;  
-`
+  color: #888;
+`;
 
 export const Content = styled.p`
 display: block;
@@ -203,10 +201,10 @@ export const DeleteButton = styled.button`
   &:hover {
     background-color: #ff7875;
   }
-`
+`;
 
 export const Title = styled(Link)`
-display: block;
+  display: block;
   font-size: 1.25rem;
   margin: 0;
   padding: 0;
@@ -233,7 +231,6 @@ export const ReadMore = styled(Link)`
   text-decoration: none;
   color: #ff69b4;
   font-weight: bold;
-
 `;
 
 export const InlineBackButton = styled.div`

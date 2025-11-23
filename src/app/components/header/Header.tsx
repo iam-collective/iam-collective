@@ -1,5 +1,6 @@
 import React from 'react';
 import { HeaderContainer, Frame, ProfileImage } from './Header.style';
+import SideNavigation from '../bottom-nav/SideNav';
 
 interface HeaderProps {
   title?: string;
@@ -15,6 +16,7 @@ const Header: React.FC<HeaderProps> = ({ title }): React.ReactElement => {
             style={{ height: '2px', width: '190%', backgroundColor: '#ff69b4', marginTop: '8px' }}
           ></div>
         </div>
+        <SideNavigation />
         <ProfileImage
           as='svg'
           width='40'

@@ -19,6 +19,8 @@ import {
 } from '../home/HomePage.styled';
 import BottomNavigation from '../bottom-nav/BottomNav';
 import Banner from '../banner/Banner';
+import SideNavigation from '../bottom-nav/SideNav';
+import FloatingStoryButton from '../about-page/floating-button/FloatingStoryButton';
 
 const GuestHomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ const GuestHomeScreen: React.FC = () => {
       headline: 'What is The I AM Collective?',
       subline: 'The I AM Collective is a healing movement and digital community...',
       cta: 'Learn More',
-      link: '/stories',
+      link: '/about',
       restricted: false,
     },
   ];
@@ -44,7 +46,8 @@ const GuestHomeScreen: React.FC = () => {
   return (
     <ScreenContainer>
       <Banner>
-        <ProfileImage
+        <SideNavigation variant='home' />
+        {/* <ProfileImage
           as='svg'
           width='40'
           height='40'
@@ -55,7 +58,7 @@ const GuestHomeScreen: React.FC = () => {
         >
           <circle cx='12' cy='8' r='4' fill='currentColor' />
           <path d='M4 20c0-4 4-6 8-6s8 2 8 6' fill='currentColor' />
-        </ProfileImage>
+        </ProfileImage> */}
       </Banner>
 
       <SuggestedWrapper>
@@ -81,7 +84,8 @@ const GuestHomeScreen: React.FC = () => {
         </SuggestedCardsContainer>
       </SuggestedWrapper>
 
-      <BottomNavigation />
+      <FloatingStoryButton />
+      {/* <BottomNavigation /> */}
     </ScreenContainer>
   );
 };

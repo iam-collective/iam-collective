@@ -146,7 +146,6 @@ const devConfig = {
     }),
 
     new ReactRefreshWebpackPlugin(),
-
   ],
 };
 

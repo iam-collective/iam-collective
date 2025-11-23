@@ -1,7 +1,7 @@
-import React from "react"
-import * as S from './NoStoriesPage.styles'
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import React from 'react';
+import * as S from './NoStoriesPage.styles';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 type NoStoriesPageProps = {
     showModal: () => void;
     closeModal: () => void;

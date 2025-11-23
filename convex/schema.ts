@@ -1,5 +1,5 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { defineSchema, defineTable } from 'convex/server';
+import { v } from 'convex/values';
 
 //schema of all fields
 export default defineSchema({
@@ -13,15 +13,15 @@ export default defineSchema({
     healing_Journey: v.string(),
     createdAt: v.number(),
     updatedAt: v.number(),
-  }).index("by_email", ["email"]),
+  }).index('by_email', ['email']),
 
   stories: defineTable({
     userId: v.string(),
     title: v.string(),
     content: v.string(),
-    imageId: v.optional(v.id("_storage")),
+    imageId: v.optional(v.id('_storage')),
     createdAt: v.number(),
     isPublic: v.optional(v.boolean()),
     username: v.optional(v.string()),
-  }).index("by_userId", ["userId"]),
+  }).index('by_userId', ['userId']),
 });

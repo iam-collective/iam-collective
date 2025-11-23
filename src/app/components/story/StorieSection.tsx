@@ -1,60 +1,49 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "convex/react";
-import { api } from "../../../../convex/_generated/api";
-import * as S from './StorieSection.styles'
+import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from 'convex/react';
+import { api } from '../../../../convex/_generated/api';
+import * as S from './StorieSection.styles';
 export default function StoryPage() {
-    const { storyId } = useParams();
-    const navigate = useNavigate()
-    const story = useQuery(
-        api.stories.getStory,
-        storyId ? { storyId } : "skip"
-    );
+  const { storyId } = useParams();
+  const navigate = useNavigate();
+  const story = useQuery(api.stories.getStory, storyId ? { storyId } : 'skip');
 
-    if (story === undefined) return <p>Loading…</p>;
-    if (story === null) return <p>Story not found</p>;
+  if (story === undefined) return <p>Loading…</p>;
+  if (story === null) return <p>Story not found</p>;
 
-    const readableDate = new Date(story.createdAt).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-    });
+  const readableDate = new Date(story.createdAt).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
 
-    return (
-        <S.StoryScreen>
-            <S.BackButton onClick={() => navigate(-1)}>
-                ← Back
-            </S.BackButton>
+  return (
+    <S.StoryScreen>
+      <S.BackButton onClick={() => navigate(-1)}>← Back</S.BackButton>
 
-            <S.StoryHeader>
-                <S.StoryTitle>{story.title}</S.StoryTitle>
+      <S.StoryHeader>
+        <S.StoryTitle>{story.title}</S.StoryTitle>
 
-                {/* Optional subtitle — you can remove this if not needed */}
-                <S.StorySubtitle>
-                    {"A story from the community"}
-                </S.StorySubtitle>
+        {/* Optional subtitle — you can remove this if not needed */}
+        <S.StorySubtitle>{'A story from the community'}</S.StorySubtitle>
 
-                <S.StoryMeta>
-                    <span>By {story.username ?? "Anonymous"}</span>
-                    <span>{readableDate}</span>
-                </S.StoryMeta>
-            </S.StoryHeader>
-            <S.HeroImageWrapper>
-                <S.HeroImage
-                    src={
-                        story.imageUrl ??
-                        "https://placehold.co/1200x600/ff69b4/ffffff?text=No+Image"
-                    }
-                />
-            </S.HeroImageWrapper>
+        <S.StoryMeta>
+          <span>By {story.username ?? 'Anonymous'}</span>
+          <span>{readableDate}</span>
+        </S.StoryMeta>
+      </S.StoryHeader>
+      <S.HeroImageWrapper>
+        <S.HeroImage
+          src={story.imageUrl ?? 'https://placehold.co/1200x600/ff69b4/ffffff?text=No+Image'}
+        />
+      </S.HeroImageWrapper>
 
+      <S.StoryContent>
+        <p>{story.content}</p>
+      </S.StoryContent>
 
-            <S.StoryContent>
-                <p>{story.content}</p>
-            </S.StoryContent>
-
-            <S.StoryFooter />
-        </S.StoryScreen>
-    );
+      <S.StoryFooter />
+    </S.StoryScreen>
+  );
 }
 
 // =======
@@ -244,33 +233,33 @@ export default function StoryPage() {
 //             <div style={{ position: "fixed", inset: 0, backdropFilter: "blur(6px)", backgroundColor: "rgba(0,0,0,0.35)", zIndex: 10 }} onClick={() => setShowModal(false)} />
 //             <StyledPopUpCard>
 //               <h3 style={{ fontFamily: "Work Sans" }}>Create a Story</h3>
-//               <input 
-//                 type="text" 
-//                 placeholder="Title" 
-//                 value={title} 
-//                 onChange={(e) => setTitle(e.target.value)} 
-//                 style={{ width: "100%", marginBottom: 8, padding: 8, border: "1px solid #ddd", borderRadius: 4, outline: "none" }} 
+//               <input
+//                 type="text"
+//                 placeholder="Title"
+//                 value={title}
+//                 onChange={(e) => setTitle(e.target.value)}
+//                 style={{ width: "100%", marginBottom: 8, padding: 8, border: "1px solid #ddd", borderRadius: 4, outline: "none" }}
 //               />
-//               <textarea 
-//                 placeholder="Description" 
-//                 value={description} 
-//                 onChange={(e) => setDescription(e.target.value)} 
-//                 style={{ width: "100%", height: 80, marginBottom: 8, padding: 8, border: "1px solid #ddd", borderRadius: 4, outline: "none", resize: "vertical" }} 
+//               <textarea
+//                 placeholder="Description"
+//                 value={description}
+//                 onChange={(e) => setDescription(e.target.value)}
+//                 style={{ width: "100%", height: 80, marginBottom: 8, padding: 8, border: "1px solid #ddd", borderRadius: 4, outline: "none", resize: "vertical" }}
 //               />
 //               <input type="file" accept="image/*" onChange={handleImageUpload} />
 //               {imageFile && <img src={URL.createObjectURL(imageFile)} alt="Preview" style={{ width: "100%", marginTop: 10, borderRadius: 8 }} />}
-//               <button 
-//                 onClick={handlePost} 
+//               <button
+//                 onClick={handlePost}
 //                 disabled={isLoading}
-//                 style={{ 
-//                   marginTop: 10, 
-//                   padding: "8px 16px", 
-//                   cursor: isLoading ? "not-allowed" : "pointer", 
-//                   width: "100%", 
-//                   border: "none", 
-//                   outline: "none", 
-//                   borderRadius: "8px", 
-//                   backgroundColor: isLoading ? "#ccc" : "#ffbfdc" 
+//                 style={{
+//                   marginTop: 10,
+//                   padding: "8px 16px",
+//                   cursor: isLoading ? "not-allowed" : "pointer",
+//                   width: "100%",
+//                   border: "none",
+//                   outline: "none",
+//                   borderRadius: "8px",
+//                   backgroundColor: isLoading ? "#ccc" : "#ffbfdc"
 //                 }}
 //               >
 //                 {isLoading ? "Posting..." : "Post"}
@@ -281,16 +270,16 @@ export default function StoryPage() {
 
 //         {/* Stories List */}
 //         {stories.map((story) => (
-//           <div 
-//             key={story._id} 
-//             style={{ 
-//               border: "1px solid #ff69b4", 
-//               borderRadius: 16, 
-//               padding: 12, 
-//               marginBottom: 16, 
-//               textAlign: "left", 
-//               backgroundColor: "white", 
-//               boxShadow: "0 4px 14px rgba(0, 0, 0, 0.1)" 
+//           <div
+//             key={story._id}
+//             style={{
+//               border: "1px solid #ff69b4",
+//               borderRadius: 16,
+//               padding: 12,
+//               marginBottom: 16,
+//               textAlign: "left",
+//               backgroundColor: "white",
+//               boxShadow: "0 4px 14px rgba(0, 0, 0, 0.1)"
 //             }}
 //           >
 //             <p style={{ fontSize: 12, color: "#888" }}>
@@ -298,21 +287,21 @@ export default function StoryPage() {
 //             </p>
 //             <h3>{story.title}</h3>
 //             {story.imageUrl && (
-//               <img 
-//                 src={story.imageUrl} 
-//                 alt={story.title} 
-//                 style={{ width: "100%", borderRadius: 10, marginBottom: 8 }} 
+//               <img
+//                 src={story.imageUrl}
+//                 alt={story.title}
+//                 style={{ width: "100%", borderRadius: 10, marginBottom: 8 }}
 //               />
 //             )}
 //             <p>{story.content}</p>
-//             <button 
-//               onClick={() => handleDelete(story._id)} 
-//               style={{ 
-//                 background: "transparent", 
-//                 border: "none", 
-//                 fontSize: 18, 
-//                 cursor: "pointer", 
-//                 color: "#ff4d6d" 
+//             <button
+//               onClick={() => handleDelete(story._id)}
+//               style={{
+//                 background: "transparent",
+//                 border: "none",
+//                 fontSize: 18,
+//                 cursor: "pointer",
+//                 color: "#ff4d6d"
 //               }}
 //             >
 //               Delete
@@ -514,33 +503,33 @@ export default function StoryPage() {
 //             <div style={{ position: "fixed", inset: 0, backdropFilter: "blur(6px)", backgroundColor: "rgba(0,0,0,0.35)", zIndex: 10 }} onClick={() => setShowModal(false)} />
 //             <StyledPopUpCard>
 //               <h3 style={{ fontFamily: "Work Sans" }}>Create a Story</h3>
-//               <input 
-//                 type="text" 
-//                 placeholder="Title" 
-//                 value={title} 
-//                 onChange={(e) => setTitle(e.target.value)} 
-//                 style={{ width: "100%", marginBottom: 8, padding: 8, border: "1px solid #ddd", borderRadius: 4, outline: "none" }} 
+//               <input
+//                 type="text"
+//                 placeholder="Title"
+//                 value={title}
+//                 onChange={(e) => setTitle(e.target.value)}
+//                 style={{ width: "100%", marginBottom: 8, padding: 8, border: "1px solid #ddd", borderRadius: 4, outline: "none" }}
 //               />
-//               <textarea 
-//                 placeholder="Description" 
-//                 value={description} 
-//                 onChange={(e) => setDescription(e.target.value)} 
-//                 style={{ width: "100%", height: 80, marginBottom: 8, padding: 8, border: "1px solid #ddd", borderRadius: 4, outline: "none", resize: "vertical" }} 
+//               <textarea
+//                 placeholder="Description"
+//                 value={description}
+//                 onChange={(e) => setDescription(e.target.value)}
+//                 style={{ width: "100%", height: 80, marginBottom: 8, padding: 8, border: "1px solid #ddd", borderRadius: 4, outline: "none", resize: "vertical" }}
 //               />
 //               <input type="file" accept="image/*" onChange={handleImageUpload} />
 //               {imageFile && <img src={URL.createObjectURL(imageFile)} alt="Preview" style={{ width: "100%", marginTop: 10, borderRadius: 8 }} />}
-//               <button 
-//                 onClick={handlePost} 
+//               <button
+//                 onClick={handlePost}
 //                 disabled={isLoading}
-//                 style={{ 
-//                   marginTop: 10, 
-//                   padding: "8px 16px", 
-//                   cursor: isLoading ? "not-allowed" : "pointer", 
-//                   width: "100%", 
-//                   border: "none", 
-//                   outline: "none", 
-//                   borderRadius: "8px", 
-//                   backgroundColor: isLoading ? "#ccc" : "#ffbfdc" 
+//                 style={{
+//                   marginTop: 10,
+//                   padding: "8px 16px",
+//                   cursor: isLoading ? "not-allowed" : "pointer",
+//                   width: "100%",
+//                   border: "none",
+//                   outline: "none",
+//                   borderRadius: "8px",
+//                   backgroundColor: isLoading ? "#ccc" : "#ffbfdc"
 //                 }}
 //               >
 //                 {isLoading ? "Posting..." : "Post"}
@@ -551,16 +540,16 @@ export default function StoryPage() {
 
 //         {/* Stories List */}
 //         {stories.map((story) => (
-//           <div 
-//             key={story._id} 
-//             style={{ 
-//               border: "1px solid #ff69b4", 
-//               borderRadius: 16, 
-//               padding: 12, 
-//               marginBottom: 16, 
-//               textAlign: "left", 
-//               backgroundColor: "white", 
-//               boxShadow: "0 4px 14px rgba(0, 0, 0, 0.1)" 
+//           <div
+//             key={story._id}
+//             style={{
+//               border: "1px solid #ff69b4",
+//               borderRadius: 16,
+//               padding: 12,
+//               marginBottom: 16,
+//               textAlign: "left",
+//               backgroundColor: "white",
+//               boxShadow: "0 4px 14px rgba(0, 0, 0, 0.1)"
 //             }}
 //           >
 //             <p style={{ fontSize: 12, color: "#888" }}>
@@ -568,21 +557,21 @@ export default function StoryPage() {
 //             </p>
 //             <h3>{story.title}</h3>
 //             {story.imageUrl && (
-//               <img 
-//                 src={story.imageUrl} 
-//                 alt={story.title} 
-//                 style={{ width: "100%", borderRadius: 10, marginBottom: 8 }} 
+//               <img
+//                 src={story.imageUrl}
+//                 alt={story.title}
+//                 style={{ width: "100%", borderRadius: 10, marginBottom: 8 }}
 //               />
 //             )}
 //             <p>{story.content}</p>
-//             <button 
-//               onClick={() => handleDelete(story._id)} 
-//               style={{ 
-//                 background: "transparent", 
-//                 border: "none", 
-//                 fontSize: 18, 
-//                 cursor: "pointer", 
-//                 color: "#ff4d6d" 
+//             <button
+//               onClick={() => handleDelete(story._id)}
+//               style={{
+//                 background: "transparent",
+//                 border: "none",
+//                 fontSize: 18,
+//                 cursor: "pointer",
+//                 color: "#ff4d6d"
 //               }}
 //             >
 //               Delete

@@ -7,7 +7,7 @@ import * as S from './PostStories.styles';
 import { StyledPopUpCard } from "./Stories.style";
 
 interface PostStoriesProps {
-    closeModal: () => void;
+  closeModal: () => void;
 }
 
 const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
@@ -28,13 +28,13 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
         setImageFile(file);
     };
 
-    const handlePost = async () => {
-        if (!title || !description) return alert("Please fill everything!");
+  const handlePost = async () => {
+    if (!title || !description) return alert('Please fill everything!');
 
-        setIsLoading(true);
+    setIsLoading(true);
 
-        try {
-            let imageId: Id<"_storage"> | undefined;
+    try {
+      let imageId: Id<'_storage'> | undefined;
 
             if (imageFile) {
                 const uploadUrl = await generateUploadUrl();
@@ -45,9 +45,9 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
                     body: imageFile,
                 });
 
-                if (!result.ok) {
-                    throw new Error("Failed to upload image");
-                }
+        if (!result.ok) {
+          throw new Error('Failed to upload image');
+        }
 
                 const { storageId } = await result.json();
                 imageId = storageId;
@@ -81,23 +81,23 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
         <>
             <S.Backdrop onClick={closeModal} />
 
-            <StyledPopUpCard>
-                <h3>Create a Story</h3>
+      <StyledPopUpCard>
+        <h3>Create a Story</h3>
 
-                <S.Input
-                    type="text"
-                    placeholder="Title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
+        <S.Input
+          type='text'
+          placeholder='Title'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-                <S.TextArea
-                    placeholder="Description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
+        <S.TextArea
+          placeholder='Description'
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
 
-                <S.Input type="file" accept="image/*" onChange={handleImageUpload} />
+        <S.Input type='file' accept='image/*' onChange={handleImageUpload} />
 
                 {imageFile && (
                     <S.PreviewImage

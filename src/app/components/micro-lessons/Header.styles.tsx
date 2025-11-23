@@ -1,7 +1,7 @@
 import styled, { DefaultTheme } from 'styled-components';
 
-export const Header = styled.header<{$absolute?: boolean}>`
-  position: ${({$absolute}):DefaultTheme => ($absolute ? 'absolute' : 'relative')}; ;
+export const Header = styled.header<{ $absolute?: boolean }>`
+  position: ${({ $absolute }): DefaultTheme => ($absolute ? 'absolute' : 'relative')};
   top: 0;
   left: 0;
   right: 0;
@@ -9,7 +9,7 @@ export const Header = styled.header<{$absolute?: boolean}>`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
 `;
 
 export const ProfileImage = styled.img<{ $invert?: boolean }>`

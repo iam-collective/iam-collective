@@ -1,19 +1,19 @@
-import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { v } from 'convex/values';
+import { mutation, query } from './_generated/server';
 
 // Query to get user information by email
 export const getUserByEmail = query({
   args: { email: v.string() },
   handler: async (ctx, args) => {
     const user = await ctx.db
-      .query("users")
-      .withIndex("by_email", (q) => q.eq("email", args.email))
+      .query('users')
+      .withIndex('by_email', (q) => q.eq('email', args.email))
       .unique();
-    
+
     if (!user) {
       return null;
     }
-    
+
     // Return user without password for security
     const { password, ...userWithoutPassword } = user;
     return userWithoutPassword;
@@ -22,14 +22,14 @@ export const getUserByEmail = query({
 
 // Query to get user information by _id
 export const getUserById = query({
-  args: { userId: v.id("users") },
+  args: { userId: v.id('users') },
   handler: async (ctx, args) => {
     const user = await ctx.db.get(args.userId);
-    
+
     if (!user) {
       return null;
     }
-    
+
     // Return user without password for security
     const { password, ...userWithoutPassword } = user;
     return userWithoutPassword;
@@ -50,20 +50,20 @@ export const createUser = mutation({
   handler: async (ctx, args) => {
     // Check if email is already registered
     const existingUser = await ctx.db
-      .query("users")
-      .withIndex("by_email", (q) => q.eq("email", args.email))
+      .query('users')
+      .withIndex('by_email', (q) => q.eq('email', args.email))
       .unique();
-    
+
     if (existingUser) {
-      throw new Error("Email already registered");
+      throw new Error('Email already registered');
     }
-    
-    const userId = await ctx.db.insert("users", {
+
+    const userId = await ctx.db.insert('users', {
       ...args,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     });
-    
+
     return { success: true, userId };
   },
 });
@@ -71,7 +71,7 @@ export const createUser = mutation({
 // Mutation to update user information
 export const updateUserInfo = mutation({
   args: {
-    userId: v.id("users"),
+    userId: v.id('users'),
     full_name: v.optional(v.string()),
     email: v.optional(v.string()),
     password: v.optional(v.string()),
@@ -82,46 +82,46 @@ export const updateUserInfo = mutation({
   },
   handler: async (ctx, args) => {
     const { userId, ...updateData } = args;
-    
+
     const user = await ctx.db.get(userId);
-    
+
     if (!user) {
-      throw new Error("User not found");
+      throw new Error('User not found');
     }
-    
+
     // If email is being updated, check it's not taken
     if (updateData.email && updateData.email !== user.email) {
       const emailExists = await ctx.db
-        .query("users")
-        .withIndex("by_email", (q) => q.eq("email", updateData.email!))
+        .query('users')
+        .withIndex('by_email', (q) => q.eq('email', updateData.email!))
         .unique();
-      
+
       if (emailExists) {
-        throw new Error("Email already registered");
+        throw new Error('Email already registered');
       }
     }
-    
+
     await ctx.db.patch(userId, {
       ...updateData,
       updatedAt: Date.now(),
     });
-    
+
     return { success: true };
   },
 });
 
 // Mutation to delete user
 export const deleteUser = mutation({
-  args: { userId: v.id("users") },
+  args: { userId: v.id('users') },
   handler: async (ctx, args) => {
     const user = await ctx.db.get(args.userId);
-    
+
     if (!user) {
-      throw new Error("User not found");
+      throw new Error('User not found');
     }
-    
+
     await ctx.db.delete(args.userId);
-    
+
     return { success: true };
   },
 });
@@ -134,14 +134,14 @@ export const loginUser = mutation({
   },
   handler: async (ctx, args) => {
     const user = await ctx.db
-      .query("users")
-      .withIndex("by_email", (q) => q.eq("email", args.email))
+      .query('users')
+      .withIndex('by_email', (q) => q.eq('email', args.email))
       .unique();
-    
+
     if (!user) {
-      throw new Error("Invalid email or password");
+      throw new Error('Invalid email or password');
     }
-    
+
     // Return user data and hashed password for frontend verification
     const { password, ...userWithoutPassword } = user;
     return {

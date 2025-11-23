@@ -2,18 +2,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import BottomNavigation from '../bottom-nav/BottomNav';
-import {
-  BlueCard,
-  CentredCard,
-  OrangeCard,
-  PinkCard,
-  SubTitle,
-} from '../cards/Cards.style';
-import {
-  LotusEmoji,
-  ProfileImage,
-  ScreenContainer
-} from '../home/HomePage.styled';
+import { BlueCard, CentredCard, OrangeCard, PinkCard, SubTitle } from '../cards/Cards.style';
+import { LotusEmoji, ProfileImage, ScreenContainer } from '../home/HomePage.styled';
 import HeaderComponent from '../micro-lessons/Header';
 import {
   ButtonWrapper,
@@ -27,6 +17,8 @@ import {
   NextButton,
   ScrollableContent,
 } from './Learn.styled';
+import SideNavigation from '../bottom-nav/SideNav';
+import FloatingStoryButton from '../about-page/floating-button/FloatingStoryButton';
 // import HeaderComponent from '../micro-lessons/Header';
 const LearnScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -37,7 +29,8 @@ const LearnScreen: React.FC = () => {
   return (
     <ScreenContainer>
       {/* <HeaderComponent title='' /> */}
-      <HeaderComponent title='Learn' />
+      <SideNavigation title='Learn' variant='learn' />
+      {/* <HeaderComponent title='Learn' /> */}
       <ScrollableContent>
         <Header>
           Knowledge is strength. Your journey to empowerment through upskilling starts here.
@@ -53,8 +46,8 @@ const LearnScreen: React.FC = () => {
                     <LotusEmoji>🌸</LotusEmoji>
                     <LearnCardHeading>Mindfulness</LearnCardHeading>
                     <LearnCardDescription>
-                      Tools to help you master stress, get in touch with your inner voice, and record
-                      your journey.
+                      Tools to help you master stress, get in touch with your inner voice, and
+                      record your journey.
                     </LearnCardDescription>
                   </LearnCardText>
                 </CentredCard>
@@ -68,8 +61,8 @@ const LearnScreen: React.FC = () => {
                     <LotusEmoji>🌸</LotusEmoji>
                     <LearnCardHeading>Empowerment</LearnCardHeading>
                     <LearnCardDescription>
-                      Tools to help you manage and avoid conflict. Learn healthy response patterns, and
-                      identify red flags more effectively.
+                      Tools to help you manage and avoid conflict. Learn healthy response patterns,
+                      and identify red flags more effectively.
                     </LearnCardDescription>
                   </LearnCardText>
                 </CentredCard>
@@ -83,7 +76,8 @@ const LearnScreen: React.FC = () => {
                     <LotusEmoji>🌸</LotusEmoji>
                     <LearnCardHeading>Life Skills</LearnCardHeading>
                     <LearnCardDescription>
-                      Tools to upskill yourself holistically and keep that work/life balance in check.
+                      Tools to upskill yourself holistically and keep that work/life balance in
+                      check.
                     </LearnCardDescription>
                   </LearnCardText>
                 </CentredCard>
@@ -96,8 +90,8 @@ const LearnScreen: React.FC = () => {
           <NextButton to={'/micro-lessons'}>Next</NextButton>
         </ButtonWrapper>
       </ScrollableContent>
-
-      <BottomNavigation></BottomNavigation>
+      <FloatingStoryButton />
+      {/* <BottomNavigation></BottomNavigation> */}
     </ScreenContainer>
   );
 };
