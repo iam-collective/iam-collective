@@ -7,25 +7,18 @@ import NoStoriesPage from "./NoStoriesPage";
 import PostStories from "./PostStories";
 import * as S from './Stories.style';
 import StoriesList from "./StoriesList";
-import MyStories from "./MyStories";
+import { useNavigate } from "react-router-dom";
+import SignUpGuestModal from "./SignUpGuestModal";
 
-interface StoryProps {
-  _id: Id<"stories">;
-  title: string;
-  content: string;
-  imageId?: Id<"_storage">;
-  imageUrl: string | null;
-  createdAt: number;
-  userId: string;
-}
+
 
 const Stories: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const { isGuest, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [showGuestModal, setShowGuestModal] = useState(false);
 
 
-  // Convex hooks - use api object for proper typing
   const stories = useQuery(api.stories.listStories);
 
 
@@ -42,8 +35,14 @@ const Stories: React.FC = () => {
   const openModal = () => {
     setShowModal(true);
   }
+  const closeGuestModal = () => {
+    setShowGuestModal(false);
+  }
   const showGuest = () => {
     setShowGuestModal(true);
+  }
+  function navigateToSignUp() {
+    navigate('/signup');
   }
   // Loading state
   if (stories === undefined) {
@@ -57,7 +56,7 @@ const Stories: React.FC = () => {
   return (
     <S.StyledScroller>
       {stories.length === 0 ? (
-        <NoStoriesPage showGuest={showGuest} showModal={openModal} closeModal={closeModal} />
+        <NoStoriesPage showGuest={showGuest} showModal={openModal} closeModal={closeModal} isGuest={showGuestModal} />
       ) : (
         <>
           <S.AddStoryWrapper>
@@ -66,11 +65,13 @@ const Stories: React.FC = () => {
 
         </>
       )}
+      {showGuestModal && (
+        <SignUpGuestModal closeModal={closeGuestModal} />
+      )}
       {showModal && (
         <PostStories closeModal={closeModal} />
       )}
-      {/* <MyStories /> */}
-      <StoriesList />
+      <StoriesList stories={stories} />
     </S.StyledScroller>
   );
 };

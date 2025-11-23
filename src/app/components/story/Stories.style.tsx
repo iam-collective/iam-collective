@@ -122,7 +122,7 @@ export const AddStoryButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffbfdc;
+  background: #ff69b4;
   color: white;
 `;
 
