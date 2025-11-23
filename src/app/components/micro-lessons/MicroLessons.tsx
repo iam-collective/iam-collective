@@ -22,7 +22,6 @@ const MicroLessons: React.FC = () => {
         <S.Title>{complatedDay} of 16 days completed</S.Title>
         <Cards />
       </S.Container>
-      <BottomNavigation />
     </S.ScreenContainer>
   );
 };
