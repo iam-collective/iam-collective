@@ -5,10 +5,11 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { truncateText } from "../../utils/stories-util";
+import { getUserFromStorage } from "../../utils/storage";
 
 const StoriesList: React.FC = () => {
     const deleteStory = useMutation(api.stories.deleteStory);
-
+    const userLocal = getUserFromStorage()
     const stories = useQuery(api.stories.listStories);
     const handleDelete = async (storyId: Id<"stories">) => {
         try {
@@ -41,17 +42,18 @@ const StoriesList: React.FC = () => {
                         />
                     )}
                     <S.Wrapper>
-                    <S.DeleteButton
-                        onClick={() => handleDelete(story._id)}
-                    >
-                        Delete
-                    </S.DeleteButton>
-
+                        {story.username === userLocal.fullName && < S.DeleteButton
+                            onClick={() => handleDelete(story._id)}
+                        >
+                            Delete
+                        </S.DeleteButton>
+                        }
                         <S.ReadMore to={`${story._id}`}>Read More</S.ReadMore>
                     </S.Wrapper>
                 </S.StyledCard>
-            ))}
-        </CardGrid>
+            ))
+            }
+        </CardGrid >
     )
 };
 
