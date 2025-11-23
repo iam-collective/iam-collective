@@ -16,12 +16,10 @@ export const StoryScreen = styled.div`
   }
 `;
 export const BackButton = styled.button`
-padding: 1rem;
   background: none;
   border: none;
   color: #ff69b4;
   font-size: 1rem;
-  margin-bottom: 1rem;
   cursor: pointer;
   align-self: flex-start;
 
