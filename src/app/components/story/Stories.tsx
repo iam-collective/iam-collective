@@ -39,9 +39,9 @@ const Stories: React.FC = () => {
   const closeModal = () => {
     setShowModal(false);
   }
-const openModal = () => {
+  const openModal = () => {
     setShowModal(true);
-}
+  }
   const showGuest = () => {
     setShowGuestModal(true);
   }
@@ -60,10 +60,10 @@ const openModal = () => {
         <NoStoriesPage showGuest={showGuest} showModal={openModal} closeModal={closeModal} />
       ) : (
         <>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", marginTop: "16px" }}>
-            <button onClick={handleAddStoryClick} style={{ width: 50, height: 50, borderRadius: "50%", fontSize: 28, border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", background: "#ffbfdc", color: "white" }}>+</button>
-          </div>
-          {/* <S.SuggestedTitle>Recent Stories</S.SuggestedTitle> */}
+          <S.AddStoryWrapper>
+            <S.AddStoryButton onClick={handleAddStoryClick}>+</S.AddStoryButton>
+          </S.AddStoryWrapper>
+
         </>
       )}
       {showModal && (
