@@ -9,6 +9,7 @@ flex-direction: column;
   gap: 1rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  padding: 0 .5rem;
 `;
 export const StoryWrapper = styled.div`
   padding: 1rem;
@@ -107,6 +108,7 @@ export const SuggestedTitle = styled.p`
   font-size: 1.2rem;
   color: #6b7280;
   font-weight: 750;
+  margin: 0;
 `;
 
 
@@ -158,7 +160,13 @@ export const Wrapper = styled.div`
   gap: 1.5rem;
   padding: 1rem 0;
 `
-
+export const Container = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 0;
+`
 export const DeleteButton = styled.button`
   background-color: #ff4d4f;
   color: white;
@@ -183,9 +191,29 @@ display: block;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+export const MyStories = styled(Link)`
+  background-color: #ff69b4;
+  color: white;
+  border: 1px solid black;
+  padding: 1rem 1.25rem;
+  border-radius: .5rem;
+  text-decoration: none;
+  font-weight: bold;
+  &:hover{
+    background-color: #ffbfdc;
+  }
+
+`;
+
 export const ReadMore = styled(Link)`
   text-decoration: none;
   color: #ff69b4;
   font-weight: bold;
 
 `;
+
+export const InlineBackButton = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+`

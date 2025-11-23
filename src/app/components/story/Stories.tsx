@@ -7,6 +7,7 @@ import NoStoriesPage from "./NoStoriesPage";
 import PostStories from "./PostStories";
 import * as S from './Stories.style';
 import StoriesList from "./StoriesList";
+import MyStories from "./MyStories";
 
 interface StoryProps {
   _id: Id<"stories">;
@@ -62,12 +63,13 @@ const openModal = () => {
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", marginTop: "16px" }}>
             <button onClick={handleAddStoryClick} style={{ width: 50, height: 50, borderRadius: "50%", fontSize: 28, border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", background: "#ffbfdc", color: "white" }}>+</button>
           </div>
-          <S.SuggestedTitle>Recent Stories</S.SuggestedTitle>
+          {/* <S.SuggestedTitle>Recent Stories</S.SuggestedTitle> */}
         </>
       )}
       {showModal && (
         <PostStories closeModal={closeModal} />
       )}
+      {/* <MyStories /> */}
       <StoriesList />
     </S.StyledScroller>
   );

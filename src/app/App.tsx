@@ -18,6 +18,7 @@ import { GlobalStyles } from './Global.styles';
 import StorieSection from './components/story/StorieSection';
 import StoriesLayout from './components/story/StoriesLayout';
 import LogIn from './components/log-in/LogIn';
+import MyStories from './components/story/MyStories';
 
 const App: React.FC = () => (
   <AuthProvider>
@@ -38,6 +39,7 @@ const App: React.FC = () => (
         <Route path='/heal' element={<Stories />} />
         <Route path='/stories' element={<StoriesLayout />}>
           <Route index element={<Stories />} />
+          <Route path='my-stories' element={<MyStories />} />
           <Route path=':storyId' element={<StorieSection />} />
         </Route>
       </Routes>
