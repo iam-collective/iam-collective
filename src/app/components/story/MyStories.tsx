@@ -6,30 +6,34 @@ import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { truncateText } from "../../utils/stories-util";
 import { getUserFromStorage } from "../../utils/storage";
-type StoriesQueryType = {
-    username?: string;
-    imageUrl: string | null;
-    _id: Id<"stories">;
-    _creationTime: number;
-    imageId?: Id<"_storage">;
-    isPublic?: boolean;
-    createdAt: number;
-    userId: string;
-    title: string;
-    content: string;
-};
-type StoriesListProp = {
-    stories: StoriesQueryType[];
-}
-const StoriesList: React.FC<StoriesListProp> = ({ stories }) => {
+import { useNavigate } from "react-router-dom";
+import { BackButton } from "./StorieSection.styles";
 
+const MyStories: React.FC = () => {
+    const navigate = useNavigate();
+    const deleteStory = useMutation(api.stories.deleteStory);
+    const userLocal = getUserFromStorage()
+    const stories = useQuery(api.stories.listStoriesByUsername, { username: userLocal.fullName });
+    const handleDelete = async (storyId: Id<"stories">) => {
+        try {
+            await deleteStory({ storyId });
+        } catch (error) {
+            console.error("Failed to delete story:", error);
+            alert("Failed to delete story. You may not have permission.");
+        }
+    };
     if (!stories) return null;
     return (
         <>
-            <S.Container>
-                <S.SuggestedTitle>Recent Stories</S.SuggestedTitle>
-                <S.MyStories to={'my-stories'}>My Stories</S.MyStories>
-            </S.Container>
+            <S.InlineBackButton>
+                <BackButton onClick={() => navigate(-1)}>
+                    ← Back
+                </BackButton>
+                <S.SuggestedTitle>My Stories</S.SuggestedTitle>
+            </S.InlineBackButton>
+
+
+
             <CardGrid>
                 {stories.map((story) => (
                     <S.StyledCard
@@ -51,6 +55,12 @@ const StoriesList: React.FC<StoriesListProp> = ({ stories }) => {
                             />
                         )}
                         <S.Wrapper>
+                            {story.username === userLocal.fullName && < S.DeleteButton
+                                onClick={() => handleDelete(story._id)}
+                            >
+                                Delete
+                            </S.DeleteButton>
+                            }
                             <S.ReadMore to={`${story._id}`}>Read More</S.ReadMore>
                         </S.Wrapper>
                     </S.StyledCard>
@@ -61,4 +71,4 @@ const StoriesList: React.FC<StoriesListProp> = ({ stories }) => {
     )
 };
 
-export default StoriesList;
+export default MyStories;

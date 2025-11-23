@@ -9,6 +9,7 @@ export const ScreenContainer = styled.main`
   gap: 1rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  padding: 0 .5rem;
 `;
 export const StoryWrapper = styled.div`
   padding: 1rem;
@@ -103,10 +104,35 @@ export const StyledScroller = styled.section`
   padding-bottom: 3rem;
 `;
 
+export const AddStoryWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
+`;
+
+export const AddStoryButton = styled.button`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 28px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff69b4;
+  color: white;
+`;
+
+
+
 export const SuggestedTitle = styled.p`
   font-size: 1.2rem;
   color: #6b7280;
   font-weight: 750;
+  margin: 0;
 `;
 
 export const StyledCard = styled.article`
@@ -146,8 +172,23 @@ export const Date = styled.p`
   color: #888;
 `;
 
-export const Content = styled.p``;
+export const Content = styled.p`
+display: block;
 
+`;
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+`
+export const Container = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 0;
+`
 export const DeleteButton = styled.button`
   background-color: #ff4d4f;
   color: white;
@@ -156,7 +197,6 @@ export const DeleteButton = styled.button`
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
-  margin-top: 10px;
 
   &:hover {
     background-color: #ff7875;
@@ -173,8 +213,28 @@ export const Title = styled(Link)`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+export const MyStories = styled(Link)`
+  background-color: #ff69b4;
+  color: white;
+  border: 1px solid black;
+  padding: 1rem 1.25rem;
+  border-radius: .5rem;
+  text-decoration: none;
+  font-weight: bold;
+  &:hover{
+    background-color: #ffbfdc;
+  }
+
+`;
+
 export const ReadMore = styled(Link)`
   text-decoration: none;
   color: #ff69b4;
   font-weight: bold;
 `;
+
+export const InlineBackButton = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+`

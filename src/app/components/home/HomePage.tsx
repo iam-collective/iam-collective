@@ -72,7 +72,7 @@ const HomeScreen: React.FC = () => {
       link: '/stories',
     },
   ];
-
+  console.log('rendering home page.............')
   return (
     <ScreenContainer>
       <Banner>
@@ -96,7 +96,7 @@ const HomeScreen: React.FC = () => {
         <SuggestedTitle>Welcome back, {user?.fullName || 'Friend'}!</SuggestedTitle>
         <SuggestedCardsContainer>
           {cardsData.map((card, index) => (
-            <Card>
+            <Card key={index}>
               <CardText>
                 <CardHeading>{card.headline}</CardHeading>
                 {card.subline && <CardDescription>{card.subline}</CardDescription>}

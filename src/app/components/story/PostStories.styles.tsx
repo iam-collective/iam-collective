@@ -9,6 +9,29 @@ export const Backdrop = styled.div`
   z-index: 10;
 `;
 
+export const SuccessPopup = styled.div`
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4caf50;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 2000;
+  animation: fadeInOut 1.5s ease-in-out;
+
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -10px); }
+    10% { opacity: 1; transform: translate(-50%, 0px); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -10px); }
+  }
+`;
+
+
 export const PopUpCard = styled.div`
   position: fixed;
   z-index: 11;
@@ -56,7 +79,9 @@ export const TextArea = styled.textarea`
 `;
 
 export const PreviewImage = styled.img`
-  width: 100%;
+  width: 90%;
+  object-fit: cover;
+  height: 10rem;
   margin-top: 10px;
   border-radius: 8px;
 `;
