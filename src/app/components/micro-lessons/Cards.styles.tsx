@@ -8,7 +8,7 @@ export const CardGrid = styled.div`
   overflow-y: scroll;
   padding-bottom: 2rem;
   @media (min-width: 480px) {
-  padding: 1rem 2rem;
+    padding: 1rem 2rem;
   }
 `;
 

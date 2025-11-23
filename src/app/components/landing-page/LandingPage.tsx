@@ -7,7 +7,6 @@ import {
   DividerWrapper,
   Line,
   DividerText,
-  NextButton,
   Footer,
   FooterText,
   FooterLogos,
@@ -28,10 +27,9 @@ export default function LandingPage() {
         <DividerWrapper>
           <Line />
           <DividerText>
-            <h3>
-            Welcome to IAM Collective
-            </h3> 
-            The I AM Collective is a healing movement and digital community for anyone impacted by gender-based violence 
+            <h3>Welcome to IAM Collective</h3>
+            The I AM Collective is a healing movement and digital community for anyone impacted by
+            gender-based violence
           </DividerText>
           <Line />
         </DividerWrapper>

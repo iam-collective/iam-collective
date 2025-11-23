@@ -325,7 +325,7 @@ export const CarouselWrapper = styled.div`
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -346,7 +346,7 @@ export const CarouselCard = styled.div`
   flex: 0 0 85%;
   scroll-snap-align: start;
   display: flex;
-  
+
   @media (min-width: 640px) {
     flex: 0 0 70%;
   }

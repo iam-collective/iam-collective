@@ -82,7 +82,8 @@ export const DividerText = styled.span`
   color: black;
   text-align: center;
   font-family: 'Lora';
-  h3, p{
+  h3,
+  p {
     margin: 0;
     padding: 0;
   }

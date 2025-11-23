@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StoryScreen = styled.div`
   position: relative;
@@ -16,7 +16,7 @@ export const StoryScreen = styled.div`
   }
 `;
 export const BackButton = styled.button`
-padding: 1rem;
+  padding: 1rem;
   background: none;
   border: none;
   color: #ff69b4;

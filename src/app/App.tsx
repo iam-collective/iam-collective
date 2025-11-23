@@ -13,7 +13,7 @@ import AboutPage from './components/about-page/AboutPage';
 import ProfilePage from './components/profile-page/ProfilePage';
 import ContinuePage from './components/continue/ContinuePage';
 import MicroLessons from './components/micro-lessons/MicroLessons';
-import { Toaster } from 'sonner'
+import { Toaster } from 'sonner';
 import { GlobalStyles } from './Global.styles';
 import StorieSection from './components/story/StorieSection';
 import StoriesLayout from './components/story/StoriesLayout';
@@ -35,7 +35,7 @@ const App: React.FC = () => (
         <Route path='learn' element={<LearnScreen />} />
         <Route path='micro-lessons' element={<MicroLessons />} />
         <Route path='/heal' element={<Stories />} />
-        <Route path='/stories' element={<StoriesLayout />} >
+        <Route path='/stories' element={<StoriesLayout />}>
           <Route index element={<Stories />} />
           <Route path=':storyId' element={<StorieSection />} />
         </Route>

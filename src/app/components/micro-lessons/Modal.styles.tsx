@@ -29,7 +29,7 @@ export const ModalContainer = styled.div`
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-`
+`;
 // Modal Box
 export const ModalContent = styled.div`
   overflow-y: auto;
@@ -149,8 +149,9 @@ export const ReflectionInput = styled.textarea`
 export const CompleteButton = styled.button<{ $variant: boolean }>`
   width: 100%;
   padding: 16px 32px;
-  background: ${({ $variant }): DefaultTheme => $variant ? '' : 'linear-gradient(135deg, #fbd8e7, 0%, #ff69b4 100%)'} ;
-  color: ${({ $variant }): DefaultTheme => $variant ? 'black' : 'white'} ;
+  background: ${({ $variant }): DefaultTheme =>
+    $variant ? '' : 'linear-gradient(135deg, #fbd8e7, 0%, #ff69b4 100%)'};
+  color: ${({ $variant }): DefaultTheme => ($variant ? 'black' : 'white')};
   border: none;
   border-radius: 12px;
   font-size: 18px;
@@ -170,7 +171,6 @@ export const CompleteButton = styled.button<{ $variant: boolean }>`
     transform: none;
   }
 `;
-
 
 // Footer
 export const Footer = styled.div`

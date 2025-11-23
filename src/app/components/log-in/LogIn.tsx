@@ -99,12 +99,11 @@ export default function LoginPage() {
     // login(mockUser); // Sets user + clears guest mode
     // navigate('/home'); // redirect
 
-
     try {
       // Call Convex login mutation
-      const result = await loginUser({ 
-        email: email.trim(), 
-        password 
+      const result = await loginUser({
+        email: email.trim(),
+        password,
       });
 
       // Verify password with bcrypt

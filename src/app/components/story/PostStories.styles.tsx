@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -23,7 +23,7 @@ export const PopUpCard = styled.div`
 
   h3 {
     margin: 0 0 1rem;
-    font-family: "Work Sans", sans-serif;
+    font-family: 'Work Sans', sans-serif;
   }
 `;
 
@@ -68,8 +68,8 @@ export const SubmitButton = styled.button<{ $loading?: boolean }>`
   border: none;
   outline: none;
   border-radius: 8px;
-  cursor: ${({ $loading }) => ($loading ? "not-allowed" : "pointer")};
-  background-color: ${({ $loading }) => ($loading ? "#ccc" : "#ffbfdc")};
+  cursor: ${({ $loading }) => ($loading ? 'not-allowed' : 'pointer')};
+  background-color: ${({ $loading }) => ($loading ? '#ccc' : '#ffbfdc')};
   font-weight: 600;
 `;
 export const SelectWrapper = styled.div`
@@ -87,7 +87,7 @@ export const Select = styled.select`
   outline: none;
   cursor: pointer;
   font-size: 0.95rem;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   appearance: none;
 
   /* This keeps the options inside the popup */
@@ -102,7 +102,6 @@ export const Select = styled.select`
   }
 `;
 
-
 export const DropdownArrow = styled.div`
   position: absolute;
   right: 12px;
@@ -113,4 +112,3 @@ export const DropdownArrow = styled.div`
   color: #ff69b4;
   opacity: 0.8;
 `;
-

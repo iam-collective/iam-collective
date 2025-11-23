@@ -21,7 +21,6 @@ import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import bcrypt from 'bcryptjs';
 
-
 type Country = { name: string };
 type StepData = {
   fullName?: string;
@@ -41,16 +40,16 @@ export default function SignUpPage() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  
+
   const navigate = useNavigate();
   const { login } = useAuth();
-  
+
   // Convex mutation
   const createUser = useMutation(api.usersInfo.createUser);
 
   const handleChange = (field: keyof StepData, value: string): void => {
     setFormData({ ...formData, [field]: value });
-    if (error) setError(''); 
+    if (error) setError('');
   };
 
   const nextStep = () => {
@@ -107,7 +106,12 @@ export default function SignUpPage() {
         return;
       }
 
-      if (!formData.ageRange || !formData.country || !formData.deviceUsed || !formData.survivorStage) {
+      if (
+        !formData.ageRange ||
+        !formData.country ||
+        !formData.deviceUsed ||
+        !formData.survivorStage
+      ) {
         setError('Please complete all fields in step 2');
         setIsLoading(false);
         return;
@@ -133,17 +137,17 @@ export default function SignUpPage() {
       // Store current logged-in user locally (optional, for offline access)
       localStorage.setItem(
         'currentUser',
-        JSON.stringify({ 
+        JSON.stringify({
           userId: result.userId,
-          email: formData.email, 
-          fullName: formData.fullName 
+          email: formData.email,
+          fullName: formData.fullName,
         })
       );
 
       // Log user in via AuthContext
-      login({ 
-        email: formData.email, 
-        fullName: formData.fullName 
+      login({
+        email: formData.email,
+        fullName: formData.fullName,
       });
 
       // Store additional user info (if needed by your app)
@@ -171,14 +175,16 @@ export default function SignUpPage() {
         <FormTitle>Create Your Account</FormTitle>
         <Form>
           {error && (
-            <div style={{ 
-              color: '#d32f2f', 
-              backgroundColor: '#ffebee', 
-              padding: '0.75rem', 
-              borderRadius: '4px', 
-              marginBottom: '1rem',
-              fontSize: '0.875rem'
-            }}>
+            <div
+              style={{
+                color: '#d32f2f',
+                backgroundColor: '#ffebee',
+                padding: '0.75rem',
+                borderRadius: '4px',
+                marginBottom: '1rem',
+                fontSize: '0.875rem',
+              }}
+            >
               {error}
             </div>
           )}
@@ -235,14 +241,12 @@ export default function SignUpPage() {
 
               <Label>Country *</Label>
               <CountrySelectWrapper>
-                <CountrySelectorButton 
-                  type='button' 
+                <CountrySelectorButton
+                  type='button'
                   onClick={() => !isLoading && setShowDropdown(!showDropdown)}
                   disabled={isLoading}
                 >
-                  <span>
-                    {formData.country || 'Select Country'}
-                  </span>
+                  <span>{formData.country || 'Select Country'}</span>
                   <span>▾</span>
                 </CountrySelectorButton>
                 {showDropdown && (
@@ -299,11 +303,7 @@ export default function SignUpPage() {
                 Next
               </PinkButton>
             ) : (
-              <PinkButton
-                type='button'
-                onClick={handleSignUp}
-                disabled={isLoading}
-              >
+              <PinkButton type='button' onClick={handleSignUp} disabled={isLoading}>
                 {isLoading ? 'Creating Account...' : 'Complete Sign Up'}
               </PinkButton>
             )}
