@@ -56,7 +56,7 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
                 title,
                 content: description,
                 imageId,
-                isPublic
+                // isPublic
             });
 
             // Reset form
