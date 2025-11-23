@@ -23,6 +23,21 @@ const MyStories: React.FC = () => {
         }
     };
     if (!stories) return null;
+    if (stories.length === 0) {
+        return (
+            <>
+                <S.InlineBackButton>
+                    <BackButton onClick={() => navigate(-1)}>
+                        ← Back
+                    </BackButton>
+                    <S.SuggestedTitle>My Stories</S.SuggestedTitle>
+                </S.InlineBackButton>
+                <S.NoStoriesContainer>
+                    <S.NoStoriesMessage>You have not posted any stories yet.</S.NoStoriesMessage>
+                </S.NoStoriesContainer>
+            </>
+        )
+    }
     return (
         <>
             <S.InlineBackButton>

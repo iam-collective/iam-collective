@@ -238,3 +238,18 @@ export const InlineBackButton = styled.div`
   gap: 1rem;
   align-items: center;
 `
+
+
+export const NoStoriesMessage = styled.p`
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 1rem;
+`;
+
+export const NoStoriesContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
