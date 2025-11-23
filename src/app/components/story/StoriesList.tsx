@@ -32,19 +32,23 @@ const StoriesList: React.FC = () => {
                     <S.Title to={`${story._id}`}>{story.title}</S.Title>
                     <S.Content>{truncateText(story.content, 20)}
 
-                        <S.ReadMore to={`${story._id}`}>Read More</S.ReadMore>
                     </S.Content>
+
                     {story.imageUrl && (
                         <S.StyledCardImage
                             src={story.imageUrl}
                             alt={story.title}
                         />
                     )}
+                    <S.Wrapper>
                     <S.DeleteButton
                         onClick={() => handleDelete(story._id)}
                     >
                         Delete
                     </S.DeleteButton>
+
+                        <S.ReadMore to={`${story._id}`}>Read More</S.ReadMore>
+                    </S.Wrapper>
                 </S.StyledCard>
             ))}
         </CardGrid>

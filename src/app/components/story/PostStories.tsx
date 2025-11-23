@@ -1,9 +1,10 @@
-import React, { useState } from "react"
-import { StyledPopUpCard } from "./Stories.style";
 import { useMutation } from "convex/react";
+import React, { useState } from "react";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
-import * as S from './PostStories.styles'
+import { getUserFromStorage } from "../../utils/storage";
+import * as S from './PostStories.styles';
+import { StyledPopUpCard } from "./Stories.style";
 
 interface PostStoriesProps {
     closeModal: () => void;
@@ -14,6 +15,7 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
     const [description, setDescription] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [imageFile, setImageFile] = useState<File | null>(null);
+    const userLocal = getUserFromStorage()
     const [isPublic, setIsPublic] = useState(true);
 
     const [showSuccess, setShowSuccess] = useState(false);
@@ -50,24 +52,18 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
                 const { storageId } = await result.json();
                 imageId = storageId;
             }
-
-            // Upload story
             await uploadStory({
                 title,
                 content: description,
                 imageId,
-                isPublic
+                isPublic,
+                username: userLocal.fullName !== '' ? userLocal.fullName : "Anonymous",
             });
 
-            // Reset form
             setTitle("");
             setDescription("");
             setImageFile(null);
-
-            // Show success popup
             setShowSuccess(true);
-
-            // Close popup + modal after animation
             setTimeout(() => {
                 setShowSuccess(false);
                 closeModal();

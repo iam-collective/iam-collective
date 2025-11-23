@@ -79,7 +79,9 @@ export const TextArea = styled.textarea`
 `;
 
 export const PreviewImage = styled.img`
-  width: 100%;
+  width: 90%;
+  object-fit: cover;
+  height: 10rem;
   margin-top: 10px;
   border-radius: 8px;
 `;
