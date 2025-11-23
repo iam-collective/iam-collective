@@ -71,6 +71,7 @@
     "styled-components": "^6.1.8",
     "swc-loader": "^0.2.6",
     "tar": "^7.4.3",
+    "vm-browserify": "^1.1.2",
     "web-vitals": "^4.0.0",
     "workbox-background-sync": "^7.3.0",
     "workbox-broadcast-update": "^7.3.0",
