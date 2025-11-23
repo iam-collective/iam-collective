@@ -38,13 +38,15 @@ export default function StoryPage() {
                     <span>{readableDate}</span>
                 </S.StoryMeta>
             </S.StoryHeader>
+            <S.HeroImageWrapper>
+                <S.HeroImage
+                    src={
+                        story.imageUrl ??
+                        "https://placehold.co/1200x600/ff69b4/ffffff?text=No+Image"
+                    }
+                />
+            </S.HeroImageWrapper>
 
-            <S.HeroImage
-                src={
-                    story.imageUrl ??
-                    "https://placehold.co/1200x600/ff69b4/ffffff?text=No+Image"
-                }
-            />
 
             <S.StoryContent>
                 <p>{story.content}</p>

@@ -5,7 +5,6 @@ export const StoryScreen = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
-  padding: 1.5rem;
   border-radius: 2rem;
   overflow: auto;
   width: 100%;
@@ -13,16 +12,15 @@ export const StoryScreen = styled.div`
   /* box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12); */
 
   @media (max-width: 768px) {
-    padding: 1rem;
     border-radius: 1rem;
   }
 `;
 export const BackButton = styled.button`
+padding: 1rem;
   background: none;
   border: none;
   color: #ff69b4;
   font-size: 1rem;
-  padding: 0;
   margin-bottom: 1rem;
   cursor: pointer;
   align-self: flex-start;
@@ -37,6 +35,7 @@ export const StoryHeader = styled.header`
   flex-direction: column;
   margin-bottom: 1.5rem;
   text-align: left;
+  padding: 1rem;
 `;
 
 export const StoryTitle = styled.h1`
@@ -66,12 +65,8 @@ export const StoryMeta = styled.div`
 `;
 
 export const HeroImageWrapper = styled.div`
-  width: 100%;
-  height: auto;
   border-radius: 1rem;
-  overflow: hidden;
-  margin: 1.5rem 0;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
 `;
 
 export const HeroImage = styled.img`
@@ -83,6 +78,7 @@ export const HeroImage = styled.img`
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
+  /* overflow: hidden; */
 `;
 
 export const HeroCaption = styled.p`
@@ -97,9 +93,10 @@ export const StoryContent = styled.section`
   font-family: 'Work Sans', sans-serif;
   line-height: 1.7;
   color: #333;
-
+  padding: 1rem;
   p {
-    margin: 1.25rem 0;
+    padding: 0;
+    margin: 0;
   }
 
   h2 {
