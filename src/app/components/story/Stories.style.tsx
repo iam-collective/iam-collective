@@ -148,8 +148,16 @@ export const Date = styled.p`
   color: #888;  
 `
 
-export const Content = styled.p``;
+export const Content = styled.p`
+display: block;
 
+`;
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+`
 
 export const DeleteButton = styled.button`
   background-color: #ff4d4f;
@@ -159,7 +167,6 @@ export const DeleteButton = styled.button`
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
-  margin-top: 10px;
 
   &:hover {
     background-color: #ff7875;
