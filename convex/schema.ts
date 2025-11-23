@@ -1,7 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
-//schema of all fields
 export default defineSchema({
   users: defineTable({
     full_name: v.string(),
@@ -14,6 +13,20 @@ export default defineSchema({
     createdAt: v.number(),
     updatedAt: v.number(),
   }).index("by_email", ["email"]),
+
+  // Sessions table to store JWT tokens
+  sessions: defineTable({
+    userId: v.id("users"),
+    token: v.string(),
+    createdAt: v.number(),
+    expiresAt: v.number(),
+    isActive: v.boolean(),
+    deviceInfo: v.optional(v.string()),
+    lastAccessedAt: v.number(),
+  })
+    .index("by_userId", ["userId"])
+    .index("by_token", ["token"])
+    .index("by_isActive", ["isActive"]),
 
   stories: defineTable({
     userId: v.string(),

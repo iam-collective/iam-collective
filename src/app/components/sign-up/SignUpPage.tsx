@@ -116,6 +116,12 @@ export default function SignUpPage() {
       JSON.stringify({ email: formData.email, fullName: formData.fullName })
     );
 
+      // Log user in via AuthContext with token
+      login({ 
+        email: result.user.email, 
+        fullName: result.user.full_name,
+        token: result.token,
+      });
     login({ email: formData.email, fullName: formData.fullName });
 
     setUser({
