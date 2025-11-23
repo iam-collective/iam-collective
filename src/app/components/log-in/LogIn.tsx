@@ -23,7 +23,7 @@ import { TitleUnderline } from '../sign-up/SignUp.styles';
 export default function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const { login } = useAuth();
+  
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -128,4 +128,5 @@ export default function LoginPage() {
       </FormWrapper>
     </Container>
   );
+}
 }
