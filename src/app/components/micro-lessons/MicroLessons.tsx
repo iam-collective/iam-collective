@@ -6,13 +6,14 @@ import ProgressBar from './ProgressBar';
 import Cards from './Cards';
 import BottomNavigation from '../bottom-nav/BottomNav';
 import { useHasHydrated, useModalCompletedDay } from '../../hooks/modal-hook';
+import SideNavigation from '../bottom-nav/SideNav';
 const MicroLessons: React.FC = () => {
   const hasHydrated = useHasHydrated();
   const complatedDay = useModalCompletedDay();
   if (!hasHydrated) return;
   return (
     <S.ScreenContainer>
-      <Header title='Micro Lessons' />
+      <SideNavigation title='Micro Lessons' variant='learn' />
       <S.Container>
         <S.Title>
           Learn.<span> </span> Heal.<span> </span> Act

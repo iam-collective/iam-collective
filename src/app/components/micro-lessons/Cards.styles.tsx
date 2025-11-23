@@ -1,5 +1,4 @@
 import styled, { DefaultTheme } from 'styled-components';
-
 export const CardGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -19,7 +18,7 @@ export const Card = styled.button<{ $completed: boolean }>`
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
-  background-color: ${({ $completed }): DefaultTheme => ($completed ? '#ff69b4' : '#fbd8e7')};
+  background-color: ${({ $completed }): DefaultTheme => ($completed ? 'var(--primary-colour)' : '#fbd8e7')};
   border-radius: 1.5rem;
   cursor: pointer;
   h4,

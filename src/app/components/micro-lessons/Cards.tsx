@@ -19,7 +19,6 @@ const Cards: React.FC = () => {
     <>
       <S.CardGrid>
         {cards.map(({ day, topic, id }) => {
-          console.log('completed card', completedCard(id));
           const completed = completedCard(id);
           return (
             <S.Card $completed={completed} onClick={() => handleClick(id)} key={id}>

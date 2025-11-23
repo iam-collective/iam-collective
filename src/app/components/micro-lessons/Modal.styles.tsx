@@ -1,5 +1,4 @@
 import styled, { DefaultTheme } from 'styled-components';
-const color = '#ff69b4';
 // Overlay
 export const Modal = styled.div<{ active?: boolean }>`
   display: ${({ active }): DefaultTheme => (active ? 'flex' : 'none')};
@@ -83,7 +82,7 @@ export const ModalHeader = styled.div`
 export const ModalDayNumber = styled.div`
   font-size: 14px;
   font-weight: 700;
-  color: #ff69b4;
+  color: var(--primary-colour);
   margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -113,7 +112,7 @@ export const Section = styled.div`
 export const SectionTitle = styled.h3`
   font-size: 14px;
   font-weight: 700;
-  color: ${color};
+  color: var(--primary-colour);
   margin: 0 0 12px 0;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -141,7 +140,7 @@ export const ReflectionInput = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: ${color};
+    border-color: var(--primary-colour);
   }
 `;
 
@@ -150,7 +149,7 @@ export const CompleteButton = styled.button<{ $variant: boolean }>`
   width: 100%;
   padding: 16px 32px;
   background: ${({ $variant }): DefaultTheme =>
-    $variant ? '' : 'linear-gradient(135deg, #fbd8e7, 0%, #ff69b4 100%)'};
+    $variant ? '' : 'linear-gradient(135deg, #fbd8e7, 0%, var(--primary-colour) 100%)'};
   color: ${({ $variant }): DefaultTheme => ($variant ? 'black' : 'white')};
   border: none;
   border-radius: 12px;

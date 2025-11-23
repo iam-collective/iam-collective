@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ScreenContainer = styled.main`
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
   position: relative;
   height: 100vh;
   gap: 1rem;
@@ -34,7 +34,7 @@ export const StyledPostButton = styled.div`
   cursor: pointer;
   width: 100%;
   border-radius: 8px;
-  background-color: #ff69b4;
+  background-color: var(--primary-colour);
 `;
 
 export const StyledPopUpCard = styled.div`
@@ -48,7 +48,7 @@ export const StyledPopUpCard = styled.div`
   width: 350px;
   z-index: 20;
   text-align: center;
-  border-color: #ff69b4;
+  border-color: var(--primary-colour);
 `;
 
 export const CardWrapper = styled.div`
@@ -63,7 +63,7 @@ export const CardWrapper = styled.div`
 `;
 
 export const PinkButton = styled.button`
-  background-color: #ffd7e8;
+  background-color: var(--primary-colour);
   color: #1a1a1a;
   padding: 20px 33px;
   font-size: 1.5rem;
@@ -95,7 +95,7 @@ export const StyledScroller = styled.section`
   padding: 0 1rem;
   scrollbar-width: none;
   flex: 1;
-  /* hide scrollbar */
+/* hide scrollbar */
   &::-webkit-scrollbar {
     display: none;
   }
@@ -122,7 +122,7 @@ export const AddStoryButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ff69b4;
+  background: var(--primary-colour);
   color: white;
 `;
 
@@ -135,17 +135,18 @@ export const SuggestedTitle = styled.p`
   margin: 0;
 `;
 
+
 export const StyledCard = styled.article`
-  border: 1px solid #ff69b4;
-  border-radius: 1rem;
-  max-width: 100%;
-  position: relative;
-  /* overflow: hidden; */
-  padding: 1.25rem;
-  text-align: left;
-  max-height: 20rem;
-  background-color: white;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--primary-colour);
+    border-radius: 1rem ;
+    max-width: 100%;
+    position: relative;
+    /* overflow: hidden; */
+    padding: 1.25rem;
+    text-align: left ;
+    max-height: 20rem;
+    background-color: white ;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) ;
 `;
 export const Username = styled.span`
   position: absolute;
@@ -153,7 +154,7 @@ export const Username = styled.span`
   right: 12px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #ff69b4;
+  color: var(--primary-colour);
   opacity: 0.8;
 `;
 
@@ -167,10 +168,11 @@ export const StyledCardImage = styled.img`
   max-height: 10rem;
 `;
 
+
 export const Date = styled.p`
   font-size: 12px;
-  color: #888;
-`;
+  color: #888;  
+`
 
 export const Content = styled.p`
 display: block;
@@ -190,7 +192,7 @@ export const Container = styled.div`
   padding: .5rem 0;
 `
 export const DeleteButton = styled.button`
-  background-color: #ff4d4f;
+  background-color: var(--danger-color );
   color: white;
   border: none;
   padding: 8px 12px;
@@ -201,10 +203,10 @@ export const DeleteButton = styled.button`
   &:hover {
     background-color: #ff7875;
   }
-`;
+`
 
 export const Title = styled(Link)`
-  display: block;
+display: block;
   font-size: 1.25rem;
   margin: 0;
   padding: 0;
@@ -214,7 +216,7 @@ export const Title = styled(Link)`
   text-overflow: ellipsis;
 `;
 export const MyStories = styled(Link)`
-  background-color: #ff69b4;
+  background-color: var(--primary-colour);
   color: white;
   border: 1px solid black;
   padding: 1rem 1.25rem;
@@ -222,15 +224,16 @@ export const MyStories = styled(Link)`
   text-decoration: none;
   font-weight: bold;
   &:hover{
-    background-color: #ffbfdc;
+    background-color: var(--primary-color-dark);
   }
 
 `;
 
 export const ReadMore = styled(Link)`
   text-decoration: none;
-  color: #ff69b4;
+  color: var(--primary-colour);
   font-weight: bold;
+
 `;
 
 export const InlineBackButton = styled.div`

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { GraduationCap, Heart, Home, Fan, Book, Menu, X } from 'lucide-react';
+import { GraduationCap, Heart, Home, Fan, Book, Menu, X, AlertCircle } from 'lucide-react';
 import {
   TopNav,
   NavContainer,
@@ -46,6 +46,7 @@ const SideNavigation: React.FC = ({ title, variant }: SideNavigationProps) => {
     { label: 'Home', icon: Home, path: '/home', isHome: true },
     { label: 'Learn', icon: GraduationCap, path: '/learn' },
     { label: 'Stories', icon: Book, path: '/stories' },
+    { label: 'About', icon: AlertCircle, path: '/about' },
     // { label: 'Favorites', icon: Heart, path: '/favorites' },
     // { label: 'Community', icon: Fan, path: '/community' },
   ];
