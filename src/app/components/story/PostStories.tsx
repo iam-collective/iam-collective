@@ -3,6 +3,7 @@ import { StyledPopUpCard } from "./Stories.style";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
+import * as S from './PostStories.styles'
 interface PostStoriesProps {
     closeModal: () => void;
 }
@@ -11,7 +12,7 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
     const [description, setDescription] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [imageFile, setImageFile] = useState<File | null>(null);
-    // Convex hooks - use api object for proper typing
+    const [isPublic, setIsPublic] = useState(true);
     const uploadStory = useMutation(api.stories.uploadStory);
     const generateUploadUrl = useMutation(api.stories.generateUploadUrl);
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +52,7 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
                 title,
                 content: description,
                 imageId,
+                isPublic
             });
 
             // Reset form
@@ -67,40 +69,46 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
     };
     return (
         <>
-            <div style={{ position: "fixed", inset: 0, backdropFilter: "blur(6px)", backgroundColor: "rgba(0,0,0,0.35)", zIndex: 10 }} onClick={closeModal} />
+            <S.Backdrop onClick={closeModal} />
+
             <StyledPopUpCard>
-                <h3 style={{ fontFamily: "Work Sans" }}>Create a Story</h3>
-                <input
+                <h3>Create a Story</h3>
+
+                <S.Input
                     type="text"
                     placeholder="Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    style={{ width: "100%", marginBottom: 8, padding: 8, border: "1px solid #ddd", borderRadius: 4, outline: "none" }}
                 />
-                <textarea
+
+                <S.TextArea
                     placeholder="Description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    style={{ width: "100%", height: 80, marginBottom: 8, padding: 8, border: "1px solid #ddd", borderRadius: 4, outline: "none", resize: "vertical" }}
                 />
-                <input type="file" accept="image/*" onChange={handleImageUpload} />
-                {imageFile && <img src={URL.createObjectURL(imageFile)} alt="Preview" style={{ width: "100%", marginTop: 10, borderRadius: 8 }} />}
-                <button
-                    onClick={handlePost}
-                    disabled={isLoading}
-                    style={{
-                        marginTop: 10,
-                        padding: "8px 16px",
-                        cursor: isLoading ? "not-allowed" : "pointer",
-                        width: "100%",
-                        border: "none",
-                        outline: "none",
-                        borderRadius: "8px",
-                        backgroundColor: isLoading ? "#ccc" : "#ffbfdc"
-                    }}
-                >
+
+                <S.Input type="file" accept="image/*" onChange={handleImageUpload} />
+
+                {imageFile && (
+                    <S.PreviewImage
+                        src={URL.createObjectURL(imageFile)}
+                        alt="Preview"
+                    />
+                )}
+                <S.SelectWrapper>
+
+                    <S.Select
+                        value={isPublic ? "public" : "private"}
+                        onChange={(e) => setIsPublic(e.target.value === "public")}
+                    >
+                        <option value="public">Post Publicly</option>
+                        <option value="private">Post Privately (Anonymous)</option>
+                    </S.Select>
+                    <S.DropdownArrow>▼</S.DropdownArrow>
+                </S.SelectWrapper>
+                <S.SubmitButton onClick={handlePost} $loading={isLoading}>
                     {isLoading ? "Posting..." : "Post"}
-                </button>
+                </S.SubmitButton>
             </StyledPopUpCard>
         </>
 

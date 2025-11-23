@@ -25,6 +25,7 @@ const StoriesList: React.FC = () => {
                 <S.StyledCard
                     key={story._id}
                 >
+                    <S.Username>{story.username}</S.Username>
                     <S.Date>
                         {new Date(story.createdAt).toLocaleString()}
                     </S.Date>

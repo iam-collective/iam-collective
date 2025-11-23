@@ -114,12 +114,22 @@ export const StyledCard = styled.article`
     border: 1px solid #ff69b4;
     border-radius: 1rem ;
     max-width: 100%;
+    position: relative;
     /* overflow: hidden; */
     padding: 1.25rem;
     text-align: left ;
     max-height: 20rem;
     background-color: white ;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) ;
+`;
+export const Username = styled.span`
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ff69b4;
+  opacity: 0.8;
 `;
 
 export const StyledCardImage = styled.img`
