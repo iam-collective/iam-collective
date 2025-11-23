@@ -1,12 +1,10 @@
-// <<<<<<< HEAD
-// <<<<<<< HEAD
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import * as S from './StorieSection.styles'
 export default function StoryPage() {
     const { storyId } = useParams();
-
+    const navigate = useNavigate()
     const story = useQuery(
         api.stories.getStory,
         storyId ? { storyId } : "skip"
@@ -23,6 +21,10 @@ export default function StoryPage() {
 
     return (
         <S.StoryScreen>
+            <S.BackButton onClick={() => navigate(-1)}>
+                ← Back
+            </S.BackButton>
+
             <S.StoryHeader>
                 <S.StoryTitle>{story.title}</S.StoryTitle>
 

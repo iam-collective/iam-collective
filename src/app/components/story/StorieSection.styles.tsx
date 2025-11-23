@@ -17,6 +17,20 @@ export const StoryScreen = styled.div`
     border-radius: 1rem;
   }
 `;
+export const BackButton = styled.button`
+  background: none;
+  border: none;
+  color: #ff69b4;
+  font-size: 1rem;
+  padding: 0;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 export const StoryHeader = styled.header`
   display: flex;
