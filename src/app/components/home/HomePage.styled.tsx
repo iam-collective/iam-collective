@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 export const ScreenContainer = styled.div`
   box-sizing: border-box;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,6 +16,7 @@ export const ScreenContainer = styled.div`
   overflow: hidden;
   position: relative;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  padding-bottom: 50px; 
 `;
 
 
@@ -27,7 +27,7 @@ export const SuggestedCardsContainer = styled.div`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.5rem;
+  padding: 0 1rem 1.5rem 1rem;
 
   &::-webkit-scrollbar { display: none; }
   -ms-overflow-style: none;
@@ -39,11 +39,11 @@ export const SuggestedCardsContainer = styled.div`
 
 
 export const Card = styled.div`
-  flex: 0 0 80%; /* width relative to container */
+  flex: 0 0 80%; 
   max-width: 80%;
   scroll-snap-align: start;
   background: #fbd8e7;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -113,7 +113,6 @@ export const SuggestedWrapper = styled.div`
   background: white;
   border-radius: 2rem;
   margin-top: -6rem;
-  padding: 0.5rem;
   z-index: 0;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 `;
@@ -122,7 +121,7 @@ export const SuggestedTitle = styled.p`
   font-size: 0.9rem;
   color: #6b7280;
   font-weight: 500;
-  margin-bottom: 0.75rem;
+  margin: 1rem 1rem 0.75rem 1rem;
 `;
 
 export const CardText = styled.div`
@@ -130,7 +129,7 @@ export const CardText = styled.div`
 `;
 
 export const CardHeading = styled.h3`
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #333;
   font-weight: 600;
 `;

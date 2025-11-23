@@ -50,8 +50,6 @@ export default function ContinuePage() {
           <FooterLogo src='/MTN-Logo.png' alt='MTN-Logo' />
           <LogoDivider />
           <FooterLogo src='/chenosis.png' alt='chenosis' />
-          {/* <LogoDivider />
-          <FooterLogo src='/unite.png' alt='unite' /> */}
         </FooterLogos>
       </Footer>
     </ScreenContainer>

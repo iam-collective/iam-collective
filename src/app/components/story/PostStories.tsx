@@ -4,17 +4,23 @@ import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import * as S from './PostStories.styles'
+
 interface PostStoriesProps {
     closeModal: () => void;
 }
+
 const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [isPublic, setIsPublic] = useState(true);
+
+    const [showSuccess, setShowSuccess] = useState(false);
+
     const uploadStory = useMutation(api.stories.uploadStory);
     const generateUploadUrl = useMutation(api.stories.generateUploadUrl);
+
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] || null;
         setImageFile(file);
@@ -29,10 +35,8 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
             let imageId: Id<"_storage"> | undefined;
 
             if (imageFile) {
-                // Step 1: Get upload URL from Convex
                 const uploadUrl = await generateUploadUrl();
 
-                // Step 2: Upload file directly to Convex storage
                 const result = await fetch(uploadUrl, {
                     method: "POST",
                     headers: { "Content-Type": imageFile.type },
@@ -47,7 +51,7 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
                 imageId = storageId;
             }
 
-            // Step 3: Create the story with the image reference
+            // Upload story
             await uploadStory({
                 title,
                 content: description,
@@ -59,7 +63,16 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
             setTitle("");
             setDescription("");
             setImageFile(null);
-            closeModal()
+
+            // Show success popup
+            setShowSuccess(true);
+
+            // Close popup + modal after animation
+            setTimeout(() => {
+                setShowSuccess(false);
+                closeModal();
+            }, 1500);
+
         } catch (error) {
             console.error("Failed to post story:", error);
             alert("Failed to post story. Please try again.");
@@ -67,6 +80,7 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
             setIsLoading(false);
         }
     };
+
     return (
         <>
             <S.Backdrop onClick={closeModal} />
@@ -95,8 +109,8 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
                         alt="Preview"
                     />
                 )}
-                <S.SelectWrapper>
 
+                <S.SelectWrapper>
                     <S.Select
                         value={isPublic ? "public" : "private"}
                         onChange={(e) => setIsPublic(e.target.value === "public")}
@@ -106,13 +120,20 @@ const PostStories: React.FC<PostStoriesProps> = ({ closeModal }) => {
                     </S.Select>
                     <S.DropdownArrow>▼</S.DropdownArrow>
                 </S.SelectWrapper>
+
                 <S.SubmitButton onClick={handlePost} $loading={isLoading}>
                     {isLoading ? "Posting..." : "Post"}
                 </S.SubmitButton>
             </StyledPopUpCard>
-        </>
 
-    )
+            {/* Success Popup */}
+            {showSuccess && (
+                <S.SuccessPopup>
+                    🎉 Your story has been posted!
+                </S.SuccessPopup>
+            )}
+        </>
+    );
 };
 
 export default PostStories;

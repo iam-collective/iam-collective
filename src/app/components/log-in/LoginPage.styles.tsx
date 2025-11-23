@@ -1,5 +1,4 @@
 
-
 /* eslint-disable */
 import styled from 'styled-components';
 import { PinkButton } from '../sign-up/SignUp.styles';

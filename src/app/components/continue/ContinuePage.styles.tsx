@@ -8,8 +8,6 @@ export const ScreenContainer = styled.div`
   justify-content: space-between;
   height: 100vh;
   padding: 1rem;
-  // background: linear-gradient(180deg, #fbd2e1, #d8f3d1);
-  // border-radius: 2rem;
   margin: 0 auto;
   overflow: hidden;
   position: relative;
