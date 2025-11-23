@@ -44,7 +44,7 @@ const Modal: React.FC = () => {
     setLoading(false);
     onCompletedDay(day);
     toast.custom((t) => (
-      <S.CustomToastWrapper $bgColor='#ff69b4' $textColor='#fff'>
+      <S.CustomToastWrapper $bgColor='#d31875' $textColor='#fff'>
         Day {day} completed!
       </S.CustomToastWrapper>
     ));

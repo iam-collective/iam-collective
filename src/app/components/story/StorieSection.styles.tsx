@@ -18,7 +18,7 @@ export const StoryScreen = styled.div`
 export const BackButton = styled.button`
   background: none;
   border: none;
-  color: #ff69b4;
+  color: var(--primary-colour);
   font-size: 1rem;
   cursor: pointer;
   align-self: flex-start;
@@ -123,7 +123,7 @@ export const StoryContent = styled.section`
 
 export const QuoteBlock = styled.blockquote`
   background: #ffe0f1;
-  border-left: 5px solid #ff69b4;
+  border-left: 5px solid var(--primary-colour);
   padding: 1rem 1.25rem;
   margin: 2rem 0;
   font-style: italic;
@@ -162,7 +162,7 @@ export const StoryTags = styled.div`
   color: #6b7280;
 
   a {
-    color: #ff69b4;
+    color: var(--primary-colour);
     text-decoration: none;
     margin-right: 0.5rem;
     font-weight: bold;
@@ -180,7 +180,7 @@ export const ShareSection = styled.div`
   }
 
   a {
-    color: #ff69b4;
+    color: var(--primary-colour);
     text-decoration: none;
   }
 `;
