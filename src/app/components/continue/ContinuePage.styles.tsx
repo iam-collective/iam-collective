@@ -7,12 +7,12 @@ export const ScreenContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
-  padding: 1rem;
-  margin: 0 auto;
   overflow: hidden;
   position: relative;
+  margin: 0 auto;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 `;
+
 export const PinkButton = styled.button`
   background-color: #ffd7e8;
   color: #1a1a1a;
