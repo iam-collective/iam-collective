@@ -46,9 +46,12 @@ import {
   ProcessTitle,
 } from './AboutPage.styles';
 import { Logo } from '../landing-page/LandingPage.styles';
+import { BackButton, InlineBackButton } from '../story/Stories.style';
+import { useNavigate } from 'react-router-dom';
 
 const AboutPage: React.FC = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const team = [
     {
@@ -76,9 +79,13 @@ const AboutPage: React.FC = () => {
 
   return (
     <PageWrapper>
+       <InlineBackButton>
+        <BackButton onClick={() => navigate(-1)}>← Back</BackButton>
+      </InlineBackButton>
       <LogoWrapper>
         <Logo src='/Header-Logo.png' alt='IAMCOLLECTIVE Logo' />
       </LogoWrapper>
+     
 
       <HeroSection>
         <HeroTitle>About Us</HeroTitle>
