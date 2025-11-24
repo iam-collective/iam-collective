@@ -16,6 +16,7 @@ import {
   ScreenContainer,
 } from './ContinuePage.styles';
 import { useAuth } from '../../context/AuthContext';
+import { LogoWrapper } from '../landing-page/LandingPage.styles';
 
 export default function ContinuePage() {
   const navigate = useNavigate();
@@ -29,7 +30,9 @@ export default function ContinuePage() {
   return (
     <ScreenContainer>
       <MainContent>
+      <LogoWrapper>
         <Logo src='/Header-Logo.png' alt='IAMCOLLECTIVE Logo' />
+        </LogoWrapper>
 
         <DividerWrapper>
           <Line />

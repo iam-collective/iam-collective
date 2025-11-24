@@ -28,6 +28,18 @@ export const StyledContainer = styled.section`
   }
 `;
 
+export const BackButton = styled.button`
+  background: none;
+  border: none;
+  color: var(--primary-colour);
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 export const StyledPostButton = styled.div`
   margin-top: 10;
   padding: 8px 16px;

@@ -1,18 +1,32 @@
 /* eslint-disable */
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Button } from '../buttons';
+
+const float = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
+export const LogoWrapper = styled.div`
+  text-align: center;
+  animation: ${float} 3s ease-in-out infinite;
+`;
 
 export const ScreenContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: 100vh;
-  padding: 1rem;
-  // background: linear-gradient(180deg, #fbd2e1, #d8f3d1);
-  // border-radius: 2rem;
-  margin: 0 auto;
+  height: 100vh;
   overflow: hidden;
   position: relative;
+  margin: 0 auto;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 `;
 
