@@ -1,7 +1,6 @@
-
 /* eslint-disable */
 import styled from 'styled-components';
-import { PinkButton } from '../sign-up/SignUp.styles';
+import { PinkButton } from '../landing-page/LandingPage.styles'; // Reuse your PinkButton
 
 export const Container = styled.div`
   position: fixed;
@@ -19,18 +18,16 @@ export const Container = styled.div`
 
 export const FormWrapper = styled.div`
   width: 100%;
-  width: 100%;        
-  height: 90vh;               
+  height: 90vh;
   background: white;
-  border-color: red;
   border-radius: 2rem;
   padding: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;   
-  margin: 0 auto;            
+  align-items: center;
+  margin: 0 auto;
   box-sizing: border-box;
 
   @media (max-width: 768px) {
@@ -38,6 +35,17 @@ export const FormWrapper = styled.div`
     height: 95vh;
     padding: 1.5rem;
   }
+
+  font-family: 'Lora', serif; /* Ensure Lora is inherited */
+`;
+
+export const FormTitle = styled.h1`
+  font-family: 'Lora', serif;
+  font-size: 1.6rem;
+  font-weight: 700; /* Use defined font-weight */
+  color: #000000;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
 `;
 
 export const TitleUnderline = styled.div`
@@ -47,25 +55,17 @@ export const TitleUnderline = styled.div`
   margin: 8px 0 20px 0;
 `;
 
-export const FormTitle = styled.h1`
-  font-family: 'Lora', serif; 
-  font-size: 1.6rem;          
-  font-weight: 600;          
-  color: #fffff;           
-  margin: 0 0 1.5rem 0;   
-  text-align: center;                
-`;
-
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   overflow-y: auto;
   margin-top: 20px;
-   
+  width: 100%;
 `;
 
 export const Label = styled.label`
+  font-family: 'Lora', serif;
   font-size: 0.95rem;
   font-weight: 500;
   color: #333;
@@ -73,6 +73,7 @@ export const Label = styled.label`
 `;
 
 export const TextInput = styled.input`
+  font-family: 'Lora', serif;
   padding: 0.75rem 1rem;
   border: 1px solid #e5e5e5;
   border-radius: 1rem;
@@ -87,6 +88,7 @@ export const TextInput = styled.input`
 `;
 
 export const ErrorMessage = styled.div`
+  font-family: 'Lora', serif;
   color: #d32f2f;
   font-size: 0.875rem;
   margin-bottom: 0.5rem;
@@ -94,9 +96,12 @@ export const ErrorMessage = styled.div`
 
 export const LoginButton = styled(PinkButton)`
   width: 100%;
+  font-family: 'Lora', serif; /* Ensure Lora is applied */
+  font-weight: 500; /* Match your @font-face medium */
 `;
 
 export const ForgotPassword = styled.a`
+  font-family: 'Lora', serif;
   margin-top: 0.5rem;
   font-size: 0.85rem;
   color: #7b1fa2;

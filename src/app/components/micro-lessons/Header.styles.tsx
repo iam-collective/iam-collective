@@ -19,7 +19,7 @@ export const ProfileImage = styled.img<{ $invert?: boolean }>`
   border: 2px solid ${({ $invert }): DefaultTheme => ($invert ? 'white' : 'black')};
 `;
 export const Title = styled.h2`
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Lora', serif;
   font-size: 24px;
   margin: 0;
   border-bottom: 2px solid #ff69b4;

@@ -1,22 +1,9 @@
-/* eslint-disable */
 import styled, { keyframes } from 'styled-components';
-import { Button } from '../buttons';
 
 const float = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-`;
-
-export const LogoWrapper = styled.div`
-  text-align: center;
-  animation: ${float} 3s ease-in-out infinite;
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
 `;
 
 export const ScreenContainer = styled.div`
@@ -27,7 +14,66 @@ export const ScreenContainer = styled.div`
   overflow: hidden;
   position: relative;
   margin: 0 auto;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+`;
+
+export const LogoWrapper = styled.div`
+  text-align: center;
+  animation: ${float} 3s ease-in-out infinite;
+`;
+
+export const Logo = styled.img`
+  width: 150px;
+  height: auto;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    width: 120px;
+  }
+`;
+
+export const MainContent = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 0;
+  font-family: 'Lora', serif;
+`;
+
+export const DividerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 400px;
+  gap: 2rem;
+`;
+
+export const Line = styled.div`
+  width: 50%;
+  height: 2px;
+  background-color: rgb(255, 105, 180);
+`;
+
+export const DividerText = styled.div`
+  font-family: 'Lora', serif;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+
+  h3 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-weight: 400;
+  }
 `;
 
 export const PinkButton = styled.button`
@@ -52,57 +98,6 @@ export const PinkButton = styled.button`
   }
 `;
 
-export const MainContent = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem 0;
-`;
-
-export const Logo = styled.img`
-  width: 150px;
-  height: auto;
-  margin-bottom: 2rem;
-
-  @media (max-width: 768px) {
-    width: 120px;
-  }
-`;
-
-export const DividerWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 2rem;
-  width: 100%;
-  max-width: 400px;
-  gap: 2rem;
-`;
-
-export const Line = styled.div`
-  width: 50%;
-  height: 2px;
-  background-color: rgb(255, 105, 180);
-`;
-
-export const DividerText = styled.span`
-  margin: 0 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: black;
-  text-align: center;
-  font-family: 'Lora', serif;
-  h3,
-  p {
-    margin: 0;
-    padding: 0;
-  }
-`;
-
 export const Footer = styled.div`
   display: flex;
   flex-direction: column;
@@ -112,6 +107,7 @@ export const Footer = styled.div`
 `;
 
 export const FooterText = styled.span`
+  font-family: 'Lora', serif;
   font-size: 0.9rem;
   color: rgb(150, 150, 150);
 `;
@@ -132,5 +128,5 @@ export const FooterLogo = styled.img`
 export const LogoDivider = styled.div`
   width: 1px;
   height: 40px;
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(200,200,200);
 `;
