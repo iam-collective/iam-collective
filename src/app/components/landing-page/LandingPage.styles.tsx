@@ -95,7 +95,7 @@ export const DividerText = styled.span`
   font-weight: 500;
   color: black;
   text-align: center;
-  font-family: 'Lora';
+  font-family: 'Lora', serif;
   h3,
   p {
     margin: 0;
@@ -103,25 +103,6 @@ export const DividerText = styled.span`
   }
 `;
 
-export const NextButton = styled(Button)`
-  background-color: rgb(255, 105, 180);
-  color: white;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: #ff85c0;
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`;
 export const Footer = styled.div`
   display: flex;
   flex-direction: column;
