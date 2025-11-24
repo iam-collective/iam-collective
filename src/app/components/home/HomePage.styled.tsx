@@ -2,7 +2,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable react/jsx-no-bind */
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
 
 export const ScreenContainer = styled.div`
   box-sizing: border-box;
@@ -83,17 +89,22 @@ export const OverlayText = styled.div`
   padding: 1.5rem;
 `;
 
-export const Quote = styled.p`
+export const Quote = styled.p<{ $animate: boolean }>`
   color: white;
   font-size: 1.4rem;
-  font-family: 'Georgia', serif;
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  text-align: center;
+  animation: ${({ $animate }) => ($animate ? fadeIn : 'none')} 0.5s ease-in-out;
 `;
 
-export const Author = styled.p`
+export const Author = styled.p<{ $animate: boolean }>`
   color: #dcdcdc;
   margin-top: 0.4rem;
   font-style: italic;
   font-size: 0.85rem;
+  text-align: center;
+  animation: ${({ $animate }) => ($animate ? fadeIn : 'none')} 0.5s ease-in-out;
 `;
 
 export const ProfileImage = styled.img`
@@ -131,12 +142,13 @@ export const CardText = styled.div`
 export const CardHeading = styled.h3`
   font-size: 1rem;
   color: #333;
-  font-weight: 600;
+  font-weight: 900;
 `;
 
 export const CardDescription = styled.p`
   font-size: 0.85rem;
   color: #6b6b6b;
+  font-weight: 200;
 `;
 
 export const CardLink = styled.button`
