@@ -96,9 +96,7 @@ export const StyledScroller = styled.section`
   scrollbar-width: none;
   flex: 1;
 /* hide scrollbar */
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  
   -ms-overflow-style: none;
   scrollbar-width: none;
   padding-bottom: 3rem;
@@ -137,7 +135,7 @@ export const SuggestedTitle = styled.p`
 
 
 export const StyledCard = styled.article`
-    border: 1px solid var(--primary-colour);
+    /* border: 1px solid var(--primary-colour); */
     border-radius: 1rem ;
     max-width: 100%;
     position: relative;
@@ -146,7 +144,32 @@ export const StyledCard = styled.article`
     text-align: left ;
     max-height: 20rem;
     background-color: white ;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) ;
+
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(168, 216, 234, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(168, 216, 234, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    border-color: rgba(168, 216, 234, 0.4);
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
 `;
 export const Username = styled.span`
   position: absolute;

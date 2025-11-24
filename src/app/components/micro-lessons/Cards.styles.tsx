@@ -5,6 +5,9 @@ export const CardGrid = styled.div`
   gap: 1.5rem;
   width: 100%;
   overflow-y: scroll;
+&::-webkit-scrollbar {
+    display: none;
+  }
   padding-bottom: 2rem;
   @media (min-width: 480px) {
     padding: 1rem 2rem;
