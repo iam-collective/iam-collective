@@ -28,10 +28,8 @@ const LearnScreen: React.FC = () => {
 
   return (
     <ScreenContainer>
-      {/* <HeaderComponent title='' /> */}
       <SideNavigation title='Learn' variant='learn' />
-      {/* <HeaderComponent title='Learn' /> */}
-      <ScrollableContent>
+            <ScrollableContent>
         <Header>
           Knowledge is strength. Your journey to empowerment through upskilling starts here.
         </Header>

@@ -9,7 +9,7 @@ export const ScreenContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  height: 100dvh;
   padding: 1rem;
   margin: 0;
   width: 100%;
