@@ -14,6 +14,19 @@ flex-direction: column;
 export const StoryWrapper = styled.div`
   padding: 1rem;
 `;
+
+export const BackButton = styled.button`
+  background: none;
+  border: none;
+  color: var(--primary-colour);
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 export const StyledContainer = styled.section`
   position: relative;
   width: 100%;

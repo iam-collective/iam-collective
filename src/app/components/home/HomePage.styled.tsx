@@ -19,8 +19,6 @@ export const ScreenContainer = styled.div`
   padding-bottom: 50px; 
 `;
 
-
-
 export const SuggestedCardsContainer = styled.div`
   display: flex;
   gap: 1rem;

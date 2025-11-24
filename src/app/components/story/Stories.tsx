@@ -6,11 +6,9 @@ import { useAuth } from '../../context/AuthContext';
 import NoStoriesPage from './NoStoriesPage';
 import PostStories from './PostStories';
 import * as S from './Stories.style';
-import StoriesList from "./StoriesList";
-import { useNavigate } from "react-router-dom";
-import SignUpGuestModal from "./SignUpGuestModal";
-
-
+import StoriesList from './StoriesList';
+import { useNavigate } from 'react-router-dom';
+import SignUpGuestModal from './SignUpGuestModal';
 
 const Stories: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -29,22 +27,22 @@ const Stories: React.FC = () => {
   };
   const closeModal = () => {
     setShowModal(false);
-  }
+  };
 
   const openModal = () => {
     setShowModal(true);
-  }
+  };
   const closeGuestModal = () => {
     setShowGuestModal(false);
-  }
+  };
 
   const showGuest = () => {
     setShowGuestModal(true);
-  }
+  };
   function navigateToSignUp() {
     navigate('/signup');
   }
-  
+
   // Loading state
   if (stories === undefined) {
     return (
@@ -58,22 +56,25 @@ const Stories: React.FC = () => {
 
   return (
     <S.StyledScroller>
+      <S.InlineBackButton>
+        <S.BackButton onClick={() => navigate(-1)}>← Back</S.BackButton>
+      </S.InlineBackButton>
       {stories.length === 0 ? (
-        <NoStoriesPage showGuest={showGuest} showModal={openModal} closeModal={closeModal} isGuest={showGuestModal} />
+        <NoStoriesPage
+          showGuest={showGuest}
+          showModal={openModal}
+          closeModal={closeModal}
+          isGuest={showGuestModal}
+        />
       ) : (
         <>
           <S.AddStoryWrapper>
             <S.AddStoryButton onClick={handleAddStoryClick}>+</S.AddStoryButton>
           </S.AddStoryWrapper>
-
         </>
       )}
-      {showGuestModal && (
-        <SignUpGuestModal closeModal={closeGuestModal} />
-      )}
-      {showModal && (
-        <PostStories closeModal={closeModal} />
-      )}
+      {showGuestModal && <SignUpGuestModal closeModal={closeGuestModal} />}
+      {showModal && <PostStories closeModal={closeModal} />}
       <StoriesList stories={stories} />
     </S.StyledScroller>
   );

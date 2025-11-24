@@ -13,6 +13,7 @@ import {
   FooterLogo,
   MainContent,
   LogoDivider,
+  LogoWrapper,
   PinkButton,
 } from './LandingPage.styles';
 
@@ -22,7 +23,9 @@ export default function LandingPage() {
   return (
     <ScreenContainer>
       <MainContent>
+        <LogoWrapper>
         <Logo src='/Header-Logo.png' alt='IAMCOLLECTIVE Logo' />
+        </LogoWrapper>
 
         <DividerWrapper>
           <Line />
