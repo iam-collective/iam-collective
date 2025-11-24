@@ -1,61 +1,65 @@
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable no-undef */
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import * as backgrounds from '../../assets/background/';
 import {
   Author,
   BackgroundImage,
   ImageCard,
   OverlayText,
   Quote,
-  SlideWrapper,
 } from '../home/HomePage.styled';
-interface Image {
+import * as backgrounds from '../../assets/background';
+
+interface BannerItem {
   src: string;
   title: string;
   author: string;
 }
+
+const bannerItems: BannerItem[] = [
+  { src: backgrounds.first, title: "First learn how to stand up for yourself, then learn how to stand up for someone else.", author: "Maya Angelou" },
+  { src: backgrounds.second, title: "Silence protects the problem. Speaking up protects the people.", author: "Audre Lorde" },
+  { src: backgrounds.third, title: "Technology should never be a weapon — it should be a shield.", author: "Sheryl Sandberg" },
+  { src: backgrounds.fourth, title: "Your story might be the key that unlocks someone else’s freedom.", author: "Chimamanda Ngozi Adichie" },
+  { src: backgrounds.fifth, title: "When we learn better, we do better — and we hurt each other less.", author: "Nelson Mandela" },
+];
+
 const Banner: React.FC<{ children: ReactElement }> = ({ children }) => {
-  const titles = [
-    'First learn how to stand up for yourself, then learn how to stand up for someone else.',
-    'Silence protects the problem. Speaking up protects the people.',
-    'Technology should never be a weapon — it should be a shield.',
-    'Your story might be the key that unlocks someone else’s freedom.',
-    'When we learn better, we do better — and we hurt each other less.',
-  ];
-  const authors = ['Maya Angelou', 'Unknown', 'Unknown', 'Unknown', 'Unknown'];
-
-  const sources = Object.values(backgrounds) as string[];
-  console.log('sources', sources);
-  const images: Image[] = sources.map((src, i) => ({ src, title: titles[i], author: authors[i] }));
-
   const [activeIndex, setActiveIndex] = useState(0);
+  const [animateText, setAnimateText] = useState(true);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const startAutoSlide = (): void => {
+  const changeSlide = (nextIndex: number) => {
+    setAnimateText(false);
+    setTimeout(() => {
+      setActiveIndex(nextIndex);
+      setAnimateText(true);
+    }, 50);
+  };
+
+  const startAutoSlide = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % images.length);
+      changeSlide((activeIndex + 1) % bannerItems.length);
     }, 5000);
   };
-  const handleTouchStart = (e: React.TouchEvent): void => {
+
+  const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
 
-  const handleTouchMove = (e: React.TouchEvent): void => {
+  const handleTouchMove = (e: React.TouchEvent) => {
     touchEndX.current = e.touches[0].clientX;
   };
 
-  const handleTouchEnd = (): void => {
+  const handleTouchEnd = () => {
     if (touchStartX.current !== null && touchEndX.current !== null) {
       const delta = touchStartX.current - touchEndX.current;
       const swipeThreshold = 50;
       if (delta > swipeThreshold) {
-        setActiveIndex((prev) => (prev + 1) % images.length);
+        changeSlide((activeIndex + 1) % bannerItems.length);
       } else if (delta < -swipeThreshold) {
-        setActiveIndex((prev) => (prev - 1 + images.length) % images.length);
+        changeSlide((activeIndex - 1 + bannerItems.length) % bannerItems.length);
       }
     }
     startAutoSlide();
@@ -65,25 +69,39 @@ const Banner: React.FC<{ children: ReactElement }> = ({ children }) => {
 
   useEffect(() => {
     startAutoSlide();
-    return (): void => {
+    return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [images.length]);
+  }, [activeIndex]);
+
   return (
     <ImageCard
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <SlideWrapper $activeIndex={activeIndex} $count={images.length}>
-        {images.map((img, index) => (
-          <BackgroundImage src={img.src} alt='Background' />
-        ))}
-      </SlideWrapper>
+      {bannerItems.map((item, index) => (
+        <BackgroundImage
+          key={index}
+          src={item.src}
+          alt={`Slide ${index + 1}`}
+          style={{
+            opacity: index === activeIndex ? 1 : 0,
+            transition: 'opacity 1s ease-in-out',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+          }}
+        />
+      ))}
+
       <OverlayText>
-        <Quote>{images[activeIndex].title}</Quote>
-        <Author>– {images[activeIndex].author}</Author>
+        <Quote $animate={animateText}>{bannerItems[activeIndex].title}</Quote>
+        <Author $animate={animateText}>– {bannerItems[activeIndex].author}</Author>
       </OverlayText>
+
       {children}
     </ImageCard>
   );

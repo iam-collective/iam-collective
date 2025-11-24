@@ -2,15 +2,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-  padding: 1rem;
-  margin: 0 auto;
+  position: fixed;
+  inset: 0;
   overflow: hidden;
-  position: relative;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0.5rem;
+  box-sizing: border-box;
+  background: #f9f9f9;
 `;
 
 export const FormWrapper = styled.div`
@@ -75,7 +77,6 @@ export const Label = styled.label<{ isRequired?: boolean }>`
   margin-bottom: 0.25rem;
   position: relative;
 
-  /* Add red star for required fields */
   &::after {
     content: '${({ isRequired }) => (isRequired ? '*' : '')}';
     color: red;
