@@ -20,7 +20,7 @@ export const OverlayText = styled.div`
 export const Quote = styled.p<{ $animate: boolean }>`
   color: white;
   font-size: 1.4rem;
-  font-family: 'Georgia', serif;
+  font-family: 'Lora', serif;
   font-weight: 500;
   animation: ${({ $animate }) => ($animate ? fadeIn : 'none')} 0.5s ease-in-out;
 `;

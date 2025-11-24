@@ -39,7 +39,7 @@ export const StoryHeader = styled.header`
 export const StoryTitle = styled.h1`
   font-size: 2rem;
   font-weight: 700;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Lora', serif;
   margin: 0;
   color: #1a1a1a;
 
@@ -88,7 +88,7 @@ export const HeroCaption = styled.p`
 
 export const StoryContent = styled.section`
   font-size: 1.1rem;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Lora', serif;
   line-height: 1.7;
   color: #333;
   padding: 1rem;

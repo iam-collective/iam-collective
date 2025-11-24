@@ -9,8 +9,8 @@ const fadeIn = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
-
 export const ScreenContainer = styled.div`
+  font-family: 'Lora', serif;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -22,10 +22,8 @@ export const ScreenContainer = styled.div`
   overflow: hidden;
   position: relative;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-  padding-bottom: 50px; 
+  padding-bottom: 50px;
 `;
-
-
 
 export const SuggestedCardsContainer = styled.div`
   display: flex;
@@ -35,17 +33,17 @@ export const SuggestedCardsContainer = styled.div`
   -webkit-overflow-scrolling: touch;
   padding: 0 1rem 1.5rem 1rem;
 
-  &::-webkit-scrollbar { display: none; }
+  &::-webkit-scrollbar {
+    display: none;
+  }
   -ms-overflow-style: none;
   scrollbar-width: none;
 
-  /* prevent child cards from exceeding container */
   max-width: 100%;
 `;
 
-
 export const Card = styled.div`
-  flex: 0 0 80%; 
+  flex: 0 0 80%;
   max-width: 80%;
   scroll-snap-align: start;
   background: #fbd8e7;
@@ -64,7 +62,7 @@ export const Card = styled.div`
 export const ImageCard = styled.div`
   position: relative;
   width: 100%;
-  max-width: 100%; /* prevent overflow */
+  max-width: 100%;
   height: 60vh;
   border-radius: 2rem;
   overflow: hidden;
@@ -129,6 +127,7 @@ export const SuggestedWrapper = styled.div`
 `;
 
 export const SuggestedTitle = styled.p`
+  font-family: 'Lora', serif;
   font-size: 0.9rem;
   color: #6b7280;
   font-weight: 500;
@@ -140,15 +139,17 @@ export const CardText = styled.div`
 `;
 
 export const CardHeading = styled.h3`
+  font-family: 'Lora', serif;
   font-size: 1rem;
   color: #333;
-  font-weight: 900;
+  font-weight: 700;
 `;
 
 export const CardDescription = styled.p`
+  font-family: 'Lora', serif;
   font-size: 0.85rem;
   color: #6b6b6b;
-  font-weight: 200;
+  font-weight: 400;
 `;
 
 export const CardLink = styled.button`

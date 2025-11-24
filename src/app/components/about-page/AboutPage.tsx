@@ -55,27 +55,76 @@ const AboutPage: React.FC = () => {
 
   const team = [
     {
-      name: 'Founder',
-      role: 'Founder',
-      bio: 'Passionate about healing, learning, and building tools that help people grow.',
-      image: '/I-am-safe-place-image.png',
+      name: 'Alexis Searle',
+      role: 'Founder & Chief Steward of the Movement',
+      bio: `Alexis has spent more than two decades shaping brand and communication strategy across Africa’s leading organisations. As a GBV survivor, she founded The I AM Collective with a clear belief: when individuals learn to name, understand, and heal their experiences, entire communities shift.
+  
+  Her work blends strategic insight, deep empathy, and an unwavering commitment to restoring dignity. Alexis is devoted to turning the voices of many into a learning ecosystem that helps people reclaim their sovereignty, reconnect with their wholeness, and choose safer, healthier ways of living.
+  
+  She leads the vision, movement strategy and ecosystem partnerships that ensure every story shared becomes an opportunity for collective healing and action. “When we heal the individual, we heal the collective. When we awaken the collective, we ignite change.”`,
+      image: '/team/AlexisSearle.png',
       color: '#FFB4A2',
     },
     {
-      name: 'Team Member 2',
-      role: 'Role',
-      bio: 'Short bio goes here. This is a placeholder for the MVP.',
-      image: '/I-am-safe-place-image.png',
+      name: 'Dr. Rafiek Lokhat',
+      role: 'Clinical Psychologist & Clinical Lead',
+      bio: `Dr Rafiek Lokhat brings more than 30 years of clinical experience to The I AM Collective. His work spans psychiatric hospitals, community upliftment programmes, media education, and the training of nearly 2,000 mental health professionals across South Africa.
+  
+  As CEO and Master Trainer of BWRT® South Africa, Dr Lokhat specialises in trauma-informed, accessible mental health approaches. His deep understanding of human behaviour, trauma, and healing guides how user stories on the platform are decoded, translated and transformed into safe, meaningful learning.
+  
+  A respected voice in both clinical and public spaces, he is committed to creating mental-health-literate communities and ensuring the platform upholds the highest ethical and psychological standards.`,
+      image: '/team/DrLokhat.png',
       color: '#A8D8EA',
     },
     {
-      name: 'Team Member 3',
-      role: 'Role',
-      bio: 'Short bio goes here. This is a placeholder for the MVP.',
-      image: '/I-am-safe-place-image.png',
+      name: 'Dee',
+      role: 'Learning Architect & Eduvator',
+      bio: `Dee is an experienced learning strategist dedicated to making education accessible, inclusive and socially just. With a background spanning academic research, learning design, and online higher education, she specialises in turning complex ideas into meaningful, human-centred learning experiences.
+  
+  Through EdXimia, her digital learning consultancy, Dee leads the design and development of the I AM Collective’s learning architecture and micro-learning library. Her work ensures that every story-derived insight becomes practical, compassionate and empowering learning that supports personal growth and community healing.`,
+      image: '/team/Dee.png',
       color: '#FFCDB2',
     },
+    {
+      name: 'Zachary',
+      role: 'Social Media Editor & Story Steward',
+      bio: `Zachary ensures that every digital touchpoint of the I AM Collective feels safe, human and held with care. He curates and communicates the stories shared by the community with compassion and responsibility, ensuring that all voices are treated with dignity.
+  
+  He brings a calm, thoughtful approach to creating online spaces where people feel seen, understood and less alone. Every post and every conversation is shaped by his belief that learning can spark healing, and that shared stories can help build safer communities across Africa—one person at a time.`,
+      image: '/team/Zachary.png',
+      color: '#D1C4E9',
+    },
+    {
+      name: 'Dr. Xena Cupido',
+      role: 'Social Scientist & Systems Research Lead',
+      bio: `Dr Xena Cupido is a higher-education specialist whose work focuses on building socially just, accountable and caring institutional environments. With expertise in academic development and GBV risk within complex systems, she helps the I AM Collective understand how violence shows up in communities—and how prevention and accountability can be strengthened.
+  
+  Her research-driven approach ensures that story insights are grounded in evidence and translated into learning that supports systemic change, not just individual awareness.`,
+      image: '/team/DrXena.png',
+      color: '#B2EBF2',
+    },
+    {
+      name: 'Samantha Africa',
+      role: 'Partnership Strategy Lead',
+      bio: `Samantha brings 15 years of partnership and stakeholder-engagement experience, guided by a deep belief in the power of storytelling and collaboration. She works to build relationships that expand the impact of The I AM Collective and unlock pathways for healing, awareness and community empowerment.
+  
+  Her role focuses on connecting the movement with organisations, funders, and platforms that share its vision for transforming the way Africa understands and responds to GBV.`,
+      image: '/team/samantha.png',
+      color: '#FFE082',
+    },
+    {
+      name: 'Saskia Falken',
+      role: 'Content & Radio Strategist',
+      bio: `Saskia is an award-winning broadcaster and marketer with more than 20 years’ experience shaping content, brand and media strategy for respected institutions including Daily Maverick, Kfm 94.5, CapeTalk and Heart FM.
+  
+  With an MBA from the UCT Graduate School of Business and training in Brené Brown’s Dare to Lead™, she blends strategic clarity with human-centred leadership. Saskia leads the Collective’s radio strategy, ensuring insights from real stories become powerful, accessible content that reaches millions across the continent.
+  
+  Her work bridges media, empathy and community impact, making her a vital voice in amplifying the movement.`,
+      image: '/team/saskia.png',
+      color: '#FFCCBC',
+    },
   ];
+  
 
   return (
     <PageWrapper>

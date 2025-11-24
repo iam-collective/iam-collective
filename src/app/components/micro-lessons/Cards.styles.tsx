@@ -28,7 +28,7 @@ export const Card = styled.button<{ $completed: boolean }>`
   p {
     margin: 0;
     padding: 0;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Lora', serif;
   }
   p {
     color: ${({ $completed }): DefaultTheme => ($completed ? 'white' : 'black')};

@@ -174,7 +174,7 @@ export const QuoteIcon = styled.span`
   font-size: 3rem;
   color: #d31875;
   opacity: 0.3;
-  font-family: Georgia, serif;
+  font-family: 'Lora', serif;
   line-height: 1;
 `;
 
@@ -223,29 +223,30 @@ export const TeamCard = styled.div<{ $isHovered: boolean; $color: string }>`
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   }
 `;
-
 export const ImageWrapper = styled.div<{ $isHovered: boolean }>`
   position: relative;
   width: 100%;
-  height: 200px;
+  max-height: 300px;
   overflow: hidden;
   border-radius: 16px 16px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 
   img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto; 
+    max-height: 100%;
+    object-fit: contain; 
     transition: transform 0.5s ease;
-    transform: ${(props) => (props.$isHovered ? 'scale(1.1)' : 'scale(1)')};
+    transform: ${(props) => (props.$isHovered ? 'scale(1.05)' : 'scale(1)')};
   }
 `;
 
+
 export const ImageOverlay = styled.div<{ $isHovered: boolean; $color: string }>`
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: ${(props) => props.$color};
   opacity: ${(props) => (props.$isHovered ? 0.2 : 0)};
   transition: opacity 0.4s ease;

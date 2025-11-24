@@ -84,7 +84,7 @@ export const PinkButton = styled.button`
   border-radius: 60px;
   cursor: pointer;
   transition: all 0.25s ease;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Lora', serif;
 
   &:hover {
     background-color: #ffbfdc;

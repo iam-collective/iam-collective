@@ -46,7 +46,7 @@ export const PopUpCard = styled.div`
 
   h3 {
     margin: 0 0 1rem;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Lora', serif;
   }
 `;
 
@@ -110,7 +110,7 @@ export const Select = styled.select`
   outline: none;
   cursor: pointer;
   font-size: 0.95rem;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Lora', serif;
   appearance: none;
 
   /* This keeps the options inside the popup */
