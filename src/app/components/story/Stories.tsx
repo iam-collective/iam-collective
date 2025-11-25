@@ -56,9 +56,9 @@ const Stories: React.FC = () => {
 
   return (
     <S.StyledScroller>
-      <S.InlineBackButton>
+      {/* <S.InlineBackButton>
         <S.BackButton onClick={() => navigate(-1)}>← Back</S.BackButton>
-      </S.InlineBackButton>
+      </S.InlineBackButton> */}
       {stories.length === 0 ? (
         <NoStoriesPage
           showGuest={showGuest}
