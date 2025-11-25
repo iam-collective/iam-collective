@@ -13,6 +13,7 @@ export default defineSchema({
     healing_Journey: v.string(),
     createdAt: v.number(),
     updatedAt: v.number(),
+    role: v.optional(v.string()),
   }).index('by_email', ['email']),
 
   stories: defineTable({

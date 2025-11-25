@@ -62,6 +62,7 @@ export const createUser = mutation({
       ...args,
       createdAt: Date.now(),
       updatedAt: Date.now(),
+      role: 'user'
     });
 
     return { success: true, userId };
