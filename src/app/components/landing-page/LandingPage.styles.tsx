@@ -14,7 +14,7 @@ export const ScreenContainer = styled.div`
   overflow: hidden;
   position: relative;
   margin: 0 auto;
-  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 `;
 
 export const LogoWrapper = styled.div`
@@ -52,6 +52,7 @@ export const DividerWrapper = styled.div`
   width: 100%;
   max-width: 400px;
   gap: 2rem;
+  padding: 16px;
 `;
 
 export const Line = styled.div`
@@ -128,5 +129,5 @@ export const FooterLogo = styled.img`
 export const LogoDivider = styled.div`
   width: 1px;
   height: 40px;
-  background-color: rgb(200,200,200);
+  background-color: rgb(200, 200, 200);
 `;

@@ -235,14 +235,13 @@ export const ImageWrapper = styled.div<{ $isHovered: boolean }>`
 
   img {
     width: 100%;
-    height: auto; 
+    height: auto;
     max-height: 100%;
-    object-fit: contain; 
+    object-fit: contain;
     transition: transform 0.5s ease;
     transform: ${(props) => (props.$isHovered ? 'scale(1.05)' : 'scale(1)')};
   }
 `;
-
 
 export const ImageOverlay = styled.div<{ $isHovered: boolean; $color: string }>`
   position: absolute;

@@ -124,17 +124,15 @@ const AboutPage: React.FC = () => {
       color: '#FFCCBC',
     },
   ];
-  
 
   return (
     <PageWrapper>
-       <InlineBackButton>
+      <InlineBackButton>
         <BackButton onClick={() => navigate(-1)}>← Back</BackButton>
       </InlineBackButton>
       <LogoWrapper>
         <Logo src='/Header-Logo.png' alt='IAMCOLLECTIVE Logo' />
       </LogoWrapper>
-     
 
       <HeroSection>
         <HeroTitle>About Us</HeroTitle>

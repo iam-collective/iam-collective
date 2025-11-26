@@ -59,7 +59,11 @@ export default function SignUpPage() {
     if (!formData.email) newErrors.email = 'Email is required';
     if (!formData.password) newErrors.password = 'Password is required';
     if (!formData.confirmPassword) newErrors.confirmPassword = 'Confirm your password';
-    if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword)
+    if (
+      formData.password &&
+      formData.confirmPassword &&
+      formData.password !== formData.confirmPassword
+    )
       newErrors.confirmPassword = 'Passwords do not match';
 
     setErrors(newErrors);
@@ -149,7 +153,7 @@ export default function SignUpPage() {
 
               <Label>Email *</Label>
               <TextInput
-                type="email"
+                type='email'
                 value={formData.email || ''}
                 onChange={(e) => handleChange('email', e.target.value)}
               />
@@ -157,7 +161,7 @@ export default function SignUpPage() {
 
               <Label>Password *</Label>
               <TextInput
-                type="password"
+                type='password'
                 value={formData.password || ''}
                 onChange={(e) => handleChange('password', e.target.value)}
               />
@@ -165,7 +169,7 @@ export default function SignUpPage() {
 
               <Label>Confirm Password *</Label>
               <TextInput
-                type="password"
+                type='password'
                 value={formData.confirmPassword || ''}
                 onChange={(e) => handleChange('confirmPassword', e.target.value)}
               />
@@ -180,17 +184,17 @@ export default function SignUpPage() {
                 value={formData.ageRange || ''}
                 onChange={(e) => handleChange('ageRange', e.target.value)}
               >
-                <option value="">Select</option>
-                <option value="18-24">18-24</option>
-                <option value="25-34">25-34</option>
-                <option value="35-44">35-44</option>
-                <option value="45+">45+</option>
+                <option value=''>Select</option>
+                <option value='18-24'>18-24</option>
+                <option value='25-34'>25-34</option>
+                <option value='35-44'>35-44</option>
+                <option value='45+'>45+</option>
               </SelectInput>
               {errors.ageRange && <p style={{ color: 'red' }}>{errors.ageRange}</p>}
 
               <Label>Country *</Label>
               <CountrySelectWrapper>
-                <CountrySelectorButton type="button" onClick={() => setShowDropdown(!showDropdown)}>
+                <CountrySelectorButton type='button' onClick={() => setShowDropdown(!showDropdown)}>
                   <span>
                     {formData.country ? (
                       <>
@@ -230,9 +234,9 @@ export default function SignUpPage() {
                 value={formData.deviceUsed || ''}
                 onChange={(e) => handleChange('deviceUsed', e.target.value)}
               >
-                <option value="">Select</option>
-                <option value="Mobile">Mobile</option>
-                <option value="Laptop">Laptop</option>
+                <option value=''>Select</option>
+                <option value='Mobile'>Mobile</option>
+                <option value='Laptop'>Laptop</option>
               </SelectInput>
               {errors.deviceUsed && <p style={{ color: 'red' }}>{errors.deviceUsed}</p>}
 
@@ -241,11 +245,11 @@ export default function SignUpPage() {
                 value={formData.survivorStage || ''}
                 onChange={(e) => handleChange('survivorStage', e.target.value)}
               >
-                <option value="">Select</option>
-                <option value="I am here to learn">I am here to learn</option>
-                <option value="Healing">Healing</option>
-                <option value="Support someone">Support someone</option>
-                <option value="Prefer not to say">Prefer not to say</option>
+                <option value=''>Select</option>
+                <option value='I am here to learn'>I am here to learn</option>
+                <option value='Healing'>Healing</option>
+                <option value='Support someone'>Support someone</option>
+                <option value='Prefer not to say'>Prefer not to say</option>
               </SelectInput>
               {errors.survivorStage && <p style={{ color: 'red' }}>{errors.survivorStage}</p>}
             </>
@@ -253,16 +257,16 @@ export default function SignUpPage() {
 
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem' }}>
             {step > 1 && (
-              <PinkButton type="button" onClick={prevStep}>
+              <PinkButton type='button' onClick={prevStep}>
                 Back
               </PinkButton>
             )}
             {step < 2 ? (
-              <PinkButton type="button" onClick={nextStep}>
+              <PinkButton type='button' onClick={nextStep}>
                 Next
               </PinkButton>
             ) : (
-              <PinkButton type="button" onClick={handleSubmit}>
+              <PinkButton type='button' onClick={handleSubmit}>
                 Complete Sign Up
               </PinkButton>
             )}
