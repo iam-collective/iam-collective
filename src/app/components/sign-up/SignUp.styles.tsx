@@ -1,6 +1,29 @@
 /* eslint-disable */
 import styled from 'styled-components';
 
+export const CuteBackButton = styled.button`
+  position: absolute;
+  top: 10px;   
+  left: 10px; 
+  background: #ffd7e8;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
 export const Container = styled.div`
   position: fixed;
   inset: 0;
@@ -16,9 +39,10 @@ export const Container = styled.div`
 `;
 
 export const FormWrapper = styled.div`
+  position: relative;
   width: 100%;
-  width: 100%;        
-  height: 90vh;               
+  width: 100%;
+  height: 90vh;
   background: white;
   border-color: red;
   border-radius: 2rem;
@@ -27,7 +51,7 @@ export const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 0 auto;            
+  margin: 0 auto;
   box-sizing: border-box;
 
   @media (max-width: 768px) {
@@ -37,15 +61,13 @@ export const FormWrapper = styled.div`
   }
 `;
 
-
-
 export const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-bottom: 1rem; 
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
 `;
-
 
 export const TitleUnderline = styled.div`
   height: 2px;
@@ -55,11 +77,11 @@ export const TitleUnderline = styled.div`
 `;
 
 export const FormTitle = styled.h1`
-  font-family: 'Lora', serif; 
-  font-size: 1.6rem;          
-  font-weight: 600;          
-  color: #fffff;           
-  margin: 0;                  
+  font-family: 'Lora', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fffff;
+  margin: 0;
 `;
 
 export const Form = styled.form`
@@ -83,7 +105,6 @@ export const Label = styled.label<{ isRequired?: boolean }>`
     margin-left: 0.25rem;
   }
 `;
-
 
 export const TextInput = styled.input`
   padding: 0.75rem 1rem;
@@ -205,4 +226,3 @@ export const CountrySelectorButton = styled.button`
     border-radius: 2px;
   }
 `;
-

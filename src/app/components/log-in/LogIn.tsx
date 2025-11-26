@@ -17,7 +17,8 @@ import {
   LoginButton,
   ForgotPassword,
 } from './LoginPage.styles';
-import { TitleUnderline } from '../sign-up/SignUp.styles';
+import { CuteBackButton, TitleUnderline } from '../sign-up/SignUp.styles';
+import { BackButton, InlineBackButton, SuggestedTitle } from '../story/Stories.style';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -72,7 +73,13 @@ export default function LoginPage() {
   return (
     <Container>
       <FormWrapper>
-        <FormTitle>Login</FormTitle>
+      <CuteBackButton type='button' onClick={() => navigate(-1)}>
+          ←
+        </CuteBackButton>
+
+          <FormTitle>Login</FormTitle>
+        
+
         <TitleUnderline />
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -80,8 +87,8 @@ export default function LoginPage() {
         <Form onSubmit={handleLogin}>
           <Label>Email *</Label>
           <TextInput
-            type="email"
-            placeholder="Enter your email"
+            type='email'
+            placeholder='Enter your email'
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -93,8 +100,8 @@ export default function LoginPage() {
 
           <Label>Password *</Label>
           <TextInput
-            type="password"
-            placeholder="Enter your password"
+            type='password'
+            placeholder='Enter your password'
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -104,12 +111,12 @@ export default function LoginPage() {
             required
           />
 
-          <LoginButton type="submit" disabled={isLoading}>
+          <LoginButton type='submit' disabled={isLoading}>
             {isLoading ? 'Logging in...' : 'Login'}
           </LoginButton>
 
           <ForgotPassword
-            href="#"
+            href='#'
             onClick={(e) => {
               e.preventDefault();
               alert('Password reset functionality coming soon!');
