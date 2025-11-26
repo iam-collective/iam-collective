@@ -23,16 +23,17 @@ export default function LandingPage() {
   return (
     <ScreenContainer>
       <MainContent>
-      <LogoWrapper>
-        <Logo src='/Header-Logo.png' alt='IAMCOLLECTIVE Logo' />
+        <LogoWrapper>
+          <Logo src='/Header-Logo.png' alt='IAMCOLLECTIVE Logo' />
         </LogoWrapper>
 
         <DividerWrapper>
           <Line />
           <DividerText>
             <h3>Welcome to IAM Collective</h3>
-            The I AM Collective is a healing movement and digital community for anyone impacted by
-            gender-based violence
+            Thank you for being one of our first pioneers. This is our very first version, with the
+            core focus on story submission journey. Your story and your feedback will help us ensure
+            we evolve in a way that's relevant Thank you for contribution in fight against GBV.
           </DividerText>
           <Line />
         </DividerWrapper>

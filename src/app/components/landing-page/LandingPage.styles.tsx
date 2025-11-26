@@ -65,6 +65,9 @@ export const DividerText = styled.div`
   font-weight: 400;
   color: #000;
   text-align: center;
+  padding: 0 1.5rem; 
+  max-width: 800px; 
+  margin: 0 auto;     
 
   h3 {
     font-weight: 700;
@@ -75,6 +78,7 @@ export const DividerText = styled.div`
     font-weight: 400;
   }
 `;
+
 
 export const PinkButton = styled.button`
   background-color: #ffd7e8;
