@@ -72,7 +72,7 @@ const HomeScreen: React.FC = () => {
       link: '/stories',
     },
   ];
-  console.log('rendering home page.............')
+  console.log('rendering home page.............');
   return (
     <ScreenContainer>
       <Banner>

@@ -11,7 +11,7 @@ export type User = {
   userId: string;
   email: string;
   fullName: string;
-}
+};
 export interface Message {
   id: number;
   content: string;
@@ -46,8 +46,7 @@ export const clearUser = (): void => {
   localStorage.removeItem('messages');
 };
 
-
 export const getUserFromStorage = (): User => {
   const data = localStorage.getItem('currentUser');
   return data ? (JSON.parse(data) as User) : { userId: '', email: '', fullName: '' };
-}
+};

@@ -29,7 +29,7 @@ const LearnScreen: React.FC = () => {
   return (
     <ScreenContainer>
       <SideNavigation title='Learn' variant='learn' />
-            <ScrollableContent>
+      <ScrollableContent>
         <Header>
           Knowledge is strength. Your journey to empowerment through upskilling starts here.
         </Header>
