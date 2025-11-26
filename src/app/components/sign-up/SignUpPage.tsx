@@ -19,6 +19,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { setUser } from '../../utils/storage';
+import { useMutation } from 'convex/react';
+import { api } from '../../../../convex/_generated/api';
+import bcrypt from 'bcryptjs';
 
 type Country = { name: string; flag: string };
 type StepData = {
@@ -38,8 +41,12 @@ export default function SignUpPage() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
+
+  // Convex mutation
+  const createUser = useMutation(api.usersInfo.createUser);
 
   const handleChange = (field: keyof StepData, value: string) => {
     setFormData({ ...formData, [field]: value });
@@ -59,7 +66,11 @@ export default function SignUpPage() {
     if (!formData.email) newErrors.email = 'Email is required';
     if (!formData.password) newErrors.password = 'Password is required';
     if (!formData.confirmPassword) newErrors.confirmPassword = 'Confirm your password';
-    if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword)
+    if (
+      formData.password &&
+      formData.confirmPassword &&
+      formData.password !== formData.confirmPassword
+    )
       newErrors.confirmPassword = 'Passwords do not match';
 
     setErrors(newErrors);
@@ -90,44 +101,67 @@ export default function SignUpPage() {
       });
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validateStep2()) return;
 
-    console.log('Collected Sign Up Data:', formData);
+    try {
+      setIsLoading(true);
+      setErrors({});
 
-    if (!formData.email || !formData.password) {
-      alert('Email and password are required');
-      return;
-    }
+      console.log('Collected Sign Up Data:', formData);
 
-    const savedUsers = JSON.parse(localStorage.getItem('users') || '[]');
-    const existingUser = savedUsers.find((u: any) => u.email === formData.email);
-    if (!existingUser) {
-      savedUsers.push({
+      if (!formData.email || !formData.password) {
+        alert('Email and password are required');
+        setIsLoading(false);
+        return;
+      }
+
+      // Extract age number from range (e.g., "25-34" -> 25)
+      const ageNumber = formData.ageRange ? parseInt(formData.ageRange.split('-')[0]) : 0;
+
+      // Hash password before sending to Convex
+      const hashedPassword = await bcrypt.hash(formData.password, 10);
+
+      // Create user in Convex (returns the generated userId)
+      const result = await createUser({
+        full_name: formData.fullName || '',
         email: formData.email,
-        password: formData.password,
-        fullName: formData.fullName,
+        password: hashedPassword,
+        age: ageNumber,
+        country: formData.country || '',
+        device_type: formData.deviceUsed || '',
+        healing_Journey: formData.survivorStage || '',
       });
-      localStorage.setItem('users', JSON.stringify(savedUsers));
+
+      // Store current logged-in user locally (optional, for offline access)
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify({
+          userId: result.userId,
+          email: formData.email,
+          fullName: formData.fullName,
+        })
+      );
+
+      // Log user in via AuthContext
+      login({ email: formData.email, fullName: formData.fullName });
+
+      // Store additional user info
+      setUser({
+        name: formData.fullName || '',
+        email: formData.email || '',
+        ageRange: formData.ageRange || '',
+        country: formData.country || '',
+        deviceUsed: formData.deviceUsed || '',
+        survivorStage: formData.survivorStage || '',
+      });
+
+      navigate('/home');
+    } catch (err: any) {
+      console.error('Sign up error:', err);
+      setErrors({ submit: err.message || 'Failed to create account. Please try again.' });
+      setIsLoading(false);
     }
-
-    localStorage.setItem(
-      'currentUser',
-      JSON.stringify({ email: formData.email, fullName: formData.fullName })
-    );
-
-    login({ email: formData.email, fullName: formData.fullName });
-
-    setUser({
-      name: formData.fullName || '',
-      email: formData.email || '',
-      ageRange: formData.ageRange || '',
-      country: formData.country || '',
-      deviceUsed: formData.deviceUsed || '',
-      survivorStage: formData.survivorStage || '',
-    });
-
-    navigate('/home');
   };
 
   return (
@@ -138,36 +172,55 @@ export default function SignUpPage() {
           <TitleUnderline />
         </TitleWrapper>
         <Form>
+          {errors.submit && (
+            <div
+              style={{
+                color: '#d32f2f',
+                backgroundColor: '#ffebee',
+                padding: '0.75rem',
+                borderRadius: '4px',
+                marginBottom: '1rem',
+                fontSize: '0.875rem',
+              }}
+            >
+              {errors.submit}
+            </div>
+          )}
+
           {step === 1 && (
             <>
               <Label>Full Name *</Label>
               <TextInput
                 value={formData.fullName || ''}
                 onChange={(e) => handleChange('fullName', e.target.value)}
+                disabled={isLoading}
               />
               {errors.fullName && <p style={{ color: 'red' }}>{errors.fullName}</p>}
 
               <Label>Email *</Label>
               <TextInput
-                type="email"
+                type='email'
                 value={formData.email || ''}
                 onChange={(e) => handleChange('email', e.target.value)}
+                disabled={isLoading}
               />
               {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
 
               <Label>Password *</Label>
               <TextInput
-                type="password"
+                type='password'
                 value={formData.password || ''}
                 onChange={(e) => handleChange('password', e.target.value)}
+                disabled={isLoading}
               />
               {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
 
               <Label>Confirm Password *</Label>
               <TextInput
-                type="password"
+                type='password'
                 value={formData.confirmPassword || ''}
                 onChange={(e) => handleChange('confirmPassword', e.target.value)}
+                disabled={isLoading}
               />
               {errors.confirmPassword && <p style={{ color: 'red' }}>{errors.confirmPassword}</p>}
             </>
@@ -179,18 +232,23 @@ export default function SignUpPage() {
               <SelectInput
                 value={formData.ageRange || ''}
                 onChange={(e) => handleChange('ageRange', e.target.value)}
+                disabled={isLoading}
               >
-                <option value="">Select</option>
-                <option value="18-24">18-24</option>
-                <option value="25-34">25-34</option>
-                <option value="35-44">35-44</option>
-                <option value="45+">45+</option>
+                <option value=''>Select</option>
+                <option value='18-24'>18-24</option>
+                <option value='25-34'>25-34</option>
+                <option value='35-44'>35-44</option>
+                <option value='45+'>45+</option>
               </SelectInput>
               {errors.ageRange && <p style={{ color: 'red' }}>{errors.ageRange}</p>}
 
               <Label>Country *</Label>
               <CountrySelectWrapper>
-                <CountrySelectorButton type="button" onClick={() => setShowDropdown(!showDropdown)}>
+                <CountrySelectorButton
+                  type='button'
+                  onClick={() => !isLoading && setShowDropdown(!showDropdown)}
+                  disabled={isLoading}
+                >
                   <span>
                     {formData.country ? (
                       <>
@@ -229,10 +287,11 @@ export default function SignUpPage() {
               <SelectInput
                 value={formData.deviceUsed || ''}
                 onChange={(e) => handleChange('deviceUsed', e.target.value)}
+                disabled={isLoading}
               >
-                <option value="">Select</option>
-                <option value="Mobile">Mobile</option>
-                <option value="Laptop">Laptop</option>
+                <option value=''>Select</option>
+                <option value='Mobile'>Mobile</option>
+                <option value='Laptop'>Laptop</option>
               </SelectInput>
               {errors.deviceUsed && <p style={{ color: 'red' }}>{errors.deviceUsed}</p>}
 
@@ -240,12 +299,13 @@ export default function SignUpPage() {
               <SelectInput
                 value={formData.survivorStage || ''}
                 onChange={(e) => handleChange('survivorStage', e.target.value)}
+                disabled={isLoading}
               >
-                <option value="">Select</option>
-                <option value="I am here to learn">I am here to learn</option>
-                <option value="Healing">Healing</option>
-                <option value="Support someone">Support someone</option>
-                <option value="Prefer not to say">Prefer not to say</option>
+                <option value=''>Select</option>
+                <option value='I am here to learn'>I am here to learn</option>
+                <option value='Healing'>Healing</option>
+                <option value='Support someone'>Support someone</option>
+                <option value='Prefer not to say'>Prefer not to say</option>
               </SelectInput>
               {errors.survivorStage && <p style={{ color: 'red' }}>{errors.survivorStage}</p>}
             </>
@@ -253,17 +313,17 @@ export default function SignUpPage() {
 
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem' }}>
             {step > 1 && (
-              <PinkButton type="button" onClick={prevStep}>
+              <PinkButton type='button' onClick={prevStep} disabled={isLoading}>
                 Back
               </PinkButton>
             )}
             {step < 2 ? (
-              <PinkButton type="button" onClick={nextStep}>
+              <PinkButton type='button' onClick={nextStep} disabled={isLoading}>
                 Next
               </PinkButton>
             ) : (
-              <PinkButton type="button" onClick={handleSubmit}>
-                Complete Sign Up
+              <PinkButton type='button' onClick={handleSubmit} disabled={isLoading}>
+                {isLoading ? 'Creating Account...' : 'Complete Sign Up'}
               </PinkButton>
             )}
           </div>
