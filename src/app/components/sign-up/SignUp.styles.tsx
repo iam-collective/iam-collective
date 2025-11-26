@@ -1,6 +1,29 @@
 /* eslint-disable */
 import styled from 'styled-components';
 
+export const CuteBackButton = styled.button`
+  position: absolute;
+  top: 10px;   
+  left: 10px; 
+  background: #ffd7e8;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
 export const Container = styled.div`
   position: fixed;
   inset: 0;
@@ -16,7 +39,10 @@ export const Container = styled.div`
 `;
 
 export const FormWrapper = styled.div`
+  position: relative;
   width: 100%;
+  width: 100%;
+  height: 90vh;
   width: 100%;
   height: 90vh;
   background: white;
@@ -42,6 +68,7 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
   gap: 4px;
   margin-bottom: 1rem;
+  margin-top: 1.5rem;
 `;
 
 export const TitleUnderline = styled.div`

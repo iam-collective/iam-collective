@@ -31,10 +31,9 @@ export default function LandingPage() {
           <Line />
           <DividerText>
             <h3>Welcome to IAM Collective</h3>
-            Welcome to The I AM Collective Thank you for being one of our first pioneers. This is
-            our very first version, with the core focus on story submission journey. Your story and
-            your feedback will help us ensure we evolve in a way that's relevant Thank you for
-            contribution in fight against GBV.
+            Thank you for being one of our first pioneers. This is our very first version, with the
+            core focus on story submission journey. Your story and your feedback will help us ensure
+            we evolve in a way that's relevant Thank you for contribution in fight against GBV.
           </DividerText>
           <Line />
         </DividerWrapper>

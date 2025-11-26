@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TitleUnderline } from '../sign-up/SignUp.styles';
 import { useAuth } from '../../context/AuthContext';
 import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
@@ -18,7 +17,8 @@ import {
   LoginButton,
   ForgotPassword,
 } from './LoginPage.styles';
-
+import { CuteBackButton, TitleUnderline } from '../sign-up/SignUp.styles';
+import { BackButton, InlineBackButton, SuggestedTitle } from '../story/Stories.style';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -114,7 +114,13 @@ export default function LoginPage() {
    return (
     <Container>
       <FormWrapper>
-        <FormTitle>Login</FormTitle>
+      <CuteBackButton type='button' onClick={() => navigate(-1)}>
+          ←
+        </CuteBackButton>
+
+          <FormTitle>Login</FormTitle>
+        
+
         <TitleUnderline />
 
         {error && <ErrorMessage>{error}</ErrorMessage>}

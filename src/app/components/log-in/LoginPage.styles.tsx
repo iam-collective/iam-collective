@@ -17,6 +17,7 @@ export const Container = styled.div`
 `;
 
 export const FormWrapper = styled.div`
+  position: relative;
   width: 100%;
   height: 90vh;
   background: white;

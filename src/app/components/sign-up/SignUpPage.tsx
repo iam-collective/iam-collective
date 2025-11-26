@@ -15,10 +15,12 @@ import {
   TitleUnderline,
   TitleWrapper,
   PinkButton,
+  CuteBackButton,
 } from './SignUp.styles';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { setUser } from '../../utils/storage';
+import { BackButton } from '../story/Stories.style';
 import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import bcrypt from 'bcryptjs';
@@ -167,10 +169,15 @@ export default function SignUpPage() {
   return (
     <Container>
       <FormWrapper>
+        <CuteBackButton type='button' onClick={() => navigate(-1)}>
+          ←
+        </CuteBackButton>
+
         <TitleWrapper>
           <FormTitle>Create Your Account</FormTitle>
           <TitleUnderline />
         </TitleWrapper>
+
         <Form>
           {errors.submit && (
             <div
