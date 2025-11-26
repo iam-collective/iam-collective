@@ -57,7 +57,7 @@
 //   return context;
 // }
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 type User = {
   email: string;
@@ -76,27 +76,31 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const isAuthenticated = localStorage.getItem('currentUser') !== null;
-  const isGuest = localStorage.getItem('currentUser') === null;
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<User | undefined>(() => {
+    // Initialize from localStorage
+    const saved = localStorage.getItem('currentUser');
+    return saved ? JSON.parse(saved) : undefined;
+  });
 
   const login = (user: User) => {
     setUser(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
   };
 
   const logout = () => {
     setUser(undefined);
-    localStorage.clear();
+    localStorage.removeItem('currentUser');
   };
 
   const continueAsGuest = () => {
     setUser(undefined);
   };
 
+  const isAuthenticated = !!user;
+  const isGuest = !user;
+
   return (
-    <AuthContext.Provider
-      value={{ isAuthenticated, isGuest, user, login, logout, continueAsGuest }}
-    >
+    <AuthContext.Provider value={{ user, isAuthenticated, isGuest, login, logout, continueAsGuest }}>
       {children}
     </AuthContext.Provider>
   );
