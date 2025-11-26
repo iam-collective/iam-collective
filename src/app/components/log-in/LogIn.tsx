@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TitleUnderline } from '../sign-up/SignUp.styles';
 import { useAuth } from '../../context/AuthContext';
 import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
