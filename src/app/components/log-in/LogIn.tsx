@@ -47,16 +47,17 @@ export default function LoginPage() {
   };
 
   // ✅ Restore user from localStorage when page loads
+  React.useEffect(() => {
     const saved = localStorage.getItem("currentUser");
     if (saved) {
       const parsed = JSON.parse(saved);
-
+  
       login({
         email: parsed.email,
         fullName: parsed.fullName,
       });
-
     }
+  }, []);
 
 
   const handleLogin = async (e: React.FormEvent) => {
