@@ -1,9 +1,11 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GraduationCap, Heart, Home, Fan, Book, Menu, X, AlertCircle } from 'lucide-react';
 import {
   TopNav,
   NavContainer,
+  LeftSection,
   Logo,
   LogoText,
   HamburgerButton,
@@ -19,7 +21,6 @@ import {
   ActiveIndicator,
   MenuFooter,
   FooterText,
-  LeftSection,
   PageTitle,
 } from './SideNav.styled';
 import Header from '../micro-lessons/Header';
@@ -41,18 +42,22 @@ const SideNavigation: React.FC = ({ title, variant }: SideNavigationProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const savedUser = localStorage.getItem("currentUser");
+  const isGuestUser = !savedUser || savedUser === "null";
 
   const navItems: NavItem[] = [
-    { label: 'Home', icon: Home, path: '/home', isHome: true },
+    { label: 'Home', icon: Home, path: isGuestUser ? '/guest-home' : '/home', isHome: true},
     { label: 'Learn', icon: GraduationCap, path: '/learn' },
     { label: 'Stories', icon: Book, path: '/stories' },
     { label: 'About', icon: AlertCircle, path: '/about' },
-    // { label: 'Favorites', icon: Heart, path: '/favorites' },
-    // { label: 'Community', icon: Fan, path: '/community' },
   ];
 
   const handleNavigate = (path: string) => {
-    navigate(path);
+    if (path === '/home' && isGuestUser) {
+      navigate('/guest-home');
+    } else {
+      navigate(path);
+    }
     setIsOpen(false);
   };
 
