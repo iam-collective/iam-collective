@@ -46,6 +46,19 @@ export default function LoginPage() {
     visible: { opacity: 1, scale: 1, transition: { delay: 0.7, duration: 0.5 } },
   };
 
+  // ✅ Restore user from localStorage when page loads
+    const saved = localStorage.getItem("currentUser");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+
+      login({
+        email: parsed.email,
+        fullName: parsed.fullName,
+      });
+
+    }
+
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);

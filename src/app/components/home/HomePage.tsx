@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable react/jsx-no-bind */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ScreenContainer,
@@ -25,9 +25,18 @@ import FloatingStoryButton from '../about-page/floating-button/FloatingStoryButt
 
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
-  const { user } = useAuth(); // get signed-up user data
+  const [input, setInput] = useState("");
 
-  // Only include relevant cards for signed-up users
+  // ✅ Load user data from localStorage ONCE (on component mount)
+  useEffect(() => {
+    const saved = localStorage.getItem("currentUser");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Store just the email or full name (your design choice)
+      setInput(parsed.fullName); 
+    }
+  }, []); // run once
+
   const cardsData = [
     {
       headline: 'I AM Taking Action Against Gender-Based Violence',
@@ -76,11 +85,11 @@ const HomeScreen: React.FC = () => {
   return (
     <ScreenContainer>
       <Banner>
-        <SideNavigation variant='home' />
+      <SideNavigation variant='home' />
       </Banner>
 
       <SuggestedWrapper>
-        <SuggestedTitle>Welcome back, {user?.fullName || 'Friend'}!</SuggestedTitle>
+        <SuggestedTitle>Welcome back, {input || 'Friend'}!</SuggestedTitle>
         <SuggestedCardsContainer>
           {cardsData.map((card, index) => (
             <Card key={index}>
