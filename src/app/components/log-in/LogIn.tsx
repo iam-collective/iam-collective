@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { TitleUnderline } from '../sign-up/SignUp.styles';
 import { useAuth } from '../../context/AuthContext';
 import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
@@ -29,7 +30,35 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // Convex mutation for login
   const loginUser = useMutation(api.usersInfo.loginUser);
+
+  const inputVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.15, duration: 0.5 },
+    }),
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { delay: 0.7, duration: 0.5 } },
+  };
+
+  // ✅ Restore user from localStorage when page loads
+    const saved = localStorage.getItem("currentUser");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+
+      login({
+        email: parsed.email,
+        fullName: parsed.fullName,
+      });
+
+    }
+
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,7 +72,13 @@ export default function LoginPage() {
     }
 
     try {
-      const result = await loginUser({ email: email.trim(), password });
+      // Call Convex login mutation
+      const result = await loginUser({ 
+        email: email.trim(), 
+        password 
+      });
+
+      // Verify password with bcrypt
       const isPasswordValid = await bcrypt.compare(password, result.hashedPassword);
 
       if (!isPasswordValid) {
@@ -52,6 +87,7 @@ export default function LoginPage() {
         return;
       }
 
+      // Store user info locally (optional)
       localStorage.setItem(
         'currentUser',
         JSON.stringify({
@@ -61,16 +97,22 @@ export default function LoginPage() {
         })
       );
 
-      login({ email: result.user.email, fullName: result.user.full_name });
+      // Login via AuthContext
+      login({
+        email: result.user.email,
+        fullName: result.user.full_name,
+      });
+
+      // Redirect to home
       navigate('/home');
     } catch (err: any) {
-      console.error(err);
+      console.error('Login error:', err);
       setError(err.message || 'Login failed. Please check your credentials.');
       setIsLoading(false);
     }
   };
 
-  return (
+   return (
     <Container>
       <FormWrapper>
       <CuteBackButton type='button' onClick={() => navigate(-1)}>
@@ -127,5 +169,5 @@ export default function LoginPage() {
         </Form>
       </FormWrapper>
     </Container>
-  );
+   );
 }
