@@ -1,11 +1,5 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import {
-  Author,
-  BackgroundImage,
-  ImageCard,
-  OverlayText,
-  Quote,
-} from '../home/HomePage.styled';
+import { Author, BackgroundImage, ImageCard, OverlayText, Quote } from '../home/HomePage.styled';
 import * as backgrounds from '../../assets/background';
 
 interface BannerItem {
@@ -15,11 +9,31 @@ interface BannerItem {
 }
 
 const bannerItems: BannerItem[] = [
-  { src: backgrounds.first, title: "First learn how to stand up for yourself, then learn how to stand up for someone else.", author: "Maya Angelou" },
-  { src: backgrounds.second, title: "Silence protects the problem. Speaking up protects the people.", author: "Audre Lorde" },
-  { src: backgrounds.third, title: "Technology should never be a weapon — it should be a shield.", author: "Sheryl Sandberg" },
-  { src: backgrounds.fourth, title: "Your story might be the key that unlocks someone else’s freedom.", author: "Chimamanda Ngozi Adichie" },
-  { src: backgrounds.fifth, title: "When we learn better, we do better — and we hurt each other less.", author: "Nelson Mandela" },
+  {
+    src: backgrounds.first,
+    title: 'First learn how to stand up for yourself, then learn how to stand up for someone else.',
+    author: 'Maya Angelou',
+  },
+  {
+    src: backgrounds.second,
+    title: 'Silence protects the problem. Speaking up protects the people.',
+    author: 'Audre Lorde',
+  },
+  {
+    src: backgrounds.third,
+    title: 'Technology should never be a weapon — it should be a shield.',
+    author: 'Sheryl Sandberg',
+  },
+  {
+    src: backgrounds.fourth,
+    title: 'Your story might be the key that unlocks someone else’s freedom.',
+    author: 'Chimamanda Ngozi Adichie',
+  },
+  {
+    src: backgrounds.fifth,
+    title: 'When we learn better, we do better — and we hurt each other less.',
+    author: 'Nelson Mandela',
+  },
 ];
 
 const Banner: React.FC<{ children: ReactElement }> = ({ children }) => {

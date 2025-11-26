@@ -43,6 +43,8 @@ export const FormWrapper = styled.div`
   width: 100%;
   width: 100%;
   height: 90vh;
+  width: 100%;
+  height: 90vh;
   background: white;
   border-color: red;
   border-radius: 2rem;

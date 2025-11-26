@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ScreenContainer = styled.main`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
   position: relative;
   height: 100vh;
   gap: 1rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
 `;
 export const StoryWrapper = styled.div`
   padding: 1rem;
@@ -107,8 +107,8 @@ export const StyledScroller = styled.section`
   padding: 0 1rem;
   scrollbar-width: none;
   flex: 1;
-/* hide scrollbar */
-  
+  /* hide scrollbar */
+
   -ms-overflow-style: none;
   scrollbar-width: none;
   padding-bottom: 3rem;
@@ -136,8 +136,6 @@ export const AddStoryButton = styled.button`
   color: white;
 `;
 
-
-
 export const SuggestedTitle = styled.p`
   font-size: 1.2rem;
   color: #6b7280;
@@ -145,19 +143,18 @@ export const SuggestedTitle = styled.p`
   margin: 0;
 `;
 
-
 export const StyledCard = styled.article`
-    /* border: 1px solid var(--primary-colour); */
-    border-radius: 1rem ;
-    max-width: 100%;
-    position: relative;
-    /* overflow: hidden; */
-    padding: 1.25rem;
-    text-align: left ;
-    max-height: 20rem;
-    background-color: white ;
+  /* border: 1px solid var(--primary-colour); */
+  border-radius: 1rem;
+  max-width: 100%;
+  position: relative;
+  /* overflow: hidden; */
+  padding: 1.25rem;
+  text-align: left;
+  max-height: 20rem;
+  background-color: white;
 
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   border: 1px solid rgba(168, 216, 234, 0.2);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
@@ -203,31 +200,29 @@ export const StyledCardImage = styled.img`
   max-height: 10rem;
 `;
 
-
 export const Date = styled.p`
   font-size: 12px;
-  color: #888;  
-`
+  color: #888;
+`;
 
 export const Content = styled.p`
-display: block;
-
+  display: block;
 `;
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
   padding: 1rem 0;
-`
+`;
 export const Container = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: .5rem 0;
-`
+  padding: 0.5rem 0;
+`;
 export const DeleteButton = styled.button`
-  background-color: var(--danger-color );
+  background-color: var(--danger-color);
   color: white;
   border: none;
   padding: 8px 12px;
@@ -238,10 +233,10 @@ export const DeleteButton = styled.button`
   &:hover {
     background-color: #ff7875;
   }
-`
+`;
 
 export const Title = styled(Link)`
-display: block;
+  display: block;
   font-size: 1.25rem;
   margin: 0;
   padding: 0;
@@ -255,28 +250,25 @@ export const MyStories = styled(Link)`
   color: white;
   border: 1px solid black;
   padding: 1rem 1.25rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   text-decoration: none;
   font-weight: bold;
-  &:hover{
+  &:hover {
     background-color: var(--primary-color-dark);
   }
-
 `;
 
 export const ReadMore = styled(Link)`
   text-decoration: none;
   color: var(--primary-colour);
   font-weight: bold;
-
 `;
 
 export const InlineBackButton = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
-`
-
+`;
 
 export const NoStoriesMessage = styled.p`
   font-size: 1.1rem;
@@ -290,4 +282,3 @@ export const NoStoriesContainer = styled.div`
   align-items: center;
   height: 100%;
 `;
-

@@ -5,7 +5,7 @@ export const CardGrid = styled.div`
   gap: 1.5rem;
   width: 100%;
   overflow-y: scroll;
-&::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
   padding-bottom: 2rem;
@@ -21,7 +21,8 @@ export const Card = styled.button<{ $completed: boolean }>`
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
-  background-color: ${({ $completed }): DefaultTheme => ($completed ? 'var(--primary-colour)' : '#fbd8e7')};
+  background-color: ${({ $completed }): DefaultTheme =>
+    $completed ? 'var(--primary-colour)' : '#fbd8e7'};
   border-radius: 1.5rem;
   cursor: pointer;
   h4,

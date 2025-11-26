@@ -25,6 +25,8 @@ export default function LandingPage() {
       <MainContent>
         <LogoWrapper>
           <Logo src='/Header-Logo.png' alt='IAMCOLLECTIVE Logo' />
+        <LogoWrapper>
+          <Logo src='/Header-Logo.png' alt='IAMCOLLECTIVE Logo' />
         </LogoWrapper>
 
         <DividerWrapper>

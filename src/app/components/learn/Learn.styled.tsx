@@ -330,17 +330,18 @@ export const CarouselWrapper = styled.div`
     display: none;
   }
 
-  /* Add some padding to show edge of next card */
-  padding: 0 1rem;
-  margin: 0 -1rem;
+  /* Show edge of next card */
+  padding-left: 1rem;
+  padding-right: 1rem;
 `;
+
 
 export const CarouselContainer = styled.div`
   display: flex;
   gap: 1rem;
-  padding-bottom: 1rem;
   align-items: stretch;
 `;
+
 
 export const CarouselCard = styled.div`
   flex: 0 0 85%;

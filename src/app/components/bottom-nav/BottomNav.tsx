@@ -17,9 +17,9 @@ const BottomNavigation: React.FC = () => {
 
   const navItems: NavItem[] = [
     { label: 'Learn', icon: GraduationCap, path: '/learn' },
-    { label: '', icon: Heart },
+    // { label: '', icon: Heart },
     { label: 'Home', icon: Home, path: '/home', isHome: true },
-    { label: '', icon: Fan },
+    // { label: '', icon: Fan },
     { label: 'Stories', icon: Book, path: '/stories' },
   ];
 
