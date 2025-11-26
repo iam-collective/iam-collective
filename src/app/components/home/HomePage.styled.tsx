@@ -29,18 +29,21 @@ export const SuggestedCardsContainer = styled.div`
   display: flex;
   gap: 1rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding: 0 1rem 1.5rem 1rem;
+  padding: 0 1rem 1.5rem 0;
+
+  /* target the real first child inside the container */
+  > *:first-child {
+    margin-left: 1.25rem; /* adjust */
+  }
 
   &::-webkit-scrollbar {
     display: none;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
-
-  max-width: 100%;
 `;
+
+
 
 export const Card = styled.div`
   flex: 0 0 80%;
@@ -52,6 +55,10 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &:first-child {
+    margin-left: 1rem; 
+  }
 
   @media (max-width: 768px) {
     flex: 0 0 70%;
