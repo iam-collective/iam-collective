@@ -19,18 +19,28 @@ export const SuccessPopup = styled.div`
   padding: 14px 24px;
   border-radius: 12px;
   font-size: 0.95rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 2000;
   animation: fadeInOut 1.5s ease-in-out;
 
   @keyframes fadeInOut {
-    0% { opacity: 0; transform: translate(-50%, -10px); }
-    10% { opacity: 1; transform: translate(-50%, 0px); }
-    90% { opacity: 1; }
-    100% { opacity: 0; transform: translate(-50%, -10px); }
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -10px);
+    }
+    10% {
+      opacity: 1;
+      transform: translate(-50%, 0px);
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -10px);
+    }
   }
 `;
-
 
 export const PopUpCard = styled.div`
   position: fixed;

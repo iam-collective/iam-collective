@@ -176,7 +176,7 @@ export const BottomNav = styled.nav`
   right: 0;
   background: white;
   border-radius: 2rem;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 4rem;
   display: flex;
   justify-content: space-between;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
