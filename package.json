@@ -66,6 +66,7 @@
     "process": "^0.11.10",
     "react-dom": "^19.0.0",
     "react-error-boundary": "^5.0.0",
+    "resend": "^6.5.2",
     "sonner": "^2.0.7",
     "stream-browserify": "^3.0.0",
     "styled-components": "^6.1.8",
