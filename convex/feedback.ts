@@ -113,7 +113,7 @@ export const updateFeedbackInternal = mutation({
 //           },
 //           body: JSON.stringify({
 //             from: "onboarding@resend.dev",
-//             to: ["celinetsiko@gmail.com"], // CHANGE THIS to your real email
+//             to: ["siko@gmail.com"], // CHANGE THIS to your real email
 //             subject: `New Feedback Received: ${updateResult.title}`,
 //             html: `
 //               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
