@@ -24,4 +24,12 @@ export default defineSchema({
     isPublic: v.optional(v.boolean()),
     username: v.optional(v.string()),
   }).index('by_userId', ['userId']),
+
+  professional_feedback: defineTable({
+    storyId: v.id('stories'),       // relationship to story
+    title: v.string(),              
+    content: v.string(),            
+    feedback: v.string(),           // will be empty (Professional must fill it in)
+    createdAt: v.number(),          
+  }),
 });
