@@ -335,13 +335,11 @@ export const CarouselWrapper = styled.div`
   padding-right: 1rem;
 `;
 
-
 export const CarouselContainer = styled.div`
   display: flex;
   gap: 1rem;
   align-items: stretch;
 `;
-
 
 export const CarouselCard = styled.div`
   flex: 0 0 85%;

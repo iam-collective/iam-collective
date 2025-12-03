@@ -19,7 +19,6 @@ import {
   ForgotPassword,
 } from './LoginPage.styles';
 
-
 export default function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -59,9 +58,9 @@ export default function LoginPage() {
 
     try {
       // Call Convex login mutation
-      const result = await loginUser({ 
-        email: email.trim(), 
-        password 
+      const result = await loginUser({
+        email: email.trim(),
+        password,
       });
 
       // Verify password with bcrypt
@@ -98,7 +97,7 @@ export default function LoginPage() {
     }
   };
 
-   return (
+  return (
     <Container>
       <FormWrapper>
         <FormTitle>Login</FormTitle>
@@ -149,5 +148,5 @@ export default function LoginPage() {
         </Form>
       </FormWrapper>
     </Container>
-   );
+  );
 }
