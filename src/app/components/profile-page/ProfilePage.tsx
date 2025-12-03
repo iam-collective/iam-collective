@@ -30,7 +30,7 @@ export default function ProfilePage() {
   const handleSignUP = () => {
     navigate('/signup');
   };
-
+// test
   const user = useQuery(api.usersInfo.getUserById, userId ? { userId } : 'skip');
 
   if (!userId)
