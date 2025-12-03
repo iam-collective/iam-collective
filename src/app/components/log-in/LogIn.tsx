@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TitleUnderline } from '../sign-up/SignUp.styles';
 import { useAuth } from '../../context/AuthContext';
 import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
@@ -18,6 +17,8 @@ import {
   LoginButton,
   ForgotPassword,
 } from './LoginPage.styles';
+import { CuteBackButton, TitleUnderline } from '../sign-up/SignUp.styles';
+import { BackButton, InlineBackButton, SuggestedTitle } from '../story/Stories.style';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -44,6 +45,20 @@ export default function LoginPage() {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1, transition: { delay: 0.7, duration: 0.5 } },
   };
+
+  // ✅ Restore user from localStorage when page loads
+  React.useEffect(() => {
+    const saved = localStorage.getItem("currentUser");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+  
+      login({
+        email: parsed.email,
+        fullName: parsed.fullName,
+      });
+    }
+  }, []);
+
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,7 +115,13 @@ export default function LoginPage() {
   return (
     <Container>
       <FormWrapper>
-        <FormTitle>Login</FormTitle>
+      <CuteBackButton type='button' onClick={() => navigate(-1)}>
+          ←
+        </CuteBackButton>
+
+          <FormTitle>Login</FormTitle>
+        
+
         <TitleUnderline />
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
