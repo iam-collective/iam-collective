@@ -19,7 +19,7 @@ export default defineSchema({
     userId: v.string(),
     title: v.string(),
     content: v.string(),
-    imageId: v.optional(v.id('_storage')),
+    imageId: v.optional(v.union(v.id('_storage'), v.string())),
     createdAt: v.number(),
     isPublic: v.optional(v.boolean()),
     username: v.optional(v.string()),
@@ -28,8 +28,11 @@ export default defineSchema({
   professional_feedback: defineTable({
     storyId: v.id('stories'),       // relationship to story
     title: v.string(),              
-    content: v.string(),            
+    content: v.string(), 
+    email: v.string(),           
     feedback: v.string(),           // will be empty (Professional must fill it in)
     createdAt: v.number(),          
-  }),
+  })
+    .index('by_storyId', ['storyId'])  // Add this for faster lookups
+    .index('by_email', ['email']),     // Add this if you want to query by email
 });

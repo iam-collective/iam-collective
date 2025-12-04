@@ -18,8 +18,9 @@ import {
   LogoWrapper,
 } from "./LandingPage.styles";
 
-import { useQuery, useMutation, useAction } from "convex/react"; // Add useAction
+import { useQuery, useMutation, useAction } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
+import * as XLSX from "xlsx";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -126,11 +127,11 @@ export default function LandingPage() {
   //   }
   // };
 
-  const performDownload = () => {
+  const performDownloadCSV = () => {
     try {
-      console.log(`Processing ${feedbackData!.length} feedback entries`);
+      console.log(`Processing ${feedbackData!.length} feedback entries for CSV`);
 
-      const headers = ["storyId", "title", "content", "feedback"];
+      const headers = ["storyId", "title", "content", "email", "feedback"];
       const csvRows = [
         headers.join(","),
         ...feedbackData!.map((row) =>
@@ -138,6 +139,7 @@ export default function LandingPage() {
             escapeCSV(row.storyId),
             escapeCSV(row.title),
             escapeCSV(row.content),
+            escapeCSV(row.email),
             escapeCSV(row.feedback),
           ].join(",")
         ),
@@ -154,7 +156,7 @@ export default function LandingPage() {
       a.click();
       URL.revokeObjectURL(url);
 
-      console.log(`Successfully downloaded ${feedbackData!.length} feedback entries`);
+      console.log(`Successfully downloaded ${feedbackData!.length} feedback entries as CSV`);
       setLoading(false);
     } catch (err) {
       console.error("Error downloading CSV:", err);
@@ -163,10 +165,74 @@ export default function LandingPage() {
     }
   };
 
+  const performDownloadExcel = () => {
+    try {
+      console.log(`Processing ${feedbackData!.length} feedback entries for Excel`);
+  
+      // Create worksheet data
+      const wsData = [
+        ["storyId", "title", "content", "email", "feedback"],
+        ...feedbackData!.map((row) => [
+          row.storyId,
+          row.title,
+          row.content,
+          row.email || "",
+          row.feedback || "",
+        ]),
+      ];
+  
+      // Create workbook and worksheet
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+  
+      // Auto column widths based on max content length
+      ws["!cols"] = wsData[0].map((_, colIndex) => {
+        const maxLength = Math.max(
+          ...wsData.map((row) => (row[colIndex] ? row[colIndex].toString().length : 0))
+        );
+        return { wch: Math.min(maxLength + 5, 100) }; // max width capped at 100
+      });
+  
+      // Auto row heights and wrap text
+      const range = XLSX.utils.decode_range(ws["!ref"]!);
+      ws["!rows"] = [];
+      for (let R = range.s.r; R <= range.e.r; ++R) {
+        let maxChars = 0;
+        for (let C = range.s.c; C <= range.e.c; ++C) {
+          const cell = ws[XLSX.utils.encode_cell({ r: R, c: C })];
+          if (cell && cell.v) {
+            maxChars = Math.max(maxChars, cell.v.toString().length);
+            if (!cell.s) cell.s = {};
+            cell.s.alignment = { wrapText: true }; // wrap text
+          }
+        }
+        const height = Math.min(80, 15 + maxChars / 20); // sensible row height
+        ws["!rows"].push({ hpt: height });
+      }
+  
+      // Add worksheet to workbook
+      XLSX.utils.book_append_sheet(wb, ws, "Feedback");
+  
+      // Generate Excel file
+      XLSX.writeFile(
+        wb,
+        `professional_feedback_${new Date().toISOString().split("T")[0]}.xlsx`
+      );
+  
+      console.log(`Successfully downloaded ${feedbackData!.length} feedback entries as Excel`);
+      setLoading(false);
+    } catch (err) {
+      console.error("Error downloading Excel:", err);
+      alert("Failed to download Excel file. See console for details.");
+      setLoading(false);
+    }
+  };
+  
+
   // Trigger download when feedbackData updates after copying
   useEffect(() => {
     if (shouldDownload && feedbackData && feedbackData.length > 0) {
-      performDownload();
+      performDownloadCSV();
       setShouldDownload(false);
     }
   }, [feedbackData, shouldDownload]);
@@ -178,7 +244,7 @@ export default function LandingPage() {
     try {
       // If data already exists, download immediately
       if (feedbackData && feedbackData.length > 0) {
-        performDownload();
+        performDownloadCSV();
         return;
       }
 
@@ -200,6 +266,37 @@ export default function LandingPage() {
     } catch (err) {
       console.error("Error downloading CSV:", err);
       alert("Failed to download CSV. See console for details.");
+      setLoading(false);
+    }
+  };
+
+  const downloadExcel = async () => {
+    if (loading) return;
+    setLoading(true);
+
+    try {
+      // If data already exists, download immediately
+      if (feedbackData && feedbackData.length > 0) {
+        performDownloadExcel();
+        return;
+      }
+
+      // Otherwise, copy stories first
+      const result = await copyStories();
+      console.log("Copy result:", result);
+
+      // Wait a bit for data to sync
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      if (feedbackData && feedbackData.length > 0) {
+        performDownloadExcel();
+      } else {
+        alert("Data is still syncing. Please try again.");
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error("Error downloading Excel:", err);
+      alert("Failed to download Excel file. See console for details.");
       setLoading(false);
     }
   };
@@ -233,7 +330,28 @@ export default function LandingPage() {
                   ? "Processing..."
                   : feedbackData === undefined
                   ? "Loading..."
-                  : `Download Feedback CSV (${feedbackData.length})`}
+                  : `Download CSV (${feedbackData.length})`}
+              </button>
+
+              <button
+                onClick={downloadExcel}
+                disabled={loading || uploading}
+                style={{
+                  padding: "10px 14px",
+                  background: loading || uploading ? "#888" : "#28a745",
+                  color: "white",
+                  borderRadius: "8px",
+                  cursor: loading || uploading ? "not-allowed" : "pointer",
+                  border: "none",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                }}
+              >
+                {loading
+                  ? "Processing..."
+                  : feedbackData === undefined
+                  ? "Loading..."
+                  : `Download Excel (${feedbackData.length})`}
               </button>
 
               <label

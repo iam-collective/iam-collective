@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as debug from "../debug.js";
 import type * as feedback from "../feedback.js";
 import type * as stories from "../stories.js";
 import type * as usersInfo from "../usersInfo.js";
@@ -15,6 +16,7 @@ import type * as usersInfo from "../usersInfo.js";
 import type { ApiFromModules, FilterApi, FunctionReference } from 'convex/server';
 
 declare const fullApi: ApiFromModules<{
+  debug: typeof debug;
   feedback: typeof feedback;
   stories: typeof stories;
   usersInfo: typeof usersInfo;

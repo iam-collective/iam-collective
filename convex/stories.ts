@@ -20,13 +20,14 @@ export const uploadStory = mutation({
     imageId: v.optional(v.id('_storage')),
     isPublic: v.optional(v.boolean()),
     username: v.optional(v.string()),
+    email: v.optional(v.string()),
   },
-  handler: async (ctx, { title, content, imageId, isPublic, username }) => {
+  handler: async (ctx, { title, content, imageId, isPublic, username, email }) => {
     // const identity = await ctx.auth.getUserIdentity();
     // if (!identity) throw new Error("Not authenticated");
 
     return await ctx.db.insert('stories', {
-      userId: 'anonymous', // identity.subject when auth is enabled, anonymous for now
+      userId: email, // identity.subject when auth is enabled, anonymous for now
       title,
       content,
       imageId,

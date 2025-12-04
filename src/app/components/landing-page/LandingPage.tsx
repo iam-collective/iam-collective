@@ -1,6 +1,7 @@
 /* eslint-disable */
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+"use client";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ScreenContainer,
   Logo,
@@ -15,38 +16,380 @@ import {
   LogoDivider,
   PinkButton,
   LogoWrapper,
-} from './LandingPage.styles';
+} from "./LandingPage.styles";
+
+import { useQuery, useMutation, useAction } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
+import * as XLSX from "xlsx";
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [shouldDownload, setShouldDownload] = useState(false);
+  const [uploading, setUploading] = useState(false);
+
+  // Fetch all feedback
+  const feedbackData = useQuery(api.feedback.listFeedback);
+
+  // Mutation to copy stories to professional_feedback safely
+  const copyStories = useMutation(api.feedback.copyAllStoriesToFeedback);
+  
+  // Changed from useMutation to useAction
+  // const updateFeedback = useAction(api.feedback.updateFeedbackFromCSV);
+
+  const escapeCSV = (field: any): string => {
+    if (field == null) return "";
+    const str = String(field);
+    if (str.includes(",") || str.includes('"') || str.includes("\n")) {
+      return `"${str.replace(/"/g, '""')}"`;
+    }
+    return str;
+  };
+
+  // const parseCSV = (csvText: string) => {
+  //   const lines = csvText.split("\n");
+  //   const result = [];
+    
+  //   for (let i = 1; i < lines.length; i++) { // Skip header row
+  //     const line = lines[i].trim();
+  //     if (!line) continue;
+
+  //     // Simple CSV parser (handles quoted fields)
+  //     const values = [];
+  //     let current = "";
+  //     let inQuotes = false;
+
+  //     for (let j = 0; j < line.length; j++) {
+  //       const char = line[j];
+  //       const nextChar = line[j + 1];
+
+  //       if (char === '"' && inQuotes && nextChar === '"') {
+  //         current += '"';
+  //         j++; // Skip next quote
+  //       } else if (char === '"') {
+  //         inQuotes = !inQuotes;
+  //       } else if (char === "," && !inQuotes) {
+  //         values.push(current);
+  //         current = "";
+  //       } else {
+  //         current += char;
+  //       }
+  //     }
+  //     values.push(current); // Push last value
+
+  //     if (values.length >= 4) {
+  //       result.push({
+  //         storyId: values[0],
+  //         title: values[1],
+  //         content: values[2],
+  //         feedback: values[3],
+  //       });
+  //     }
+  //   }
+
+  //   return result;
+  // };
+
+  // const handleUploadCSV = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (!file) return;
+
+  //   setUploading(true);
+
+  //   try {
+  //     const text = await file.text();
+  //     const parsedData = parseCSV(text);
+
+  //     console.log("Parsed CSV data:", parsedData);
+
+  //     // Update each feedback entry
+  //     let successCount = 0;
+  //     for (const row of parsedData) {
+  //       try {
+  //         await updateFeedback({
+  //           storyId: row.storyId,
+  //           feedback: row.feedback,
+  //         });
+  //         successCount++;
+  //       } catch (err) {
+  //         console.error(`Failed to update storyId ${row.storyId}:`, err);
+  //       }
+  //     }
+
+  //     alert(`Successfully updated ${successCount} out of ${parsedData.length} feedback entries!`);
+  //   } catch (err) {
+  //     console.error("Error uploading CSV:", err);
+  //     alert("Failed to upload CSV. See console for details.");
+  //   } finally {
+  //     setUploading(false);
+  //     // Reset file input
+  //     event.target.value = "";
+  //   }
+  // };
+
+  const performDownloadCSV = () => {
+    try {
+      console.log(`Processing ${feedbackData!.length} feedback entries for CSV`);
+
+      const headers = ["storyId", "title", "content", "email", "feedback"];
+      const csvRows = [
+        headers.join(","),
+        ...feedbackData!.map((row) =>
+          [
+            escapeCSV(row.storyId),
+            escapeCSV(row.title),
+            escapeCSV(row.content),
+            escapeCSV(row.email),
+            escapeCSV(row.feedback),
+          ].join(",")
+        ),
+      ];
+
+      const csvContent = csvRows.join("\n");
+
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `professional_feedback_${new Date().toISOString().split("T")[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      console.log(`Successfully downloaded ${feedbackData!.length} feedback entries as CSV`);
+      setLoading(false);
+    } catch (err) {
+      console.error("Error downloading CSV:", err);
+      alert("Failed to download CSV. See console for details.");
+      setLoading(false);
+    }
+  };
+
+  const performDownloadExcel = () => {
+    try {
+      console.log(`Processing ${feedbackData!.length} feedback entries for Excel`);
+  
+      // Create worksheet data
+      const wsData = [
+        ["storyId", "title", "content", "email", "feedback"],
+        ...feedbackData!.map((row) => [
+          row.storyId,
+          row.title,
+          row.content,
+          row.email || "",
+          row.feedback || "",
+        ]),
+      ];
+  
+      // Create workbook and worksheet
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+  
+      // Auto column widths based on max content length
+      ws["!cols"] = wsData[0].map((_, colIndex) => {
+        const maxLength = Math.max(
+          ...wsData.map((row) => (row[colIndex] ? row[colIndex].toString().length : 0))
+        );
+        return { wch: Math.min(maxLength + 5, 100) }; // max width capped at 100
+      });
+  
+      // Auto row heights and wrap text
+      const range = XLSX.utils.decode_range(ws["!ref"]!);
+      ws["!rows"] = [];
+      for (let R = range.s.r; R <= range.e.r; ++R) {
+        let maxChars = 0;
+        for (let C = range.s.c; C <= range.e.c; ++C) {
+          const cell = ws[XLSX.utils.encode_cell({ r: R, c: C })];
+          if (cell && cell.v) {
+            maxChars = Math.max(maxChars, cell.v.toString().length);
+            if (!cell.s) cell.s = {};
+            cell.s.alignment = { wrapText: true }; // wrap text
+          }
+        }
+        const height = Math.min(80, 15 + maxChars / 20); // sensible row height
+        ws["!rows"].push({ hpt: height });
+      }
+  
+      // Add worksheet to workbook
+      XLSX.utils.book_append_sheet(wb, ws, "Feedback");
+  
+      // Generate Excel file
+      XLSX.writeFile(
+        wb,
+        `professional_feedback_${new Date().toISOString().split("T")[0]}.xlsx`
+      );
+  
+      console.log(`Successfully downloaded ${feedbackData!.length} feedback entries as Excel`);
+      setLoading(false);
+    } catch (err) {
+      console.error("Error downloading Excel:", err);
+      alert("Failed to download Excel file. See console for details.");
+      setLoading(false);
+    }
+  };
+  
+
+  // Trigger download when feedbackData updates after copying
+  useEffect(() => {
+    if (shouldDownload && feedbackData && feedbackData.length > 0) {
+      performDownloadCSV();
+      setShouldDownload(false);
+    }
+  }, [feedbackData, shouldDownload]);
+
+  const downloadCSV = async () => {
+    if (loading) return;
+    setLoading(true);
+
+    try {
+      // If data already exists, download immediately
+      if (feedbackData && feedbackData.length > 0) {
+        performDownloadCSV();
+        return;
+      }
+
+      // Otherwise, copy stories and wait for useEffect to trigger download
+      const result = await copyStories();
+      console.log("Copy result:", result);
+
+      // Set flag to trigger download when data arrives
+      setShouldDownload(true);
+
+      // Safety timeout in case data never arrives
+      setTimeout(() => {
+        if (shouldDownload) {
+          alert("Data is taking longer than expected. Please try again.");
+          setShouldDownload(false);
+          setLoading(false);
+        }
+      }, 5000);
+    } catch (err) {
+      console.error("Error downloading CSV:", err);
+      alert("Failed to download CSV. See console for details.");
+      setLoading(false);
+    }
+  };
+
+  const downloadExcel = async () => {
+    if (loading) return;
+    setLoading(true);
+
+    try {
+      // If data already exists, download immediately
+      if (feedbackData && feedbackData.length > 0) {
+        performDownloadExcel();
+        return;
+      }
+
+      // Otherwise, copy stories first
+      const result = await copyStories();
+      console.log("Copy result:", result);
+
+      // Wait a bit for data to sync
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      if (feedbackData && feedbackData.length > 0) {
+        performDownloadExcel();
+      } else {
+        alert("Data is still syncing. Please try again.");
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error("Error downloading Excel:", err);
+      alert("Failed to download Excel file. See console for details.");
+      setLoading(false);
+    }
+  };
 
   return (
     <ScreenContainer>
       <MainContent>
         <LogoWrapper>
-          <Logo src='/Header-Logo.png' alt='IAMCOLLECTIVE Logo' />
+          <Logo src="/Header-Logo.png" alt="IAMCOLLECTIVE Logo" />
         </LogoWrapper>
 
         <DividerWrapper>
           <Line />
           <DividerText>
-            <h3>Welcome to IAM Collective</h3>
-            Thank you for being one of our first pioneers. This is our very first version, with the
-            core focus on story submission journey. Your story and your feedback will help us ensure
-            we evolve in a way that's relevant Thank you for contribution in fight against GBV.
+            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center" }}>
+              <button
+                onClick={downloadCSV}
+                disabled={loading || uploading}
+                style={{
+                  padding: "10px 14px",
+                  background: loading || uploading ? "#888" : "black",
+                  color: "white",
+                  borderRadius: "8px",
+                  cursor: loading || uploading ? "not-allowed" : "pointer",
+                  border: "none",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                }}
+              >
+                {loading
+                  ? "Processing..."
+                  : feedbackData === undefined
+                  ? "Loading..."
+                  : `Download CSV (${feedbackData.length})`}
+              </button>
+
+              <button
+                onClick={downloadExcel}
+                disabled={loading || uploading}
+                style={{
+                  padding: "10px 14px",
+                  background: loading || uploading ? "#888" : "#28a745",
+                  color: "white",
+                  borderRadius: "8px",
+                  cursor: loading || uploading ? "not-allowed" : "pointer",
+                  border: "none",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                }}
+              >
+                {loading
+                  ? "Processing..."
+                  : feedbackData === undefined
+                  ? "Loading..."
+                  : `Download Excel (${feedbackData.length})`}
+              </button>
+
+              <label
+                style={{
+                  padding: "10px 14px",
+                  background: loading || uploading ? "#888" : "#0066cc",
+                  color: "white",
+                  borderRadius: "8px",
+                  cursor: loading || uploading ? "not-allowed" : "pointer",
+                  border: "none",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                  display: "inline-block",
+                }}
+              >
+                {uploading ? "Uploading..." : "Upload Edited CSV"}
+                {/* <input
+                  type="file"
+                  accept=".csv"
+                  onChange={handleUploadCSV}
+                  disabled={loading || uploading}
+                  style={{ display: "none" }}
+                /> */}
+              </label>
+            </div>
           </DividerText>
           <Line />
         </DividerWrapper>
 
-        <PinkButton onClick={() => navigate('/continue')}>Next</PinkButton>
+        <PinkButton onClick={() => navigate("/continue")}>Next</PinkButton>
       </MainContent>
 
       <Footer>
         <FooterText>I AM Collective is powered by</FooterText>
         <FooterLogos>
-          <FooterLogo src='/MTN-Logo.png' alt='MTN-Logo' />
+          <FooterLogo src="/MTN-Logo.png" alt="MTN-Logo" />
           <LogoDivider />
-          <FooterLogo src='/chenosis.png' alt='chenosis' />
+          <FooterLogo src="/chenosis.png" alt="chenosis" />
         </FooterLogos>
       </Footer>
     </ScreenContainer>

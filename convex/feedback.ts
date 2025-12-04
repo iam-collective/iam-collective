@@ -27,6 +27,7 @@ export const copyAllStoriesToFeedback = mutation({
           storyId: story._id,
           title: story.title,
           content: story.content,
+          email: story.userId, // Get email from users table
           feedback: "",
           createdAt: Date.now(),
         });
@@ -37,20 +38,6 @@ export const copyAllStoriesToFeedback = mutation({
     return { success: true, totalStories: stories.length, copiedCount };
   },
 });
-
-// // Clear all professional_feedback entries - Not needed, FOR TESTING!!!!
-// export const clearAllFeedback = mutation({
-//   args: {},
-//   handler: async (ctx) => {
-//     const allFeedback = await ctx.db.query("professional_feedback").collect();
-
-//     for (const feedback of allFeedback) {
-//       await ctx.db.delete(feedback._id);
-//     }
-
-//     return { success: true, deletedCount: allFeedback.length };
-//   },
-// });
 
 // Internal mutation to update feedback (called by action)
 export const updateFeedbackInternal = mutation({
@@ -81,7 +68,22 @@ export const updateFeedbackInternal = mutation({
       storyId: args.storyId,
       wasEmpty,
       title: feedbackEntry.title,
+      email: feedbackEntry.email, // Include email for sending notification
     };
+  },
+});
+
+// // Clear all professional_feedback entries - Not needed, FOR TESTING!!!!
+export const clearAllFeedback = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const allFeedback = await ctx.db.query("professional_feedback").collect();
+
+    for (const feedback of allFeedback) {
+      await ctx.db.delete(feedback._id);
+    }
+
+    return { success: true, deletedCount: allFeedback.length };
   },
 });
 
@@ -101,7 +103,7 @@ export const updateFeedbackInternal = mutation({
 //     // Send email if feedback was previously empty and is now filled
 //     const isNowFilled = args.feedback && args.feedback.trim() !== "";
     
-//     if (updateResult.wasEmpty && isNowFilled) {
+//     if (updateResult.wasEmpty && isNowFilled && updateResult.email) {
 //       try {
 //         const apiKey = process.env.RESEND_API_KEY;
         
@@ -113,21 +115,20 @@ export const updateFeedbackInternal = mutation({
 //           },
 //           body: JSON.stringify({
 //             from: "onboarding@resend.dev",
-//             to: ["siko@gmail.com"], // CHANGE THIS to your real email
-//             subject: `New Feedback Received: ${updateResult.title}`,
+//             to: [updateResult.email], // Send to the user who wrote the story
+//             subject: `Feedback Received for Your Story: ${updateResult.title}`,
 //             html: `
 //               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-//                 <h2 style="color: #333;">New Feedback Received</h2>
+//                 <h2 style="color: #333;">You've Received Feedback on Your Story!</h2>
 //                 <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-//                   <p><strong>Story Title:</strong> ${updateResult.title}</p>
-//                   <p><strong>Story ID:</strong> ${args.storyId}</p>
+//                   <p><strong>Your Story:</strong> ${updateResult.title}</p>
 //                 </div>
 //                 <div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
-//                   <h3 style="color: #666; margin-top: 0;">Feedback:</h3>
+//                   <h3 style="color: #666; margin-top: 0;">Professional Feedback:</h3>
 //                   <p style="line-height: 1.6;">${args.feedback}</p>
 //                 </div>
 //                 <p style="color: #999; font-size: 12px; margin-top: 20px;">
-//                   This email was sent automatically when feedback was added.
+//                   This email was sent automatically when professional feedback was added to your story.
 //                 </p>
 //               </div>
 //             `,
@@ -139,7 +140,7 @@ export const updateFeedbackInternal = mutation({
 //         if (!response.ok) {
 //           console.error("Resend API error:", result);
 //         } else {
-//           console.log("Email sent successfully:", result);
+//           console.log("Email sent successfully to:", updateResult.email);
 //         }
 //       } catch (emailError) {
 //         console.error("Failed to send email:", emailError);
