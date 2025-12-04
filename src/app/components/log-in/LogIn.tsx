@@ -73,9 +73,9 @@ export default function LoginPage() {
 
     try {
       // Call Convex login mutation
-      const result = await loginUser({ 
-        email: email.trim(), 
-        password 
+      const result = await loginUser({
+        email: email.trim(),
+        password,
       });
 
       // Verify password with bcrypt
@@ -112,7 +112,7 @@ export default function LoginPage() {
     }
   };
 
-   return (
+  return (
     <Container>
       <FormWrapper>
       <CuteBackButton type='button' onClick={() => navigate(-1)}>
@@ -169,5 +169,5 @@ export default function LoginPage() {
         </Form>
       </FormWrapper>
     </Container>
-   );
+  );
 }

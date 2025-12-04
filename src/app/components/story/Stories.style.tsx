@@ -144,20 +144,16 @@ export const SuggestedTitle = styled.p`
 `;
 
 export const StyledCard = styled.article`
-  /* border: 1px solid var(--primary-colour); */
   border-radius: 1rem;
   max-width: 100%;
   position: relative;
-  /* overflow: hidden; */
   padding: 1.25rem;
   text-align: left;
   max-height: 20rem;
   background-color: white;
-
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   border: 1px solid rgba(168, 216, 234, 0.2);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
 
   &::before {
     content: '';
@@ -168,6 +164,7 @@ export const StyledCard = styled.article`
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(168, 216, 234, 0.1), transparent);
     transition: left 0.5s ease;
+    pointer-events: none; /* <-- Add this line */
   }
 
   &:hover {
@@ -180,6 +177,7 @@ export const StyledCard = styled.article`
     left: 100%;
   }
 `;
+
 export const Username = styled.span`
   position: absolute;
   top: 8px;

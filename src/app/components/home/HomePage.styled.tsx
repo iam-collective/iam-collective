@@ -43,8 +43,6 @@ export const SuggestedCardsContainer = styled.div`
   scrollbar-width: none;
 `;
 
-
-
 export const Card = styled.div`
   flex: 0 0 80%;
   max-width: 80%;
@@ -57,7 +55,7 @@ export const Card = styled.div`
   align-items: center;
 
   &:first-child {
-    margin-left: 1rem; 
+    margin-left: 1rem;
   }
 
   @media (max-width: 768px) {
